@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -62,12 +63,36 @@ class CountryDetailActivity : AppCompatActivity() {
         val totalVaccTv = findViewById<TextView>(R.id.total_vacc_number_tv)
         val peopleVaccTv = findViewById<TextView>(R.id.people_vacc_number_tv)
         val fullyVaccTv = findViewById<TextView>(R.id.people_full_vacc_number_tv)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val vaccPercentageTv = findViewById<TextView>(R.id.vacc_percentage_tv)
 
         //Set data according to clicked country
         displayedCountry.observe(
             this,
             Observer { country ->
+
+
+                //Update country data to new values fetched from web
+                if(displayedCountryData != null){
+                    val arrayLength = displayedCountryData.data.size
+                    val lastUpdate = displayedCountryData.data[arrayLength-1]
+
+                    country!!.date = lastUpdate.date
+                    country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
+                    country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
+                    country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
+                }
+
+                //TODO:New Cases and New Deaths are not shown correctly
+                if(displayedCountryCaseData != null){
+                    country!!.population = displayedCountryCaseData.population
+                    country.newDeaths = displayedCountryCaseData.deaths - country.totalDeaths
+                    country.totalDeaths = displayedCountryCaseData.deaths
+                    country.newCases = displayedCountryCaseData.confirmed - country.totalCases
+                    country.totalCases = displayedCountryCaseData.confirmed
+                    country.activeCases = displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered
+                }
+
                 val flag = country!!.flag
                 val name = country.name
                 val population = country.population
@@ -77,17 +102,6 @@ class CountryDetailActivity : AppCompatActivity() {
                 val deaths = country.totalDeaths
                 val newDeaths = country.newDeaths
 
-
-                //Update country data to new values fetched from web
-                if(displayedCountryData != null){
-                    val arrayLength = displayedCountryData.data.size
-                    val lastUpdate = displayedCountryData.data[arrayLength-1]
-
-                    country.date = lastUpdate.date
-                    country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
-                    country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
-                    country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
-                }
                 //date missing
                 val totalVaccinated = country.totalVaccinations
                 val firstVaccine = country.firstVaccine
@@ -95,11 +109,11 @@ class CountryDetailActivity : AppCompatActivity() {
 
                 flagIv.setImageResource(flag)
                 nameTv.text = name
-                populationTv.text = population.toString()
-                totalCasesTv.text = totalCases.toString()
+                populationTv.text = formatNumber(population)
+                totalCasesTv.text = formatNumber(totalCases)
                 newCasesTv.text = "+$newCases"
-                activeCasesTv.text = activeCases.toString()
-                deathsTv.text = deaths.toString()
+                activeCasesTv.text = formatNumber(activeCases)
+                deathsTv.text = formatNumber(deaths)
                 newDeathsTv.text = "+$newDeaths"
 
                 dateTv.text = country.date
@@ -108,8 +122,9 @@ class CountryDetailActivity : AppCompatActivity() {
                 fullyVaccTv.text = if(fullyVaccinated == 0) "No data" else formatNumber(fullyVaccinated)
 
                 //ProgressBar
-                val percentage = fullyVaccinated / population.toDouble() * 100
-                vaccPercentageTv.text = "$percentage fully vaccinated"
+                val percentage = Math.floor((fullyVaccinated / population.toDouble() * 10000))/100
+                vaccPercentageTv.text = "$percentage % fully vaccinated"
+                progressBar.progress = percentage.toInt()
 
                 val executor = Executors.newSingleThreadExecutor()
                 executor.execute{
