@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">COVID Vaccination Status</string>
+    <string name="start">Start</string>
+    <string name="vaccination_status">Vaccination Status</string>
+    <string name="population">Population</string>
+    <string name="total_cases">Total Cases</string>
+    <string name="date">Date</string>
+    <string name="total_vaccinations">Total Vaccinations</string>
+    <string name="people_fully_vaccinated">People Fully Vaccinated</string>
+    <string name="people_vaccinated">People Vaccinated</string>
+    <string name="new_cases">New Cases</string>
+    <string name="total_deaths">Total Deaths</string>
+    <string name="new_deaths">New Deaths</string>
+    <string name="active_cases">Active Cases</string>
+    <string name="no_data">No data</string>
+</resources>
