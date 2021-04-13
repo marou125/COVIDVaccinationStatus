@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
+import com.marou125.covidvaccinationstatus.database.Country
 import com.marou125.covidvaccinationstatus.service.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,8 +63,12 @@ class MainActivity : AppCompatActivity() {
             caseCall.enqueue(object : Callback<JsonCaseData>{
                 override fun onResponse(call: Call<JsonCaseData>?, response: Response<JsonCaseData>?) {
                     val caseData = response?.body()
-                    Log.i("caseData first position", caseData!!.Germany.All.population.toString())
-//                    startActivity(i)
+                    if(caseData != null){
+                        CountryDataSingleton.fillCaseData(caseData)
+                    } else {
+                        Toast.makeText(this@MainActivity, "Error while trying to save case data", Toast.LENGTH_SHORT).show()
+                    }
+                    startActivity(i)
                 }
 
                 override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
