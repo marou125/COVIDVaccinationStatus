@@ -6,8 +6,8 @@
     <string name="total_cases">Total Cases</string>
     <string name="date">Date</string>
     <string name="total_vaccinations">Total Vaccinations</string>
-    <string name="people_fully_vaccinated">People Fully Vaccinated</string>
-    <string name="people_vaccinated">People Vaccinated</string>
+    <string name="people_fully_vaccinated">Fully Vaccinated</string>
+    <string name="people_vaccinated">First Vaccine Shot</string>
     <string name="new_cases">New Cases</string>
     <string name="total_deaths">Total Deaths</string>
     <string name="new_deaths">New Deaths</string>

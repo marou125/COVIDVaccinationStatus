@@ -36,8 +36,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Bermuda: CaseData,
                    var Bhutan: CaseData,
                    var Bolivia: CaseData,
-                   @SerializedName("Bosnia and Herzegowina")
-                   var BosniaAndHerzegowina: CaseData,
+                   @SerializedName("Bosnia and Herzegovina")
+                   var BosniaAndHerzegovina: CaseData,
                    var Botswana: CaseData,
                    @SerializedName("Bouvet Island")
                    var BouvetIsland: CaseData,
@@ -81,7 +81,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Croatia: CaseData,
                    var Cuba: CaseData,
                    var Cyprus: CaseData,
-                   @SerializedName("Czech Republic")
+                   @SerializedName("Czechia")
                    var CzechRepublic: CaseData,
                    var Denmark: CaseData,
                    var Djibouti: CaseData,

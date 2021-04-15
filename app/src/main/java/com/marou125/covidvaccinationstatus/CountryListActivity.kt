@@ -37,7 +37,6 @@ class CountryListActivity : AppCompatActivity() {
             this,
             Observer { countries ->
                 countries?.let {
-                    Log.i("TAG","Got countries ${countries.size}")
                     updateUI(countries)
                 }
             }
