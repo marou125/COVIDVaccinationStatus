@@ -77,7 +77,6 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var CostaRica: CaseData,
                    @SerializedName("Cote d'Ivoire")
                    var CoteDIvoire: CaseData,
-                   @SerializedName("Croatia (Hrvatska)")
                    var Croatia: CaseData,
                    var Cuba: CaseData,
                    var Cyprus: CaseData,

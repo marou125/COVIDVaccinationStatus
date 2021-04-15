@@ -2,6 +2,7 @@ package com.marou125.covidvaccinationstatus
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -45,7 +46,20 @@ class CountryListActivity : AppCompatActivity() {
 
     }
 
-        fun updateUI(countries: List<Country>){
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+    }
+
+    fun updateUI(countries: List<Country>){
             recyclerView.adapter = CountryListAdapter(countries)
         }
 
