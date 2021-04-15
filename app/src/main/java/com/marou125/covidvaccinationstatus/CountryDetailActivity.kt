@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.marou125.covidvaccinationstatus.database.CountryRepository
@@ -72,8 +74,10 @@ class CountryDetailActivity : AppCompatActivity() {
                     country.activeCases = displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered
                 }
 
-                binding.detailFlagIv.setImageResource(country!!.flag)
-                binding.detailCountryNameTv.text = country.name
+                val detailFlagIV = findViewById<ImageView>(R.id.detail_flag_iv)
+                val detailCountryNameTV = findViewById<TextView>(R.id.detail_country_name_tv)
+                detailFlagIV.setImageResource(country!!.flag)
+                detailCountryNameTV.text = country.name
                 binding.populationNumberTv.text = formatNumber(country.population)
                 binding.caseNumberTv.text = formatNumber(country.totalCases)
                 binding.newCasesTv.text = "+${country.newCases}"

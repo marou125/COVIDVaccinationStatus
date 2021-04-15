@@ -2,10 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CountryDetailActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar_detail"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/vaccination_card"
@@ -179,7 +184,7 @@
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_detail">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -189,27 +194,27 @@
             android:paddingEnd="16dp"
             android:paddingBottom="16dp">
 
-            <ImageView
-                android:id="@+id/detail_flag_iv"
-                android:layout_width="24dp"
-                android:layout_height="18dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                app:layout_constraintEnd_toStartOf="@+id/detail_country_name_tv"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/ger" />
+<!--            <ImageView-->
+<!--                android:id="@+id/detail_flag_iv"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="18dp"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:layout_marginEnd="4dp"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/detail_country_name_tv"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:srcCompat="@drawable/ger" />-->
 
-            <TextView
-                android:id="@+id/detail_country_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Germany" />
+<!--            <TextView-->
+<!--                android:id="@+id/detail_country_name_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="Germany" />-->
 
             <TextView
                 android:id="@+id/textView3"
