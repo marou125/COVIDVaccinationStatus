@@ -6,26 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".CountryListActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose a country"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-    </androidx.appcompat.widget.Toolbar>
+   <include
+       layout = "@layout/toolbar_list"
+       android:id="@+id/toolbar_list"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -35,7 +18,7 @@
         app:layout_constraintBottom_toBottomOf="@id/coordinator_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_list"
         tools:listitem="@layout/list_item" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -1,6 +1,7 @@
 package com.marou125.covidvaccinationstatus
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.marou125.covidvaccinationstatus.database.Country
@@ -8,6 +9,7 @@ import com.marou125.covidvaccinationstatus.database.CountryRepository
 import com.marou125.covidvaccinationstatus.service.VaccinationData
 import java.lang.reflect.Executable
 import java.sql.Date
+import java.util.*
 import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
@@ -17,6 +19,7 @@ class CountryListViewModel : ViewModel() {
     val countryRepository: CountryRepository = CountryRepository.get()
     var countryListLiveData = countryRepository.getCountries()
     val executor = Executors.newSingleThreadExecutor()
+
 
     init {
         insert(europe)
@@ -33,6 +36,16 @@ class CountryListViewModel : ViewModel() {
             }
             countryListLiveData = countryRepository.getCountries()
         }
+    }
+
+    fun sortCountries(){
+        Log.i("Button clicked", "Sort button was clicked")
+        //TODO: This block of code does not lead to a sorted list
+//        countryListLiveData = countryListLiveData.apply {
+//           this.value!!.sortedBy { it.population }
+//        }
+//        Log.i("First value", countryListLiveData.value!![0].name)
+
     }
 
 

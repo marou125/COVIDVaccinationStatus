@@ -15,6 +15,7 @@ import com.marou125.covidvaccinationstatus.service.VaccinationData
 import java.util.concurrent.Executors
 import kotlin.math.floor
 
+//TODO: Refactoring, flag appears small on some countries, create viewmodel for this class
 class CountryDetailActivity : AppCompatActivity() {
 
     val countryRepository by lazy {

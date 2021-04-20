@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+//TODO: Add sorting option
 class CountryListActivity : AppCompatActivity() {
 
     val recyclerView by lazy {
@@ -43,6 +45,10 @@ class CountryListActivity : AppCompatActivity() {
             }
         )
 
+        findViewById<Button>(R.id.sort_button).setOnClickListener {
+            viewModel.sortCountries()
+        }
+
 
     }
 
@@ -54,7 +60,7 @@ class CountryListActivity : AppCompatActivity() {
         }
 
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.ExitToast), Toast.LENGTH_SHORT).show()
 
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }

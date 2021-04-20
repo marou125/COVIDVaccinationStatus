@@ -13,4 +13,5 @@
     <string name="new_deaths">New Deaths</string>
     <string name="active_cases">Active Cases</string>
     <string name="no_data">No data</string>
+    <string name="ExitToast">Please click BACK again to exit</string>
 </resources>

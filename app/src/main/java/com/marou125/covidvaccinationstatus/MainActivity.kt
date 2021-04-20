@@ -19,6 +19,8 @@ import java.util.concurrent.Executors
 
 private const val BASE_URL_VACCINATION_DATA = "https://raw.githubusercontent.com/"
 
+
+//TODO: Refactor this into another class
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
