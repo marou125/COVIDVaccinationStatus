@@ -6,10 +6,12 @@ import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marou125.covidvaccinationstatus.database.Country
 import com.marou125.covidvaccinationstatus.service.CovidService
 import com.marou125.covidvaccinationstatus.service.VaccinationData
@@ -44,6 +46,9 @@ class CountryListActivity : AppCompatActivity() {
                 }
             }
         )
+
+        //TODO: this resets the tint but also appears to remove the selection navigation
+        findViewById<BottomNavigationView>(R.id.bottom_nav).itemIconTintList=null
 
         findViewById<Button>(R.id.sort_button).setOnClickListener {
             viewModel.sortCountries()

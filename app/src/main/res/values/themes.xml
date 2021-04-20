@@ -14,4 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/background</item>
     </style>
+
+    <style name="menu_text_style" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Menu">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
