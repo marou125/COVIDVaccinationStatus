@@ -14,4 +14,6 @@
     <string name="active_cases">Active Cases</string>
     <string name="no_data">No data</string>
     <string name="ExitToast">Please click BACK again to exit</string>
+    <string name="sorted_by_name">Sorted by Name</string>
+    <string name="sorted_by_population">Sorted by Population</string>
 </resources>

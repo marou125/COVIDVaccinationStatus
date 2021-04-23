@@ -29,11 +29,13 @@ class CountryListActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.recyclerView)
     }
 
+    val viewModel by lazy {
+        ViewModelProvider(this).get(CountryListViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_list)
-
-        val viewModel = ViewModelProvider(this).get(CountryListViewModel::class.java)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -42,7 +44,7 @@ class CountryListActivity : AppCompatActivity() {
             this,
             Observer { countries ->
                 countries?.let {
-                    updateUI(countries)
+                    updateUI()
                 }
             }
         )
@@ -51,7 +53,15 @@ class CountryListActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_nav).itemIconTintList=null
 
         findViewById<Button>(R.id.sort_button).setOnClickListener {
+            var mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT)
             viewModel.sortCountries()
+            if(viewModel.sortedByName){
+                mToast.setText(getString(R.string.sorted_by_name))
+            } else {
+                mToast.setText(getString(R.string.sorted_by_population))
+            }
+            updateUI()
+            mToast.show()
         }
 
 
@@ -70,8 +80,8 @@ class CountryListActivity : AppCompatActivity() {
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 
-    fun updateUI(countries: List<Country>){
-            recyclerView.adapter = CountryListAdapter(countries)
+    fun updateUI(){
+            recyclerView.adapter = CountryListAdapter(viewModel.europe)
         }
 
 
