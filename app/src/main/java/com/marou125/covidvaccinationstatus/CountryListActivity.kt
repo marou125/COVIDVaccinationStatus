@@ -81,7 +81,7 @@ class CountryListActivity : AppCompatActivity() {
     }
 
     fun updateUI(){
-            recyclerView.adapter = CountryListAdapter(viewModel.europe)
+            recyclerView.adapter = CountryListAdapter(viewModel.americas)
         }
 
 

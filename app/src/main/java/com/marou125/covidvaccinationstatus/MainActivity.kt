@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         executor.execute{
-            Thread.sleep(1000)
 
             val service = retrofit.create(CovidService::class.java)
             val call = service.getVaccinationData()
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
-            val caseCall = service.getCaseData("https://covid-api.mmediagroup.fr/v1/cases?continent=Europe")
+            val caseCall = service.getCaseData("https://covid-api.mmediagroup.fr/v1/cases")
 
             caseCall.enqueue(object : Callback<JsonCaseData>{
                 override fun onResponse(call: Call<JsonCaseData>?, response: Response<JsonCaseData>?) {

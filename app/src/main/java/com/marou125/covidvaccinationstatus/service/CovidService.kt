@@ -9,7 +9,7 @@ interface CovidService {
     fun getVaccinationData(): Call<Array<VaccinationData>>
 
 
-    //https://covid-api.mmediagroup.fr/v1/cases?continent=Europe
+    //https://covid-api.mmediagroup.fr/v1/cases
     @GET
     fun getCaseData(@Url url: String): Call<JsonCaseData>
 }

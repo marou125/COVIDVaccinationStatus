@@ -17,6 +17,10 @@ import kotlin.collections.ArrayList
 class CountryListViewModel : ViewModel() {
 
     var europe = fillEurope()
+    var americas = fillAmericas()
+    var asia = fillAsia()
+    var africa = fillAfrica()
+    var oceania = fillOceania()
     val countryRepository: CountryRepository = CountryRepository.get()
     var countryListLiveData = countryRepository.getCountries()
     val executor = Executors.newSingleThreadExecutor()
@@ -27,6 +31,7 @@ class CountryListViewModel : ViewModel() {
 
     init {
         insert(europe)
+        insert(americas)
     }
 
 
@@ -44,7 +49,7 @@ class CountryListViewModel : ViewModel() {
 
     fun sortCountries(){
         if(sortedByName) {
-            europe = europe.sortedBy { it.population }
+            europe = europe.sortedBy { it.population }.reversed()
             sortedByName = false
         } else {
             europe = europe.sortedBy{it.name}
@@ -101,5 +106,81 @@ class CountryListViewModel : ViewModel() {
         europe.add(Country(R.drawable.ua, "Ukraine", 43733762, 0, 0, 0, 0, 0, Date(2020,1,1).toString(), 0, 0, 0))
         europe.add(Country(R.drawable.gb, "United Kingdom", 67886011, 0, 0, 0, 0, 0, Date(2020,1,1).toString(), 0, 0, 0))
         return europe
+    }
+
+    fun fillAmericas(): List<Country>{
+        val americas = ArrayList<Country>()
+        americas.add(Country(R.drawable.ai,"Anguilla",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ag,"Antigua and Barbuda",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ar,"Argentina",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.aw,"Aruba",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.bs,"Bahamas",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.bb,"Barbados",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.bz,"Belize",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.bm,"Bermuda",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.bo,"Bolivia",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.br,"Brazil",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.vg,"British Virgin Islands",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ca,"Canada",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //americas.add(Country(R.drawable.,"Caribbean Netherlands",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ky,"Cayman Islands",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.cl,"Chile",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.co,"Colombia",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.cr,"Costa Rica",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.cu,"Cuba",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //americas.add(Country(R.drawable.,"Curacao",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.dm,"Dominica",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.dominican,"Dominican Republic",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ec,"Ecuador",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.sv,"El Salvador",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.fk,"Falkland Islands",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.gf,"French Guiana",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.gl,"Greenland",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.gd,"Grenada",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.gp,"Guadeloupe",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.gy,"Guyana",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //americas.add(Country(R.drawable.,"Haiti",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.hn,"Honduras",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.jm,"Jamaica",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //check accuracy of flag
+        americas.add(Country(R.drawable.mq,"Martinique",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.mx,"Mexico",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ms,"Montserrat",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ni,"Nicaragua",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //check accuracy of flag
+        americas.add(Country(R.drawable.pa,"Panama",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.py,"Paraguay",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.pe,"Peru",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.pr,"Puerto Rico",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.kn,"Saint Kitt & Nevis",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.lc,"Saint Lucia",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //americas.add(Country(R.drawable.,"Saint Martin",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.pm,"Saint Pierre & Miquelon",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        //americas.add(Country(R.drawable.,"Sint Marteen",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.vc,"St. Vincent & Grenadines",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.sr,"Suriname",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.tt,"Trinidad & Tobago",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.tc,"Turks and Caicos",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.us,"United States",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.vi,"US Virgin Islands",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.uy,"Uruguay",0,0,0,0,0,0,"2020-01-01",0,0,0))
+        americas.add(Country(R.drawable.ve,"Venezuela",0,0,0,0,0,0,"2020-01-01",0,0,0))
+
+        return americas
+    }
+
+    fun fillAsia(): List<Country>{
+        val asia = ArrayList<Country>()
+        return asia
+    }
+
+    fun fillAfrica(): List<Country>{
+        val africa = ArrayList<Country>()
+        return africa
+    }
+
+    fun fillOceania(): List<Country>{
+        val oceania = ArrayList<Country>()
+        return oceania
     }
 }
