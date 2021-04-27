@@ -67,8 +67,8 @@ class CountryDetailActivity : AppCompatActivity() {
 
                 /*TODO:New Cases and New Deaths are not shown correctly because the total values of the day before are not saved anywhere and the population data seems inaccurate*/
                 if(displayedCountryCaseData != null){
-                    country!!.population = displayedCountryCaseData.population
-                    country.newDeaths = displayedCountryCaseData.deaths - country.totalDeaths
+                    //country!!.population = displayedCountryCaseData.population
+                    country!!.newDeaths = displayedCountryCaseData.deaths - country.totalDeaths
                     country.totalDeaths = displayedCountryCaseData.deaths
                     country.newCases = displayedCountryCaseData.confirmed - country.totalCases
                     country.totalCases = displayedCountryCaseData.confirmed
