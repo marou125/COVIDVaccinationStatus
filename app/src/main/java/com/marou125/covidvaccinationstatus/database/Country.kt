@@ -8,15 +8,15 @@ import java.util.*
 data class Country(val flag: Int,
                    @PrimaryKey val name: String,
                    var population: Int,
-                   var totalCases: Int,
-                   var newCases: Int,
-                   var activeCases: Int,
-                   var totalDeaths: Int,
-                   var newDeaths: Int,
-                   var date: String,
-                   var totalVaccinations: Int,
-                   var firstVaccine: Int,
-                   var fullyVaccinated: Int) {
+                   var totalCases: Int = 0,
+                   var newCases: Int = 0,
+                   var activeCases: Int = 0,
+                   var totalDeaths: Int = 0,
+                   var newDeaths: Int = 0,
+                   var date: String = "2021-01-01",
+                   var totalVaccinations: Int = 0,
+                   var firstVaccine: Int = 0,
+                   var fullyVaccinated: Int = 0) {
     @Override
     override fun toString(): String {
         return name

@@ -78,7 +78,17 @@ class CountryListActivity : AppCompatActivity() {
             mToast.show()
         }
 
+        Log.i("EUROPE", printCountryConstructor(viewModel.europe))
 
+
+    }
+
+    fun printCountryConstructor(continent: List<Country>): String{
+        var string = ""
+        for(country in continent){
+            string+="europe.add(Country(${country.flag}, \"${country.name}\", ${country.population}))\n"
+        }
+        return string
     }
 
     private var doubleBackToExitPressedOnce = false
