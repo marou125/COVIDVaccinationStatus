@@ -6,23 +6,13 @@ import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marou125.covidvaccinationstatus.database.Country
-import com.marou125.covidvaccinationstatus.service.CovidService
-import com.marou125.covidvaccinationstatus.service.VaccinationData
-import com.marou125.covidvaccinationstatus.service.VaccinationTimeStamp
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-//TODO: Add sorting option
 class CountryListActivity : AppCompatActivity() {
 
     val recyclerView by lazy {
@@ -39,28 +29,52 @@ class CountryListActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        var currentList = viewModel.europe
+
 
         viewModel.countryListLiveData.observe(
             this,
             Observer { countries ->
                 countries?.let {
-                    updateUI()
+                    updateUI(currentList)
                 }
             }
         )
 
         //TODO: this resets the tint but also appears to remove the selection navigation
-        findViewById<BottomNavigationView>(R.id.bottom_nav).itemIconTintList=null
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        //bottomNav.itemIconTintList=null
 
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.favourites -> Log.i("LIST", "FAVOURITES SELECTED")
+                R.id.europe -> {
+                    currentList = viewModel.europe
+                }
+                R.id.americas -> {
+                    currentList = viewModel.americas
+                }
+                R.id.asiaPacific -> {
+                    currentList = viewModel.asiaPacific
+                }
+                R.id.africa -> {
+                    currentList = viewModel.africa
+                }
+            }
+            updateUI(currentList)
+            true
+        }
+
+        //TODO: BUG: When switching lists the sorting gets reset, has to do with the boolean value not being saved properly maybe
         findViewById<Button>(R.id.sort_button).setOnClickListener {
             var mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT)
-            viewModel.sortCountries()
+            currentList = viewModel.sortCountries(currentList)
             if(viewModel.sortedByName){
                 mToast.setText(getString(R.string.sorted_by_name))
             } else {
                 mToast.setText(getString(R.string.sorted_by_population))
             }
-            updateUI()
+            updateUI(currentList)
             mToast.show()
         }
 
@@ -80,8 +94,8 @@ class CountryListActivity : AppCompatActivity() {
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 
-    fun updateUI(){
-            recyclerView.adapter = CountryListAdapter(viewModel.americas)
+    fun updateUI(continent: List<Country>){
+            recyclerView.adapter = CountryListAdapter(continent)
         }
 
 
