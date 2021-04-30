@@ -13,7 +13,8 @@ class CountryRepository private constructor(context: Context){
         context.applicationContext,
         CountryDatabase::class.java,
         DATABASE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration()
+            .build()
 
     private val countryDao = database.countryDao()
 

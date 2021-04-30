@@ -63,9 +63,11 @@ class CountryDetailActivity : AppCompatActivity() {
                     country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
                     country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
                     country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
+                    country.sevenDayAverage = if(lastUpdate.daily_vaccinations != null) Integer.valueOf(lastUpdate.daily_vaccinations) else country.sevenDayAverage
                 }
 
-                /*TODO:New Cases and New Deaths are not shown correctly because the total values of the day before are not saved anywhere and the population data seems inaccurate*/
+                /*TODO:New Cases and New Deaths are not shown correctly because the total values of the day before are not saved anywhere
+                *  Idea: Use the case numbers from the day before to determine new cases and new deaths*/
                 if(displayedCountryCaseData != null){
                     //country!!.population = displayedCountryCaseData.population
                     country!!.newDeaths = displayedCountryCaseData.deaths - country.totalDeaths
@@ -90,6 +92,7 @@ class CountryDetailActivity : AppCompatActivity() {
                 binding.totalVaccNumberTv.text = if(country.totalVaccinations == 0) "No data" else formatNumber(country.totalVaccinations)
                 binding.peopleVaccNumberTv.text = if(country.firstVaccine == 0) "No data" else formatNumber(country.firstVaccine)
                 binding.peopleFullVaccNumberTv.text = if(country.fullyVaccinated == 0) "No data" else formatNumber(country.fullyVaccinated)
+                binding.sevenDayAvgNumber.text = if(country.sevenDayAverage == 0) "No data" else formatNumber(country.sevenDayAverage)
 
                 //ProgressBar
                 if(binding.peopleFullVaccNumberTv.text.equals("No data")){

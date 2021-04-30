@@ -25,6 +25,8 @@ class CountryListViewModel : ViewModel() {
     var countryListLiveData = countryRepository.getCountries()
     val executor = Executors.newSingleThreadExecutor()
 
+    var favourites = CountryDataSingleton.favourites
+
     //boolean for the sort button
     var sortedByName = true
 

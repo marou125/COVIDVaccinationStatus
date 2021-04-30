@@ -17,7 +17,7 @@ object CountryDataSingleton {
     var asiaPacific = createAsiaPacific()
     val world = getAllCountries()
 
-    var favourites = ArrayList<Country>()
+    var favourites = emptyList<Country>()
 
     fun fillList(countryData: Array<VaccinationData>){
         countryDataList = countryData.toList()

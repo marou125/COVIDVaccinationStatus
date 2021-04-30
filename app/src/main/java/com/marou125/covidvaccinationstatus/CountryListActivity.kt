@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,13 +24,21 @@ class CountryListActivity : AppCompatActivity() {
         ViewModelProvider(this).get(CountryListViewModel::class.java)
     }
 
+    val emptyList by lazy {
+        findViewById<TextView>(R.id.emptyList)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_list)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        var currentList = viewModel.europe
+        var currentList = viewModel.favourites
+
+//        if(viewModel.favourites.isEmpty()){
+//            emptyList.visibility = TextView.VISIBLE
+//        }
 
 
         viewModel.countryListLiveData.observe(
@@ -47,7 +56,9 @@ class CountryListActivity : AppCompatActivity() {
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
-                R.id.favourites -> Log.i("LIST", "FAVOURITES SELECTED")
+                R.id.favourites -> {
+                    currentList = viewModel.favourites
+                }
                 R.id.europe -> {
                     currentList = viewModel.europe
                 }
@@ -78,17 +89,7 @@ class CountryListActivity : AppCompatActivity() {
             mToast.show()
         }
 
-        Log.i("EUROPE", printCountryConstructor(viewModel.europe))
 
-
-    }
-
-    fun printCountryConstructor(continent: List<Country>): String{
-        var string = ""
-        for(country in continent){
-            string+="europe.add(Country(${country.flag}, \"${country.name}\", ${country.population}))\n"
-        }
-        return string
     }
 
     private var doubleBackToExitPressedOnce = false
@@ -106,6 +107,11 @@ class CountryListActivity : AppCompatActivity() {
 
     fun updateUI(continent: List<Country>){
             recyclerView.adapter = CountryListAdapter(continent)
+            if(continent.isEmpty()){
+                emptyList.visibility = TextView.VISIBLE
+            } else {
+                emptyList.visibility = TextView.GONE
+            }
         }
 
 

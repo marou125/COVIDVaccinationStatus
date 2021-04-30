@@ -16,7 +16,8 @@ data class Country(val flag: Int,
                    var date: String = "2021-01-01",
                    var totalVaccinations: Int = 0,
                    var firstVaccine: Int = 0,
-                   var fullyVaccinated: Int = 0) {
+                   var fullyVaccinated: Int = 0,
+                   var sevenDayAverage: Int = 0 ) {
     @Override
     override fun toString(): String {
         return name
