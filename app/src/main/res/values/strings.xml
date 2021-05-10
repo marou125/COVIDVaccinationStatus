@@ -18,4 +18,6 @@
     <string name="sorted_by_population">Sorted by Population</string>
     <string name="_7_day_average">7-day average</string>
     <string name="you_have_no_countries_saved_in_your_favourites_yet">You have no countries saved in your favourites yet</string>
+    <string name="index">. . . . . . . . . . . . . . . . . . . . .</string>
+    <string name="infection_status">Infection Status</string>
 </resources>

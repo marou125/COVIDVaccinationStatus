@@ -1,15 +1,19 @@
 package com.marou125.covidvaccinationstatus
 
+import android.util.Log
 import com.marou125.covidvaccinationstatus.database.Country
 import com.marou125.covidvaccinationstatus.service.JsonCaseData
 import com.marou125.covidvaccinationstatus.service.VaccinationData
 import java.sql.Date
 import java.util.*
+import kotlin.collections.HashMap
 
 object CountryDataSingleton {
 
     var countryDataList = emptyList<VaccinationData>()
     var caseData:JsonCaseData? = null
+    var historicCases:JsonCaseData? = null
+    var historicDeaths:JsonCaseData? = null
 
     var europe = fillEurope()
     var americas = fillAmericas()
@@ -25,6 +29,27 @@ object CountryDataSingleton {
 
     fun fillCaseData(jsonData: JsonCaseData){
         caseData = jsonData
+    }
+
+    fun fillHistoricConfirmed(jsonData: JsonCaseData){
+        historicCases = jsonData
+    }
+
+    fun fillHistoricDeaths(jsonData: JsonCaseData){
+        historicDeaths = jsonData
+    }
+
+    //This function returns the cases/deaths of the last recorded seven days
+    fun getWeeklyData(dateMap: HashMap<String, Int>): IntArray {
+        val weeklyData = dateMap.entries.sortedByDescending { it.value }.subList(0,7)
+        var weeklyDataNumeric = IntArray(7)
+        var i = 0
+        for(day in weeklyData){
+            val numericValue = Integer.valueOf(day.toString().substring(11))
+            weeklyDataNumeric[i] = numericValue
+            i++
+        }
+        return weeklyDataNumeric
     }
 
     //Population source: https://www.worldometers.info/world-population/population-by-country/

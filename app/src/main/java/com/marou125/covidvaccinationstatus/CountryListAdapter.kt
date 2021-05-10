@@ -23,6 +23,8 @@ class CountryListAdapter(private val countryList: List<Country>) : RecyclerView.
                 i.putExtra("country", countryList.get(adapterPosition).name)
                 startActivity(view.context, i, null)
             }
+
+
         }
 
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -49,6 +50,11 @@ class CountryListActivity : AppCompatActivity() {
                 }
             }
         )
+
+//        val favouriteButton = findViewById<ImageView>(R.id.favButton)
+//
+//        favouriteButton.setOnClickListener {
+//        }
 
         //TODO: this resets the tint but also appears to remove the selection navigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)

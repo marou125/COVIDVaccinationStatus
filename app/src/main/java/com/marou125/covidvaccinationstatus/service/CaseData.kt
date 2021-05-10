@@ -6,7 +6,7 @@ class CaseData (var All: CaseInfo) {
 }
 
 class CaseInfo(var confirmed: Int, var recovered: Int, var deaths: Int,
-               var country: String, var population: Int)
+               var country: String, var dates: HashMap<String, Int>)
 
 class JsonCaseData(var Afghanistan: CaseData,
                    var Albania: CaseData,

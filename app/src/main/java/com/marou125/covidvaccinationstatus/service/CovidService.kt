@@ -12,4 +12,7 @@ interface CovidService {
     //https://covid-api.mmediagroup.fr/v1/cases
     @GET
     fun getCaseData(@Url url: String): Call<JsonCaseData>
+
+    @GET
+    fun getHistoricalData(@Url url: String): Call<JsonCaseData>
 }

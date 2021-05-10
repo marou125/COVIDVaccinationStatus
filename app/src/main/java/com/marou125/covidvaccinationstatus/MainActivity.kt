@@ -69,13 +69,45 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this@MainActivity, "Error while trying to save case data", Toast.LENGTH_SHORT).show()
                     }
-                    startActivity(i)
                 }
 
                 override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
                     Log.i("CaseCall", "Error $t")
                 }
             })
+
+            val historyConfirmedCall = service.getHistoricalData("https://covid-api.mmediagroup.fr/v1/history?status=confirmed")
+
+            historyConfirmedCall.enqueue(object : Callback<JsonCaseData>{
+                override fun onResponse(call: Call<JsonCaseData>?, response: Response<JsonCaseData>?) {
+                    val historicConfirmed = response?.body()
+                    if(historicConfirmed != null){
+                        CountryDataSingleton.fillHistoricConfirmed(historicConfirmed)
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
+                    Log.i("historicConfirmed", "Error $t")
+                }
+            })
+
+
+            val historyDeathsCall = service.getHistoricalData("https://covid-api.mmediagroup.fr/v1/history?status=deaths")
+
+            historyDeathsCall.enqueue(object : Callback<JsonCaseData>{
+                override fun onResponse(call: Call<JsonCaseData>?, response: Response<JsonCaseData>?) {
+                    val historicDeaths = response?.body()
+                    if(historicDeaths != null){
+                        CountryDataSingleton.fillHistoricDeaths(historicDeaths)
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
+                    Log.i("historicDeaths", "Error $t")
+                }
+            })
+
+            startActivity(i)
         }
     }
 }
