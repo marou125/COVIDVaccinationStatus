@@ -6,6 +6,7 @@ import com.marou125.covidvaccinationstatus.service.JsonCaseData
 import com.marou125.covidvaccinationstatus.service.VaccinationData
 import java.sql.Date
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 object CountryDataSingleton {
@@ -21,7 +22,7 @@ object CountryDataSingleton {
     var asiaPacific = createAsiaPacific()
     val world = getAllCountries()
 
-    var favourites = emptyList<Country>()
+    var favourites = ArrayList<Country>()
 
     fun fillList(countryData: Array<VaccinationData>){
         countryDataList = countryData.toList()
@@ -39,6 +40,16 @@ object CountryDataSingleton {
         historicDeaths = jsonData
     }
 
+    fun saveInFavourites(country: Country) {
+        if(!favourites.contains(country)){
+            favourites.add(country)
+            Log.i("ADDED", "Added $country to favourites")
+        } else {
+            favourites.remove(country)
+            Log.i("REMOVED", "Removed $country from favourites")
+        }
+    }
+
     //This function returns the cases/deaths of the last recorded seven days
     fun getWeeklyData(dateMap: HashMap<String, Int>): IntArray {
         val weeklyData = dateMap.entries.sortedByDescending { it.value }.subList(0,7)
@@ -52,6 +63,10 @@ object CountryDataSingleton {
         return weeklyDataNumeric
     }
 
+
+    fun fillFavourites(savedFavourites: ArrayList<Country>){
+        favourites = savedFavourites
+    }
     //Population source: https://www.worldometers.info/world-population/population-by-country/
     //TODO: check with right click refactor unused ressources for not used flags for countries that were commented out
     fun fillEurope(): List<Country> {
@@ -336,4 +351,6 @@ object CountryDataSingleton {
         world.addAll(asiaPacific)
         return world.sortedBy { it.name }
     }
+
+
 }

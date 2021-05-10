@@ -1,5 +1,6 @@
 package com.marou125.covidvaccinationstatus
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -13,7 +14,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.marou125.covidvaccinationstatus.database.Country
+import java.lang.reflect.Type
 
 class CountryListActivity : AppCompatActivity() {
 
@@ -29,17 +33,16 @@ class CountryListActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.emptyList)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_list)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        var currentList = viewModel.favourites
+        readFavourites()
 
-//        if(viewModel.favourites.isEmpty()){
-//            emptyList.visibility = TextView.VISIBLE
-//        }
+        var currentList: List<Country> = viewModel.favourites
 
 
         viewModel.countryListLiveData.observe(
@@ -50,11 +53,6 @@ class CountryListActivity : AppCompatActivity() {
                 }
             }
         )
-
-//        val favouriteButton = findViewById<ImageView>(R.id.favButton)
-//
-//        favouriteButton.setOnClickListener {
-//        }
 
         //TODO: this resets the tint but also appears to remove the selection navigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
@@ -96,6 +94,32 @@ class CountryListActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onPause() {
+        saveFavourites(CountryDataSingleton.favourites)
+        super.onPause()
+    }
+
+    private fun readFavourites(){
+        val prefs = this.getSharedPreferences("ListActivity", Context.MODE_PRIVATE) ?: return
+        val gson = Gson()
+        val json = prefs.getString("FavouriteList", null)
+        val type = object : TypeToken<ArrayList<Country>>() {}.type
+        val favouriteList = gson.fromJson<ArrayList<Country>>(json, type)
+        if(favouriteList != null){
+            CountryDataSingleton.fillFavourites(favouriteList)
+        }
+    }
+
+    private fun saveFavourites(favourites: ArrayList<Country>){
+        val prefs = this.getSharedPreferences("ListActivity", Context.MODE_PRIVATE) ?: return
+        with(prefs.edit()){
+            val gson = Gson()
+            val json = gson.toJson(favourites)
+            putString("FavouriteList", json)
+            apply()
+        }
     }
 
     private var doubleBackToExitPressedOnce = false

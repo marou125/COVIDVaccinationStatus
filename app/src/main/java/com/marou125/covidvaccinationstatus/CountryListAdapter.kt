@@ -23,7 +23,10 @@ class CountryListAdapter(private val countryList: List<Country>) : RecyclerView.
                 i.putExtra("country", countryList.get(adapterPosition).name)
                 startActivity(view.context, i, null)
             }
-
+            val favButton = view.findViewById<ImageView>(R.id.favButton)
+            favButton.setOnClickListener {
+                CountryDataSingleton.saveInFavourites(countryList.get(adapterPosition))
+            }
 
         }
 
