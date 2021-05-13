@@ -68,7 +68,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/population"
-                        android:textColor="@color/purple_700"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/infectionStatus" />
 
@@ -79,7 +78,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/total_cases"
-                        android:textColor="@color/purple_700"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -90,7 +88,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/new_cases"
-                        android:textColor="@color/purple_700"
                         android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -102,7 +99,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/total_deaths"
-                        android:textColor="@color/purple_700"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -124,7 +120,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/active_cases"
-                        android:textColor="@color/purple_700"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -242,7 +237,6 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:progress="40"
-                        android:progressTint="@color/purple_700"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -253,7 +247,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/vaccination_status"
-                        android:textColor="@color/purple_700"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -309,7 +302,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:progress="40"
-                        android:progressTint="@color/purple_700"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/vacc_percentage_first_tv" />
@@ -432,104 +424,103 @@
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Prognosis for 1st shot percentage"
-                        android:textColor="@color/purple_700"
+                        android:text="Visualized"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/twentyFivePercent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="25 %"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/twentyFivePercent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:text="25 %"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
 
-                    <TextView
-                        android:id="@+id/fiftyPercent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="50 %"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/twentyFivePercent" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/fiftyPercent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:text="50 %"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/twentyFivePercent" />-->
 
-                    <TextView
-                        android:id="@+id/seventyPercent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="70 %"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fiftyPercent" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/seventyPercent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:text="70 %"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/fiftyPercent" />-->
 
-                    <TextView
-                        android:id="@+id/index"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/index"
-                        android:textColor="@color/purple_700"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@+id/twentyFivePercent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/index"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:text="@string/index"-->
+<!--                        android:textColor="@color/purple_700"-->
+<!--                        android:textSize="24sp"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/twentyFivePercent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
 
-                    <TextView
-                        android:id="@+id/index2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/index"
-                        android:textColor="@color/purple_700"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@+id/fiftyPercent"
-                        app:layout_constraintTop_toBottomOf="@+id/index" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/index2"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/index"-->
+<!--                        android:textColor="@color/purple_700"-->
+<!--                        android:textSize="24sp"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/fiftyPercent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/index" />-->
 
-                    <TextView
-                        android:id="@+id/index3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/index"
-                        android:textColor="@color/purple_700"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@+id/seventyPercent"
-                        app:layout_constraintTop_toBottomOf="@+id/index2" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/index3"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/index"-->
+<!--                        android:textColor="@color/purple_700"-->
+<!--                        android:textSize="24sp"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/seventyPercent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/index2" />-->
 
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18"
-                        tools:text="10 days" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView15"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView18"-->
+<!--                        tools:text="10 days" />-->
 
-                    <TextView
-                        android:id="@+id/textView16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView15"
-                        tools:text="30 days" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView15"-->
+<!--                        tools:text="30 days" />-->
 
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView16"
-                        tools:text="55 days" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView17"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView16"-->
+<!--                        tools:text="55 days" />-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
