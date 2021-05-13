@@ -79,7 +79,7 @@ class CountryListActivity : AppCompatActivity() {
             updateUI(currentList)
             true
         }
-        
+
         findViewById<Button>(R.id.sort_button).setOnClickListener {
             var mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT)
             if(viewModel.sortedByName){

@@ -53,7 +53,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Cambodia: CaseData,
                    var Cameroon: CaseData,
                    var Canada: CaseData,
-                   @SerializedName("Cape Verde")
+                   @SerializedName("Cape Verde", alternate = ["Cabo Verde"])
                    var CapeVerde: CaseData,
                    @SerializedName("Cayman Islands")
                    var CaymanIslands: CaseData,
@@ -68,8 +68,9 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Cocos: CaseData,
                    var Colombia: CaseData,
                    var Comoros: CaseData,
+                   @SerializedName("Congo", alternate=["Congo (Brazzaville)"])
                    var Congo: CaseData,
-                   @SerializedName("Congo, the Democratic Republic of the")
+                   @SerializedName("Democratic Republic of Congo", alternate=["Congo (Kinshasa)"])
                    var CongoDR: CaseData,
                    @SerializedName("Cook Islands")
                    var CookIslands: CaseData,
@@ -141,7 +142,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Iceland: CaseData,
                    var India: CaseData,
                    var Indonesia: CaseData,
-                   @SerializedName("Iran (Islamic Republic of)")
+                   //@SerializedName("Iran (Islamic Republic of)")
                    var Iran: CaseData,
                    var Iraq: CaseData,
                    var Ireland: CaseData,
@@ -155,7 +156,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Kiribati: CaseData,
                    @SerializedName("Korea, Democratic People's Republic of")
                    var NorthKorea: CaseData,
-                   @SerializedName("Korea, Republic of")
+                   @SerializedName("South Korea", alternate = ["Korea, South"])
                    var SouthKorea: CaseData,
                    var Kuwait: CaseData,
                    var Kyrgyzstan: CaseData,
@@ -165,8 +166,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Lebanon: CaseData,
                    var Lesotho: CaseData,
                    var Liberia: CaseData,
-                   @SerializedName("Libyan Arab Jamahiriya")
-                   var LibyanArabJamahiriya: CaseData,
+                   //@SerializedName("Libyan Arab Jamahiriya")
+                   var Libya: CaseData,
                    var Liechtenstein: CaseData,
                    var Lithuania: CaseData,
                    var Luxembourg: CaseData,
@@ -188,7 +189,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Mexico: CaseData,
                    @SerializedName("Micronesia, Federated States of")
                    var Micronesia: CaseData,
-                   @SerializedName("Moldova, Republic of")
+//                   @SerializedName("Moldova")
                    var Moldova: CaseData,
                    var Monaco: CaseData,
                    var Mongolia: CaseData,
@@ -213,6 +214,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Niue: CaseData,
                    @SerializedName("Norfolk Island")
                    var NorfolkIsland: CaseData,
+                   @SerializedName("North Macedonia")
+                   var NorthMacedonia: CaseData,
                    @SerializedName("Northern Mariana Islands")
                    var NorthernMarianaIslands: CaseData,
                    var Norway: CaseData,
@@ -283,7 +286,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    @SerializedName("Taiwan, Province of China")
                    var Taiwan: CaseData,
                    var Tajikistan: CaseData,
-                   @SerializedName("Tanzania, United Republic of")
+                   //@SerializedName("Tanzania, United Republic of")
                    var Tanzania: CaseData,
                    var Thailand: CaseData,
                    var Togo: CaseData,

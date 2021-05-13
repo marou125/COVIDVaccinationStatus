@@ -1,10 +1,5 @@
 - When recovered or deaths are not documented (=0) the active cases are not accurate and confusing
 - Some countries crash the app when trying to open them:
-EUROPE
-Moldova
-North Macedonia
-Serbia
-
 AMERICAS
 Anguilla
 Aruba
@@ -32,7 +27,6 @@ Cook Islands
 French Polynesia
 Guam
 Hong Kong
-Iran
 Kiribati
 Laos
 Macao
@@ -44,7 +38,6 @@ Niue
 North Korea
 Northern Mariana Islands
 Palau
-South Korea
 State of Palestine
 Syria
 Taiwan
@@ -56,17 +49,12 @@ Tuvalu
 Wallis & Futuna
 
 AFRICA
-Cape Verde
-Congo
-Cote d'Ivoire
-DR Congo
 Eswatini
-Libya
 Mayotte
 Reunion
 Saint Helena
 Sao Tome & Principe
-Tanzania
+Tanzania //no case data
 Western Sahara
 
 - The sort button does not show the right toast when you switch the continent and try to sort again
