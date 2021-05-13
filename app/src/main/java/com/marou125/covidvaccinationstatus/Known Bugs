@@ -1,0 +1,71 @@
+1) When recovered or deaths are not documented (=0) the active cases are not accurate and confusing
+2) Some countries crash the app when trying to open them:
+EUROPE
+Moldova
+North Macedonia
+Serbia
+
+AMERICAS
+Anguilla
+Aruba
+Bermuda
+British Virgin Islands
+Cayman Islands
+Falkland Islands
+French Guiana
+Greenland
+Guadeloupe
+Martinique
+Montserrat
+Puerto Rico
+Saint Kitt & Nevis
+Saint Pierre & Miquelon
+St. Vincent & Grenadines
+Trinidad & Tobago
+Turks and Caicos
+US Virgin Islands
+
+ASIA PACIFIC
+American Samoa
+Brunei
+Cook Islands
+French Polynesia
+Guam
+Hong Kong
+Iran
+Kiribati
+Laos
+Macao
+Micronesia
+Myanmar
+Nauru
+New Caledonia
+Niue
+North Korea
+Northern Mariana Islands
+Palau
+South Korea
+State of Palestine
+Syria
+Taiwan
+Timor-Leste
+Tokelau
+Tonga
+Turkmenistan
+Tuvalu
+Wallis & Futuna
+
+AFRICA
+Cape Verde
+Congo
+Cote d'Ivoire
+DR Congo
+Eswatini
+Libya
+Mayotte
+Reunion
+Saint Helena
+Sao Tome & Principe
+Tanzania
+Western Sahara
+3) The sort button does not show the right toast when you switch the continent and try to sort again

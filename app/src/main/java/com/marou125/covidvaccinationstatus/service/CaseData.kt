@@ -80,8 +80,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Croatia: CaseData,
                    var Cuba: CaseData,
                    var Cyprus: CaseData,
-                   @SerializedName("Czechia")
-                   var CzechRepublic: CaseData,
+                   //@SerializedName("Czechia")
+                   var Czechia: CaseData,
                    var Denmark: CaseData,
                    var Djibouti: CaseData,
                    var Dominica: CaseData,
@@ -192,6 +192,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Moldova: CaseData,
                    var Monaco: CaseData,
                    var Mongolia: CaseData,
+                   var Montenegro: CaseData,
                    var Montserrat: CaseData,
                    var Morocco: CaseData,
                    var Mozambique: CaseData,
@@ -232,8 +233,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Qatar: CaseData,
                    var Reunion: CaseData,
                    var Romania: CaseData,
-                   @SerializedName("Russian Federation")
-                   var RussianFederation: CaseData,
+                   //@SerializedName("Russian Federation")
+                   var Russia: CaseData,
                    var Rwanda: CaseData,
                    @SerializedName("Saint Kitts and Nevis")
                    var SaintKittsAndNevis: CaseData,
@@ -249,11 +250,11 @@ class JsonCaseData(var Afghanistan: CaseData,
                    @SerializedName("Saudi Arabia")
                    var SaudiArabia: CaseData,
                    var Senegal: CaseData,
+                   var Serbia: CaseData,
                    var Seychelles: CaseData,
                    @SerializedName("Sierra Leone")
                    var SierraLeone: CaseData,
                    var Singapore: CaseData,
-                   @SerializedName("Slovakia (Slovak Republic)")
                    var Slovakia: CaseData,
                    var Slovenia: CaseData,
                    @SerializedName("Solomon Islands")
@@ -302,7 +303,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var UnitedArabEmirates: CaseData,
                    @SerializedName("United Kingdom")
                    var UnitedKingdom: CaseData,
-                   @SerializedName("United States")
+                   @SerializedName("United States", alternate = arrayOf("US"))
                    var UnitedStates: CaseData,
                    @SerializedName("United States Minor Outlying Islands")
                    var UnitedStatesMinorOutlyingIslands: CaseData,

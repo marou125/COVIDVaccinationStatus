@@ -20,4 +20,16 @@
     <string name="you_have_no_countries_saved_in_your_favourites_yet">You have no countries saved in your favourites yet</string>
     <string name="index">. . . . . . . . . . . . . . . . . . . . .</string>
     <string name="infection_status">Infection Status</string>
+    <string name="January">January</string>
+    <string name="February">February</string>
+    <string name="March">March</string>
+    <string name="April">April</string>
+    <string name="May">May</string>
+    <string name="June">June</string>
+    <string name="July">July</string>
+    <string name="August">August</string>
+    <string name="September">September</string>
+    <string name="October">October</string>
+    <string name="November">November</string>
+    <string name="December">December</string>
 </resources>
