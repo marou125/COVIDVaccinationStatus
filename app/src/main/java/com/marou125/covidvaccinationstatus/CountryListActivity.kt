@@ -79,15 +79,15 @@ class CountryListActivity : AppCompatActivity() {
             updateUI(currentList)
             true
         }
-
-        //TODO: BUG: When switching lists the sorting gets reset, has to do with the boolean value not being saved properly maybe
+        
         findViewById<Button>(R.id.sort_button).setOnClickListener {
             var mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT)
-            currentList = viewModel.sortCountries(currentList)
             if(viewModel.sortedByName){
                 mToast.setText(getString(R.string.sorted_by_name))
+                viewModel.sortedByName = false
             } else {
                 mToast.setText(getString(R.string.sorted_by_population))
+                viewModel.sortedByName = true
             }
             updateUI(currentList)
             mToast.show()
@@ -136,7 +136,8 @@ class CountryListActivity : AppCompatActivity() {
     }
 
     fun updateUI(continent: List<Country>){
-            recyclerView.adapter = CountryListAdapter(continent)
+            val sorted = viewModel.sortCountries(continent)
+            recyclerView.adapter = CountryListAdapter(sorted)
             if(continent.isEmpty()){
                 emptyList.visibility = TextView.VISIBLE
             } else {

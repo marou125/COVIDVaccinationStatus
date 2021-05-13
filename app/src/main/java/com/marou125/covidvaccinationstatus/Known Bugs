@@ -1,5 +1,5 @@
-1) When recovered or deaths are not documented (=0) the active cases are not accurate and confusing
-2) Some countries crash the app when trying to open them:
+- When recovered or deaths are not documented (=0) the active cases are not accurate and confusing
+- Some countries crash the app when trying to open them:
 EUROPE
 Moldova
 North Macedonia
@@ -68,4 +68,8 @@ Saint Helena
 Sao Tome & Principe
 Tanzania
 Western Sahara
-3) The sort button does not show the right toast when you switch the continent and try to sort again
+
+- The sort button does not show the right toast when you switch the continent and try to sort again
+
+- Some country flags are not displayed in a nice way
+
