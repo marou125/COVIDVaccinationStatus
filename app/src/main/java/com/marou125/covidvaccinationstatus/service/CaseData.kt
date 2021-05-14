@@ -98,6 +98,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var EquatorialGuinea: CaseData,
                    var Eritrea: CaseData,
                    var Estonia: CaseData,
+                   var Eswatini: CaseData,
                    var Ethiopia: CaseData,
                    @SerializedName("Falkland Islands (Malvinas)")
                    var FalklandIslands: CaseData,
@@ -160,8 +161,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var SouthKorea: CaseData,
                    var Kuwait: CaseData,
                    var Kyrgyzstan: CaseData,
-                   @SerializedName("Lao, People's Democratic Republic")
-                   var Lao: CaseData,
+                   //@SerializedName("Lao, People's Democratic Republic")
+                   var Laos: CaseData,
                    var Latvia: CaseData,
                    var Lebanon: CaseData,
                    var Lesotho: CaseData,
@@ -171,6 +172,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Liechtenstein: CaseData,
                    var Lithuania: CaseData,
                    var Luxembourg: CaseData,
+                   @SerializedName("Macao", alternate = ["Macau"])
                    var Macau: CaseData,
                    @SerializedName("Macedonia, The Former Yugoslav Republic of")
                    var Macedonia: CaseData,
@@ -197,6 +199,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Montserrat: CaseData,
                    var Morocco: CaseData,
                    var Mozambique: CaseData,
+                   @SerializedName("Myanmar", alternate = ["Burma"])
                    var Myanmar: CaseData,
                    var Namibia: CaseData,
                    var Nauru: CaseData,
@@ -281,14 +284,15 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Swaziland: CaseData,
                    var Sweden: CaseData,
                    var Switzerland: CaseData,
-                   @SerializedName("Syrian Arab Republic")
-                   var SyrianArabRepublic: CaseData,
-                   @SerializedName("Taiwan, Province of China")
+                   var Syria: CaseData,
+                   //@SerializedName("Taiwan, Province of China")
                    var Taiwan: CaseData,
                    var Tajikistan: CaseData,
                    //@SerializedName("Tanzania, United Republic of")
                    var Tanzania: CaseData,
                    var Thailand: CaseData,
+                   @SerializedName("Timor-Leste", alternate = ["Timor"])
+                   var TimorLeste: CaseData,
                    var Togo: CaseData,
                    var Tokelau: CaseData,
                    var Tonga: CaseData,

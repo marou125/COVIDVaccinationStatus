@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="@string/you_have_no_countries_saved_in_your_favourites_yet"
         android:visibility="gone"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

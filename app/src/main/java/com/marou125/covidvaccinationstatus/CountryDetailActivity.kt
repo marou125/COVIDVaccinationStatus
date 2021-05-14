@@ -33,7 +33,7 @@ class CountryDetailActivity : AppCompatActivity() {
         if (country != null) {
             Log.i("The country is ", country)
             for(c in CountryDataSingleton.world){
-                if(c.equals(country)){
+                if(c.name == country){
                     Log.i("Is it in the database", c.date)
                 }
             }
@@ -41,6 +41,8 @@ class CountryDetailActivity : AppCompatActivity() {
 
         //Find data for country in Singleton List
         val displayedCountryData : VaccinationData? = findCountryData(country!!)
+
+        Log.i("Last vaccination update", displayedCountryData!!.data[displayedCountryData.data.size-1].date)
 
         //Find data for country in Json Case Data object
         val caseInfoArray = findCaseData(country!!)
@@ -260,6 +262,7 @@ class CountryDetailActivity : AppCompatActivity() {
             "Equatorial Guinea" -> caseInfo = arrayOf(caseData!!.EquatorialGuinea.All, historicCases!!.EquatorialGuinea.All, historicDeaths!!.EquatorialGuinea.All)
             "Eritrea" -> caseInfo = arrayOf(caseData!!.Eritrea.All, historicCases!!.Eritrea.All, historicDeaths!!.Eritrea.All)
             "Estonia" -> caseInfo = arrayOf(caseData!!.Estonia.All, historicCases!!.Estonia.All, historicDeaths!!.Estonia.All)
+            "Eswatini" -> caseInfo = arrayOf(caseData!!.Eswatini.All, historicCases!!.Eswatini.All, historicDeaths!!.Eswatini.All)
             "Ethiopia" -> caseInfo = arrayOf(caseData!!.Ethiopia.All, historicCases!!.Ethiopia.All, historicDeaths!!.Ethiopia.All)
             "Falkland Islands" -> caseInfo = arrayOf(caseData!!.FalklandIslands.All, historicCases!!.FalklandIslands.All, historicDeaths!!.FalklandIslands.All)
             "Faroe Islands" -> caseInfo = arrayOf(caseData!!.FaroeIslands.All, historicCases!!.FaroeIslands.All, historicDeaths!!.FaroeIslands.All)
@@ -309,7 +312,7 @@ class CountryDetailActivity : AppCompatActivity() {
             "South Korea" -> caseInfo = arrayOf(caseData!!.SouthKorea.All, historicCases!!.SouthKorea.All, historicDeaths!!.SouthKorea.All)
             "Kuwait" -> caseInfo = arrayOf(caseData!!.Kuwait.All, historicCases!!.Kuwait.All, historicDeaths!!.Kuwait.All)
             "Kyrgyzstan" -> caseInfo = arrayOf(caseData!!.Kyrgyzstan.All, historicCases!!.Kyrgyzstan.All, historicDeaths!!.Kyrgyzstan.All)
-            "Lao" -> caseInfo = arrayOf(caseData!!.Lao.All, historicDeaths!!.Lao.All, historicDeaths!!.Lao.All)
+            "Laos" -> caseInfo = arrayOf(caseData!!.Laos.All, historicDeaths!!.Laos.All, historicDeaths!!.Laos.All)
             "Latvia" -> caseInfo = arrayOf(caseData!!.Latvia.All, historicCases!!.Latvia.All, historicDeaths!!.Latvia.All)
             "Lebanon" -> caseInfo = arrayOf(caseData!!.Lebanon.All, historicCases!!.Lebanon.All, historicDeaths!!.Lebanon.All)
             "Lesotho" -> caseInfo = arrayOf(caseData!!.Lesotho.All, historicCases!!.Lesotho.All, historicDeaths!!.Lesotho.All)
@@ -318,7 +321,7 @@ class CountryDetailActivity : AppCompatActivity() {
             "Liechtenstein" -> caseInfo = arrayOf(caseData!!.Liechtenstein.All, historicCases!!.Liechtenstein.All, historicDeaths!!.Liechtenstein.All)
             "Lithuania" -> caseInfo = arrayOf(caseData!!.Lithuania.All, historicCases!!.Lithuania.All, historicDeaths!!.Lithuania.All)
             "Luxembourg" -> caseInfo = arrayOf(caseData!!.Luxembourg.All, historicCases!!.Luxembourg.All, historicDeaths!!.Luxembourg.All)
-            "Macau" -> caseInfo = arrayOf(caseData!!.Macau.All, historicCases!!.Macau.All, historicDeaths!!.Macau.All)
+            "Macao" -> caseInfo = arrayOf(caseData!!.Macau.All, historicCases!!.Macau.All, historicDeaths!!.Macau.All)
             "Macedonia" -> caseInfo = arrayOf(caseData!!.Macedonia.All, historicCases!!.Macedonia.All, historicDeaths!!.Macedonia.All)
             "Madagascar" -> caseInfo = arrayOf(caseData!!.Madagascar.All, historicCases!!.Madagascar.All, historicDeaths!!.Madagascar.All)
             "Malawi" -> caseInfo = arrayOf(caseData!!.Malawi.All, historicCases!!.Malawi.All, historicDeaths!!.Malawi.All)
@@ -378,7 +381,7 @@ class CountryDetailActivity : AppCompatActivity() {
             "Saint Vincent & Grenadines" -> caseInfo = arrayOf(caseData!!.SaintVincentAndTheGrenadines.All, historicCases!!.SaintVincentAndTheGrenadines.All, historicDeaths!!.SaintVincentAndTheGrenadines.All)
             "Samoa" -> caseInfo = arrayOf(caseData!!.Samoa.All, historicCases!!.Samoa.All, historicDeaths!!.Samoa.All)
             "San Marino" -> caseInfo = arrayOf(caseData!!.SanMarino.All, historicCases!!.SanMarino.All, historicDeaths!!.SanMarino.All)
-            "Sao Tome and Principe" -> caseInfo = arrayOf(caseData!!.SaoTomeAndPrincipe.All, historicCases!!.SaoTomeAndPrincipe.All, historicDeaths!!.SaoTomeAndPrincipe.All)
+            "Sao Tome & Principe" -> caseInfo = arrayOf(caseData!!.SaoTomeAndPrincipe.All, historicCases!!.SaoTomeAndPrincipe.All, historicDeaths!!.SaoTomeAndPrincipe.All)
             "Saudi Arabia" -> caseInfo = arrayOf(caseData!!.SaudiArabia.All, historicCases!!.SaudiArabia.All, historicDeaths!!.SaudiArabia.All)
             "Senegal" -> caseInfo = arrayOf(caseData!!.Senegal.All, historicCases!!.Senegal.All, historicDeaths!!.Senegal.All)
             "Serbia" -> caseInfo = arrayOf(caseData!!.Serbia.All, historicCases!!.Serbia.All, historicDeaths!!.Serbia.All)
@@ -401,11 +404,12 @@ class CountryDetailActivity : AppCompatActivity() {
             "Swaziland" -> caseInfo = arrayOf(caseData!!.Swaziland.All, historicCases!!.Swaziland.All, historicDeaths!!.Swaziland.All)
             "Sweden" -> caseInfo = arrayOf(caseData!!.Sweden.All, historicCases!!.Sweden.All, historicDeaths!!.Sweden.All)
             "Switzerland" -> caseInfo = arrayOf(caseData!!.Switzerland.All, historicCases!!.Switzerland.All, historicDeaths!!.Switzerland.All)
-            "Syrian Arab Republic" -> caseInfo = arrayOf(caseData!!.SyrianArabRepublic.All, historicCases!!.SyrianArabRepublic.All, historicDeaths!!.SyrianArabRepublic.All)
+            "Syria" -> caseInfo = arrayOf(caseData!!.Syria.All, historicCases!!.Syria.All, historicDeaths!!.Syria.All)
             "Taiwan" -> caseInfo = arrayOf(caseData!!.Taiwan.All, historicCases!!.Taiwan.All, historicDeaths!!.Taiwan.All)
             "Tajikistan" -> caseInfo = arrayOf(caseData!!.Tajikistan.All, historicCases!!.Tajikistan.All, historicDeaths!!.Tajikistan.All)
             "Tanzania" -> caseInfo = arrayOf(caseData!!.Tanzania.All, historicCases!!.Tanzania.All, historicDeaths!!.Tanzania.All)
             "Thailand" -> caseInfo = arrayOf(caseData!!.Thailand.All, historicCases!!.Thailand.All, historicDeaths!!.Thailand.All)
+            "Timor-Leste" -> caseInfo = arrayOf(caseData!!.TimorLeste.All, historicCases!!.TimorLeste.All, historicDeaths!!.TimorLeste.All)
             "Togo" -> caseInfo = arrayOf(caseData!!.Togo.All, historicCases!!.Togo.All, historicDeaths!!.Togo.All)
             "Tokelau" -> caseInfo = arrayOf(caseData!!.Tokelau.All, historicCases!!.Tokelau.All, historicDeaths!!.Tokelau.All)
             "Tonga" -> caseInfo = arrayOf(caseData!!.Tonga.All, historicCases!!.Tonga.All, historicDeaths!!.Tonga.All)

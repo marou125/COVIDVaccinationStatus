@@ -93,6 +93,7 @@ class CountryListActivity : AppCompatActivity() {
             mToast.show()
         }
 
+        //Test if bugged country is in case data
 
     }
 
