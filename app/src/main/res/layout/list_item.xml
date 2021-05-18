@@ -5,18 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
+
     android:layout_marginTop="2dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="2dp"
-    app:cardCornerRadius="8dp"
+
+    app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/start_background">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/flag_iv"
@@ -26,10 +25,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/country_flag_border"
-            android:cropToPadding="false"
+            android:cropToPadding="true"
             android:elevation="8dp"
             android:outlineProvider="bounds"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,9 +39,10 @@
             android:id="@+id/country_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/caudex_bold"
             android:text="Country"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/flag_iv"

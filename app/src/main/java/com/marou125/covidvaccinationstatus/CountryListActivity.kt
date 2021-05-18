@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,6 +41,8 @@ class CountryListActivity : AppCompatActivity() {
 
         var currentList: List<Country> = viewModel.favourites
 
+        val toolbarTitle = findViewById<TextView>(R.id.toolbarTitle)
+
 
         viewModel.countryListLiveData.observe(
             this,
@@ -54,6 +53,14 @@ class CountryListActivity : AppCompatActivity() {
             }
         )
 
+//        viewModel.favourites.observe(
+//                this,
+//                {
+//                    Log.i("OBSERVER", "LiveData changed")
+//                    recyclerView.adapter?.notifyDataSetChanged()
+//                }
+//        )
+
         //TODO: this resets the tint but also appears to remove the selection navigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         //bottomNav.itemIconTintList=null
@@ -61,18 +68,23 @@ class CountryListActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.favourites -> {
+                    toolbarTitle.text = "Favourites"
                     currentList = viewModel.favourites
                 }
                 R.id.europe -> {
+                    toolbarTitle.text = "Europe"
                     currentList = viewModel.europe
                 }
                 R.id.americas -> {
+                    toolbarTitle.text = "Americas"
                     currentList = viewModel.americas
                 }
                 R.id.asiaPacific -> {
+                    toolbarTitle.text = "Asia/Pacific"
                     currentList = viewModel.asiaPacific
                 }
                 R.id.africa -> {
+                    toolbarTitle.text = "Africa"
                     currentList = viewModel.africa
                 }
             }
@@ -97,6 +109,7 @@ class CountryListActivity : AppCompatActivity() {
 
     }
 
+    //TODO: This skips the view model and accesses the data directly,there should be another solution for this
     override fun onPause() {
         saveFavourites(CountryDataSingleton.favourites)
         super.onPause()

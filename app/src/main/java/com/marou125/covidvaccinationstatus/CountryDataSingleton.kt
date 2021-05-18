@@ -1,6 +1,7 @@
 package com.marou125.covidvaccinationstatus
 
 import android.util.Log
+import android.widget.Toast
 import com.marou125.covidvaccinationstatus.database.Country
 import com.marou125.covidvaccinationstatus.service.JsonCaseData
 import com.marou125.covidvaccinationstatus.service.VaccinationData

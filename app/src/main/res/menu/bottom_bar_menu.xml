@@ -5,26 +5,31 @@
     <item
         android:id="@+id/favourites"
         android:icon="@android:drawable/btn_star_big_on"
+        android:iconTint="@color/black"
         android:title="Favourites"
         app:showAsAction="always" />
     <item
         android:id="@+id/europe"
         android:icon="@android:drawable/ic_menu_info_details"
+        android:iconTint="@color/black"
         android:title="Europe"
         app:showAsAction="always" />
     <item
         android:id="@+id/americas"
+        android:iconTint="@color/black"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="Americas"
         app:showAsAction="always" />
     <item
         android:id="@+id/asiaPacific"
+        android:iconTint="@color/black"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="Asia-Pacific"
         app:showAsAction="always" />
     <item
         android:id="@+id/africa"
         android:icon="@android:drawable/ic_menu_info_details"
+        android:iconTint="@color/black"
         android:title="Africa"
         app:showAsAction="always" />
 </menu>

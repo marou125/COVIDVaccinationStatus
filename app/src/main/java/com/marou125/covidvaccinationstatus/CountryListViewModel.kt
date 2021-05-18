@@ -34,8 +34,8 @@ class CountryListViewModel : ViewModel() {
 
     init {
         insert(world)
+//        favourites.value = CountryDataSingleton.favourites
     }
-
 
     //fills database with countries if freshly installed
     private fun insert(world: List<Country>) {
