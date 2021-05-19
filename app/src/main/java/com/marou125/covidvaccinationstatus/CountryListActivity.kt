@@ -22,7 +22,7 @@ class CountryListActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.recyclerView)
     }
 
-    val viewModel by lazy {
+    private val viewModel by lazy {
         ViewModelProvider(this).get(CountryListViewModel::class.java)
     }
 
