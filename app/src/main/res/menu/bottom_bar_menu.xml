@@ -10,25 +10,25 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/europe"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/europe"
         android:iconTint="@color/black"
         android:title="Europe"
         app:showAsAction="always" />
     <item
         android:id="@+id/americas"
         android:iconTint="@color/black"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/americas"
         android:title="Americas"
         app:showAsAction="always" />
     <item
         android:id="@+id/asiaPacific"
-        android:iconTint="@color/black"
-        android:icon="@android:drawable/ic_menu_info_details"
+
+        android:icon="@drawable/asiapacific"
         android:title="Asia-Pacific"
         app:showAsAction="always" />
     <item
         android:id="@+id/africa"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/africa"
         android:iconTint="@color/black"
         android:title="Africa"
         app:showAsAction="always" />
