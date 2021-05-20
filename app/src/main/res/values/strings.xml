@@ -13,11 +13,11 @@
     <string name="new_deaths">New Deaths</string>
     <string name="active_cases">Active Cases</string>
     <string name="no_data">No data</string>
-    <string name="ExitToast">Press again to close app</string>
+    <string name="ExitToast">Press again to exit app</string>
     <string name="sorted_by_name">Sorted by Name</string>
     <string name="sorted_by_population">Sorted by Population</string>
     <string name="_7_day_average">7-day average</string>
-    <string name="you_have_no_countries_saved_in_your_favourites_yet">You have no countries saved in your favourites yet</string>
+    <string name="you_have_no_countries_saved_in_your_favourites_yet">No countries saved yet.\nTap and hold a country to add or remove it</string>
     <string name="index">. . . . . . . . . . . . . . . . . . . . .</string>
     <string name="infection_status">Infection Status</string>
     <string name="January">January</string>

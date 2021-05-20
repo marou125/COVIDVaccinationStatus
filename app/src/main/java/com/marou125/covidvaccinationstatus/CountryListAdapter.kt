@@ -7,26 +7,45 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.marou125.covidvaccinationstatus.database.Country
 
-class CountryListAdapter(private val countryList: List<Country>) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
+interface OnItemClickListener {
+    fun onItemClick(position: Int)
+    fun onLongClick(position: Int)
+}
 
-    class ViewHolder(view: View, countryList: List<Country>) : RecyclerView.ViewHolder(view){
+//TODO: https://www.youtube.com/watch?v=wKFJsrdiGS8
+
+class CountryListAdapter(private val countryList: List<Country>, listener: OnItemClickListener) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
+
+    val listener = listener
+
+    inner class ViewHolder(view: View, countryList: List<Country>) : RecyclerView.ViewHolder(view){
         val countryName : TextView = view.findViewById(R.id.country_name_tv)
         val countryFlag : ImageView = view.findViewById(R.id.flag_iv)
+        val favStar: ImageView = view.findViewById(R.id.favButton)
 
         init {
             view.setOnClickListener {
-                val i = Intent(view.context, CountryDetailActivity::class.java)
-                i.putExtra("country", countryList.get(adapterPosition).name)
-                startActivity(view.context, i, null)
+                if(adapterPosition != RecyclerView.NO_POSITION){
+                    listener.onItemClick(adapterPosition)
+                }
+            }
+            view.setOnLongClickListener {
+                if(adapterPosition != RecyclerView.NO_POSITION){
+                    listener.onLongClick(adapterPosition)
+                }
+                true
             }
             val favButton = view.findViewById<ImageView>(R.id.favButton)
             favButton.setOnClickListener {
-                CountryDataSingleton.saveInFavourites(countryList.get(adapterPosition))
+                CountryDataSingleton.saveInFavourites(countryList[adapterPosition])
             }
+
+
 
         }
 
@@ -42,6 +61,9 @@ class CountryListAdapter(private val countryList: List<Country>) : RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.countryFlag.setImageResource(countryList[position].flag)
         holder.countryName.text = countryList[position].name
+        if(CountryDataSingleton.favourites.contains(countryList[position]) && countryList != CountryDataSingleton.favourites){
+            holder.favStar.visibility = ImageView.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {

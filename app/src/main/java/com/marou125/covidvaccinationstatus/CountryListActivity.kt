@@ -1,11 +1,14 @@
 package com.marou125.covidvaccinationstatus
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +19,9 @@ import com.google.gson.reflect.TypeToken
 import com.marou125.covidvaccinationstatus.database.Country
 import java.lang.reflect.Type
 
-class CountryListActivity : AppCompatActivity() {
+class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
-    val recyclerView by lazy {
+    val recyclerView: RecyclerView by lazy {
         findViewById<RecyclerView>(R.id.recyclerView)
     }
 
@@ -30,6 +33,7 @@ class CountryListActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.emptyList)
     }
 
+    var currentList : List<Country> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +41,10 @@ class CountryListActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+
         readFavourites()
 
-        var currentList: List<Country> = viewModel.favourites
+        currentList = viewModel.favourites
 
         val toolbarTitle = findViewById<TextView>(R.id.toolbarTitle)
 
@@ -109,6 +114,7 @@ class CountryListActivity : AppCompatActivity() {
 
     }
 
+
     //TODO: This skips the view model and accesses the data directly,there should be another solution for this
     override fun onPause() {
         saveFavourites(CountryDataSingleton.favourites)
@@ -151,13 +157,37 @@ class CountryListActivity : AppCompatActivity() {
 
     fun updateUI(continent: List<Country>){
             val sorted = viewModel.sortCountries(continent)
-            recyclerView.adapter = CountryListAdapter(sorted)
+            recyclerView.adapter = CountryListAdapter(sorted, this)
             if(continent.isEmpty()){
                 emptyList.visibility = TextView.VISIBLE
             } else {
                 emptyList.visibility = TextView.GONE
             }
         }
+
+    override fun onItemClick(position: Int) {
+        val sorted = viewModel.sortCountries(currentList)
+        val i = Intent(this, CountryDetailActivity::class.java)
+        i.putExtra("country", sorted[position].name)
+        startActivity(i, null)
+    }
+
+    override fun onLongClick(position: Int) {
+        val sorted = viewModel.sortCountries(currentList)
+        val toast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
+        if(CountryDataSingleton.favourites.contains(sorted[position])){
+            CountryDataSingleton.favourites.remove(sorted[position])
+            toast.setText("Removed from favourites: ${sorted[position].name}")
+            toast.show()
+
+        } else {
+            CountryDataSingleton.favourites.add(sorted[position])
+            toast.setText("Added to favourites: ${sorted[position].name}")
+            toast.show()
+        }
+        updateUI(currentList)
+
+    }
 
 
 }
