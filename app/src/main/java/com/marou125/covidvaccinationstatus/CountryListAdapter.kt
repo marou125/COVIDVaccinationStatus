@@ -18,11 +18,13 @@ interface OnItemClickListener {
 }
 
 
-class CountryListAdapter(private val countryList: List<Country>, listener: OnItemClickListener) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
+class CountryListAdapter(private val countryList: List<Country>, listener: OnItemClickListener, isFavourites: Boolean = false) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
     val listener = listener
+    val isFavourites = isFavourites
+    var mCountryList:MutableList<Country> = countryList.toMutableList()
 
-    inner class ViewHolder(view: View, countryList: List<Country>) : RecyclerView.ViewHolder(view){
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val countryName : TextView = view.findViewById(R.id.country_name_tv)
         val countryFlag : ImageView = view.findViewById(R.id.flag_iv)
         val favStar: ImageView = view.findViewById(R.id.favButton)
@@ -36,13 +38,20 @@ class CountryListAdapter(private val countryList: List<Country>, listener: OnIte
             view.setOnLongClickListener {
                 if(adapterPosition != RecyclerView.NO_POSITION){
                     listener.onLongClick(adapterPosition)
+                    if(!isFavourites){
+                        notifyDataSetChanged()
+                    } else {
+                        mCountryList.removeAt(adapterPosition)
+                        notifyItemRemoved(adapterPosition)
+                        notifyItemRangeChanged(adapterPosition, mCountryList.size)
+                    }
                 }
                 true
             }
-            val favButton = view.findViewById<ImageView>(R.id.favButton)
-            favButton.setOnClickListener {
-                CountryDataSingleton.saveInFavourites(countryList[adapterPosition])
-            }
+//            val favButton = view.findViewById<ImageView>(R.id.favButton)
+//            favButton.setOnClickListener {
+//                CountryDataSingleton.saveInFavourites(mCountryList[adapterPosition])
+//            }
 
 
 
@@ -54,13 +63,13 @@ class CountryListAdapter(private val countryList: List<Country>, listener: OnIte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
 
-        return ViewHolder(view, countryList)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.countryFlag.setImageResource(countryList[position].flag)
-        holder.countryName.text = countryList[position].name
-        if(CountryDataSingleton.favourites.contains(countryList[position]) && countryList != CountryDataSingleton.favourites){
+        holder.countryFlag.setImageResource(mCountryList[position].flag)
+        holder.countryName.text = mCountryList[position].name
+        if(CountryDataSingleton.favourites.contains(mCountryList[position]) && !isFavourites){
             holder.favStar.visibility = ImageView.VISIBLE
         } else {
             holder.favStar.visibility = ImageView.INVISIBLE
@@ -68,7 +77,7 @@ class CountryListAdapter(private val countryList: List<Country>, listener: OnIte
     }
 
     override fun getItemCount(): Int {
-        return countryList.size
+        return mCountryList.size
     }
 
 }

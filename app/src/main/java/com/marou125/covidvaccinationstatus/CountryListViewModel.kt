@@ -52,7 +52,7 @@ class CountryListViewModel : ViewModel() {
     //TODO: Sort the other lists too, maybe only the one that is selected
     fun sortCountries(continent: List<Country>): List<Country>{
         var sorted = continent
-        if(sortedByName == true) {
+        if(sortedByName) {
             sorted = continent.sortedBy { it.population }.reversed()
         } else {
             sorted = continent.sortedBy{it.name}

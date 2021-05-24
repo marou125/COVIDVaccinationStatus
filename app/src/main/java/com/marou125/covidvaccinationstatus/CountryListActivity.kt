@@ -45,19 +45,20 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         readFavourites()
 
         currentList = viewModel.favourites
+        updateUI(currentList, true)
 
         val toolbarTitle = findViewById<TextView>(R.id.toolbarTitle)
         val toolbarTopLeft = findViewById<ImageView>(R.id.topleftIcon)
 
 
-        viewModel.countryListLiveData.observe(
-            this,
-            Observer { countries ->
-                countries?.let {
-                    updateUI(currentList)
-                }
-            }
-        )
+//        viewModel.countryListLiveData.observe(
+//            this,
+//            Observer { countries ->
+//                countries?.let {
+//                    updateUI(currentList, false)
+//                }
+//            }
+//        )
 
 //        viewModel.favourites.observe(
 //                this,
@@ -72,11 +73,13 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         //bottomNav.itemIconTintList=null
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
+            var isFavourites = false
             when(item.itemId){
                 R.id.favourites -> {
                     toolbarTitle.text = "Favourites"
                     toolbarTopLeft.setImageResource(R.drawable.europe_topleft)
                     currentList = viewModel.favourites
+                    isFavourites = true
                 }
                 R.id.europe -> {
                     toolbarTitle.text = "Europe"
@@ -99,7 +102,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
                     currentList = viewModel.africa
                 }
             }
-            updateUI(currentList)
+            updateUI(currentList, isFavourites)
             true
         }
 
@@ -112,7 +115,8 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
                 mToast.setText(getString(R.string.sorted_by_population))
                 viewModel.sortedByName = true
             }
-            updateUI(currentList)
+            var isFavourites = currentList==viewModel.favourites
+            updateUI(currentList, isFavourites)
             mToast.show()
         }
 
@@ -161,9 +165,9 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 
-    fun updateUI(continent: List<Country>){
+    fun updateUI(continent: List<Country>, isFavourites: Boolean){
             val sorted = viewModel.sortCountries(continent)
-            recyclerView.adapter = CountryListAdapter(sorted, this)
+            recyclerView.adapter = CountryListAdapter(sorted, this, isFavourites)
             if(continent.isEmpty()){
                 emptyList.visibility = TextView.VISIBLE
             } else {
@@ -183,15 +187,19 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         val toast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
         if(CountryDataSingleton.favourites.contains(sorted[position])){
             CountryDataSingleton.favourites.remove(sorted[position])
+            if(CountryDataSingleton.favourites.isEmpty()){
+                emptyList.visibility = TextView.VISIBLE
+            }
             toast.setText("Removed from favourites: ${sorted[position].name}")
             toast.show()
 
         } else {
+            emptyList.visibility = TextView.GONE
             CountryDataSingleton.favourites.add(sorted[position])
             toast.setText("Added to favourites: ${sorted[position].name}")
             toast.show()
         }
-        updateUI(currentList)
+        //updateUI(currentList)
 
     }
 
