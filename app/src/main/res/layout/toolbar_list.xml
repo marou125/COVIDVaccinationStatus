@@ -26,7 +26,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/topleftIcon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -41,15 +41,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/topleftIcon"
             android:layout_width="50dp"
             android:layout_height="0dp"
             android:cropToPadding="false"
-            android:scaleType="fitStart"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/app_icon" />
+            app:srcCompat="@drawable/europe_topleft" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.appcompat.widget.Toolbar>

@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_bar_menu"
         android:background="@color/mainColor"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@color/black"
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"/>

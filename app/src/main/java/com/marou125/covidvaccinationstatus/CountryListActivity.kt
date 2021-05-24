@@ -47,6 +47,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         currentList = viewModel.favourites
 
         val toolbarTitle = findViewById<TextView>(R.id.toolbarTitle)
+        val toolbarTopLeft = findViewById<ImageView>(R.id.topleftIcon)
 
 
         viewModel.countryListLiveData.observe(
@@ -74,22 +75,27 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             when(item.itemId){
                 R.id.favourites -> {
                     toolbarTitle.text = "Favourites"
+                    toolbarTopLeft.setImageResource(R.drawable.europe_topleft)
                     currentList = viewModel.favourites
                 }
                 R.id.europe -> {
                     toolbarTitle.text = "Europe"
+                    toolbarTopLeft.setImageResource(R.drawable.europe_topleft)
                     currentList = viewModel.europe
                 }
                 R.id.americas -> {
                     toolbarTitle.text = "Americas"
+                    toolbarTopLeft.setImageResource(R.drawable.americas_topleft)
                     currentList = viewModel.americas
                 }
                 R.id.asiaPacific -> {
                     toolbarTitle.text = "Asia/Pacific"
+                    toolbarTopLeft.setImageResource(R.drawable.asia_topleft)
                     currentList = viewModel.asiaPacific
                 }
                 R.id.africa -> {
                     toolbarTitle.text = "Africa"
+                    toolbarTopLeft.setImageResource(R.drawable.africa_topleft)
                     currentList = viewModel.africa
                 }
             }

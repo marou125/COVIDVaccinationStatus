@@ -5,18 +5,18 @@
     <item
         android:id="@+id/favourites"
         android:icon="@android:drawable/btn_star_big_on"
-        android:iconTint="@color/black"
+
         android:title="Favourites"
         app:showAsAction="always" />
     <item
         android:id="@+id/europe"
         android:icon="@drawable/europe"
-        android:iconTint="@color/black"
+
         android:title="Europe"
         app:showAsAction="always" />
     <item
         android:id="@+id/americas"
-        android:iconTint="@color/black"
+
         android:icon="@drawable/americas"
         android:title="Americas"
         app:showAsAction="always" />
@@ -29,7 +29,7 @@
     <item
         android:id="@+id/africa"
         android:icon="@drawable/africa"
-        android:iconTint="@color/black"
+
         android:title="Africa"
         app:showAsAction="always" />
 </menu>

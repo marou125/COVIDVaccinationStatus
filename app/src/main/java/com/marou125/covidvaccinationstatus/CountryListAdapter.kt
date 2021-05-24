@@ -17,7 +17,6 @@ interface OnItemClickListener {
     fun onLongClick(position: Int)
 }
 
-//TODO: https://www.youtube.com/watch?v=wKFJsrdiGS8
 
 class CountryListAdapter(private val countryList: List<Country>, listener: OnItemClickListener) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
@@ -63,6 +62,8 @@ class CountryListAdapter(private val countryList: List<Country>, listener: OnIte
         holder.countryName.text = countryList[position].name
         if(CountryDataSingleton.favourites.contains(countryList[position]) && countryList != CountryDataSingleton.favourites){
             holder.favStar.visibility = ImageView.VISIBLE
+        } else {
+            holder.favStar.visibility = ImageView.INVISIBLE
         }
     }
 
