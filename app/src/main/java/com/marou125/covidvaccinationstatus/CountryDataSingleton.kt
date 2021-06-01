@@ -64,6 +64,15 @@ object CountryDataSingleton {
         return weeklyDataNumeric
     }
 
+    fun findCountry(country: String): Country{
+        for(c in world){
+            if(c.name == country){
+                return c
+            }
+        }
+        return world[1]
+    }
+
 
     fun fillFavourites(savedFavourites: ArrayList<Country>){
         favourites = savedFavourites

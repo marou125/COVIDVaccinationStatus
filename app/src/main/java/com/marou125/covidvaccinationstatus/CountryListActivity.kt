@@ -77,7 +77,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             when(item.itemId){
                 R.id.favourites -> {
                     toolbarTitle.text = "Favourites"
-                    toolbarTopLeft.setImageResource(R.drawable.europe_topleft)
+                    toolbarTopLeft.setImageResource(R.drawable.favourite_topleft)
                     currentList = viewModel.favourites
                     isFavourites = true
                 }

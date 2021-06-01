@@ -1,5 +1,6 @@
 package com.marou125.covidvaccinationstatus
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.marou125.covidvaccinationstatus.database.CountryRepository
 import com.marou125.covidvaccinationstatus.databinding.ActivityCountryDetailBinding
 import com.marou125.covidvaccinationstatus.service.CaseInfo
 import com.marou125.covidvaccinationstatus.service.VaccinationData
+import java.lang.Exception
 import java.util.*
 import java.util.concurrent.Executors
 import kotlin.math.floor
@@ -39,107 +41,115 @@ class CountryDetailActivity : AppCompatActivity() {
             }
         }
 
-        //Find data for country in Singleton List
-        val displayedCountryData : VaccinationData? = findCountryData(country!!)
+        try{
+            //Find data for country in Singleton List
+            val displayedCountryData : VaccinationData? = findCountryData(country!!)
 
-        Log.i("Last vaccination update", displayedCountryData!!.data[displayedCountryData.data.size-1].date)
+            Log.i("Last vaccination update", displayedCountryData!!.data[displayedCountryData.data.size-1].date)
 
-        //Find data for country in Json Case Data object
-        val caseInfoArray = findCaseData(country!!)
-        val displayedCountryCaseData = caseInfoArray[0]
+            //Find data for country in Json Case Data object
+            val caseInfoArray = findCaseData(country!!)
+            val displayedCountryCaseData = caseInfoArray[0]
 
-        //Get last recorded seven days of cases and deaths saved into an Array
-        val lastWeekCases = CountryDataSingleton.getWeeklyData(caseInfoArray[1]!!.dates)
-        val lastWeekDeaths = CountryDataSingleton.getWeeklyData(caseInfoArray[2]!!.dates)
+            //Get last recorded seven days of cases and deaths saved into an Array
+            val lastWeekCases = CountryDataSingleton.getWeeklyData(caseInfoArray[1]!!.dates)
+            val lastWeekDeaths = CountryDataSingleton.getWeeklyData(caseInfoArray[2]!!.dates)
 
-        val newCases = lastWeekCases[0] - lastWeekCases[1]
-        val newDeaths = lastWeekDeaths[0] - lastWeekDeaths[1]
+            val newCases = lastWeekCases[0] - lastWeekCases[1]
+            val newDeaths = lastWeekDeaths[0] - lastWeekDeaths[1]
 
 
-        Log.i("LAST WEEK CASES in $country", Arrays.toString(lastWeekCases))
-        Log.i("LAST WEEK DEATHS in $country", Arrays.toString(lastWeekDeaths))
+            Log.i("LAST WEEK CASES in $country", Arrays.toString(lastWeekCases))
+            Log.i("LAST WEEK DEATHS in $country", Arrays.toString(lastWeekDeaths))
 
-        //Values were fetched and are
-        if (displayedCountryData != null) {
-            Log.i("Fetched data for", displayedCountryData.country)
+            //Values were fetched and are
+            if (displayedCountryData != null) {
+                Log.i("Fetched data for", displayedCountryData.country)
+            }
+
+            //Fetch Country data from database
+            val displayedCountry = countryRepository.getCountry(country)
+
+
+
+
+            //Set data according to clicked country
+            displayedCountry.observe(
+                this,
+                Observer { country ->
+
+
+                    //Update country data to new values fetched from web
+                    if(displayedCountryData != null){
+                        val arrayLength = displayedCountryData.data.size
+                        val lastUpdate = displayedCountryData.data[arrayLength-1]
+
+                        country!!.date = formatDate(lastUpdate.date)
+                        country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
+                        country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
+                        country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
+                        country.sevenDayAverage = if(lastUpdate.daily_vaccinations != null) Integer.valueOf(lastUpdate.daily_vaccinations) else country.sevenDayAverage
+                    }
+
+                    if(displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases){
+                        country!!.newDeaths = newDeaths
+                        country.totalDeaths = displayedCountryCaseData.deaths
+                        country.newCases = newCases
+                        country.totalCases = displayedCountryCaseData.confirmed
+                        //The active cases are the confirmed cases subtracted by the recovered people and people who passed away
+                        country.activeCases = displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered - country.totalDeaths
+
+                    }
+
+                    val detailFlagIV = findViewById<ImageView>(R.id.detail_flag_iv)
+                    val detailCountryNameTV = findViewById<TextView>(R.id.detail_country_name_tv)
+                    detailFlagIV.setImageResource(country!!.flag)
+                    detailCountryNameTV.text = country.name
+                    binding.populationNumberTv.text = formatNumber(country.population)
+                    binding.caseNumberTv.text = formatNumber(country.totalCases)
+                    binding.newCasesTv.text = "(+${formatNumber(country.newCases)})"
+                    binding.activeCasesNumberTv.text = formatNumber(country.activeCases)
+                    binding.totalDeathsNumberTv.text = formatNumber(country.totalDeaths)
+                    binding.newDeathsNumberTv.text = "(+${formatNumber(country.newDeaths)})"
+
+                    binding.dateDataTv.text = country.date
+                    binding.totalVaccNumberTv.text = if(country.totalVaccinations == 0) "No data" else formatNumber(country.totalVaccinations)
+                    binding.peopleVaccNumberTv.text = if(country.firstVaccine == 0) "No data" else formatNumber(country.firstVaccine)
+                    binding.peopleFullVaccNumberTv.text = if(country.fullyVaccinated == 0) "No data" else formatNumber(country.fullyVaccinated)
+                    binding.sevenDayAvgNumber.text = if(country.sevenDayAverage == 0) "No data" else formatNumber(country.sevenDayAverage)
+
+                    //ProgressBar
+                    if(binding.peopleFullVaccNumberTv.text.equals("No data")){
+                        binding.progressBarFully.visibility = View.GONE
+                        binding.vaccPercentageFullTv.visibility = View.GONE
+                    }
+                    val fullyVaccinatedPercentage = calculatePercentage(country.fullyVaccinated, country.population)
+                    binding.vaccPercentageFullTv.text = "$fullyVaccinatedPercentage % are fully vaccinated"
+                    binding.progressBarFully.progress = fullyVaccinatedPercentage.toInt()
+
+                    if(binding.peopleVaccNumberTv.text.equals("No data")){
+                        binding.progressBarFirst.visibility = View.GONE
+                        binding.vaccPercentageFirstTv.visibility = View.GONE
+                    }
+                    val firstVaccinePercentage = calculatePercentage(country.firstVaccine, country.population)
+                    binding.vaccPercentageFirstTv.text = "$firstVaccinePercentage % with at least one vaccine shot"
+                    binding.progressBarFirst.progress = firstVaccinePercentage.toInt()
+
+
+                    val executor = Executors.newSingleThreadExecutor()
+                    executor.execute{
+                        countryRepository.updateCountry(country)
+                    }
+
+                }
+            )
+
+        } catch (e: Exception){
+            val i = Intent(this, NoDataActivity::class.java)
+            i.putExtra("country", country)
+            startActivity(i)
         }
 
-        //Fetch Country data from database
-        val displayedCountry = countryRepository.getCountry(country)
-
-
-
-
-        //Set data according to clicked country
-        displayedCountry.observe(
-            this,
-            Observer { country ->
-
-
-                //Update country data to new values fetched from web
-                if(displayedCountryData != null){
-                    val arrayLength = displayedCountryData.data.size
-                    val lastUpdate = displayedCountryData.data[arrayLength-1]
-
-                    country!!.date = formatDate(lastUpdate.date)
-                    country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
-                    country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
-                    country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
-                    country.sevenDayAverage = if(lastUpdate.daily_vaccinations != null) Integer.valueOf(lastUpdate.daily_vaccinations) else country.sevenDayAverage
-                }
-
-                if(displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases){
-                    country!!.newDeaths = newDeaths
-                    country.totalDeaths = displayedCountryCaseData.deaths
-                    country.newCases = newCases
-                    country.totalCases = displayedCountryCaseData.confirmed
-                    //The active cases are the confirmed cases subtracted by the recovered people and people who passed away
-                    country.activeCases = displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered - country.totalDeaths
-
-                }
-
-                val detailFlagIV = findViewById<ImageView>(R.id.detail_flag_iv)
-                val detailCountryNameTV = findViewById<TextView>(R.id.detail_country_name_tv)
-                detailFlagIV.setImageResource(country!!.flag)
-                detailCountryNameTV.text = country.name
-                binding.populationNumberTv.text = formatNumber(country.population)
-                binding.caseNumberTv.text = formatNumber(country.totalCases)
-                binding.newCasesTv.text = "(+${formatNumber(country.newCases)})"
-                binding.activeCasesNumberTv.text = formatNumber(country.activeCases)
-                binding.totalDeathsNumberTv.text = formatNumber(country.totalDeaths)
-                binding.newDeathsNumberTv.text = "(+${formatNumber(country.newDeaths)})"
-
-                binding.dateDataTv.text = country.date
-                binding.totalVaccNumberTv.text = if(country.totalVaccinations == 0) "No data" else formatNumber(country.totalVaccinations)
-                binding.peopleVaccNumberTv.text = if(country.firstVaccine == 0) "No data" else formatNumber(country.firstVaccine)
-                binding.peopleFullVaccNumberTv.text = if(country.fullyVaccinated == 0) "No data" else formatNumber(country.fullyVaccinated)
-                binding.sevenDayAvgNumber.text = if(country.sevenDayAverage == 0) "No data" else formatNumber(country.sevenDayAverage)
-
-                //ProgressBar
-                if(binding.peopleFullVaccNumberTv.text.equals("No data")){
-                    binding.progressBarFully.visibility = View.GONE
-                    binding.vaccPercentageFullTv.visibility = View.GONE
-                }
-                val fullyVaccinatedPercentage = calculatePercentage(country.fullyVaccinated, country.population)
-                binding.vaccPercentageFullTv.text = "$fullyVaccinatedPercentage % are fully vaccinated"
-                binding.progressBarFully.progress = fullyVaccinatedPercentage.toInt()
-
-                if(binding.peopleVaccNumberTv.text.equals("No data")){
-                    binding.progressBarFirst.visibility = View.GONE
-                    binding.vaccPercentageFirstTv.visibility = View.GONE
-                }
-                val firstVaccinePercentage = calculatePercentage(country.firstVaccine, country.population)
-                binding.vaccPercentageFirstTv.text = "$firstVaccinePercentage % with at least one vaccine shot"
-                binding.progressBarFirst.progress = firstVaccinePercentage.toInt()
-
-
-                val executor = Executors.newSingleThreadExecutor()
-                executor.execute{
-                    countryRepository.updateCountry(country)
-                }
-
-            }
-        )
     }
 
     private fun calculatePercentage(vaccinated: Int, population: Int): Double = floor((vaccinated/population.toDouble()) * 1000) /10

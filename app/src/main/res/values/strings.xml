@@ -34,4 +34,5 @@
     <string name="December">December</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="at_the_moment_there_is_no_data_available_for_this_country">At the moment there is no data available for this country.</string>
 </resources>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.marou125.covidvaccinationstatus">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".database.CountryIntentApplication"
@@ -12,11 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.COVIDVaccinationStatus">
-        <activity android:name=".CountryDetailActivity"
-            android:label="Country Statistics"/>
-        <activity android:name=".CountryListActivity"
-            android:label="Select Country"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".NoDataActivity"></activity>
+        <activity
+            android:name=".CountryDetailActivity"
+            android:label="Country Statistics" />
+        <activity
+            android:name=".CountryListActivity"
+            android:label="Select Country" />
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
