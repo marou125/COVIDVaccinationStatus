@@ -41,7 +41,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/caudex_bold"
             android:text="Country"
-            android:textColor="@color/black"
+            style="@style/listActivity"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/flag_iv"
