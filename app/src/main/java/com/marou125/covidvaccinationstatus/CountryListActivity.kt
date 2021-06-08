@@ -37,6 +37,8 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        CountryDataSingleton.printWorld(this)
         setContentView(R.layout.activity_country_list)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -167,7 +169,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
     fun updateUI(continent: List<Country>, isFavourites: Boolean){
             val sorted = viewModel.sortCountries(continent)
-            recyclerView.adapter = CountryListAdapter(sorted, this, isFavourites)
+            recyclerView.adapter = CountryListAdapter(this, sorted, this, isFavourites)
             if(continent.isEmpty()){
                 emptyList.visibility = TextView.VISIBLE
             } else {
@@ -190,13 +192,13 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             if(CountryDataSingleton.favourites.isEmpty()){
                 emptyList.visibility = TextView.VISIBLE
             }
-            toast.setText("Removed from favourites: ${sorted[position].name}")
+            toast.setText("Removed from favourites: ${getString(sorted[position].name)}")
             toast.show()
 
         } else {
             emptyList.visibility = TextView.GONE
             CountryDataSingleton.favourites.add(sorted[position])
-            toast.setText("Added to favourites: ${sorted[position].name}")
+            toast.setText("Added to favourites: ${getString(sorted[position].name)}")
             toast.show()
         }
         //updateUI(currentList)

@@ -10,7 +10,7 @@ interface CountryDao {
     fun getCountries(): LiveData<List<Country>>
 
     @Query("SELECT * FROM country WHERE name=(:name)")
-    fun getCountry(name: String): LiveData<Country?>
+    fun getCountry(name: Int): LiveData<Country?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCountry(country: Country)

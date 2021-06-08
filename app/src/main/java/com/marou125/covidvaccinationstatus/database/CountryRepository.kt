@@ -20,7 +20,7 @@ class CountryRepository private constructor(context: Context){
 
     fun getCountries(): LiveData<List<Country>> = countryDao.getCountries()
 
-    fun getCountry(name: String): LiveData<Country?> = countryDao.getCountry(name)
+    fun getCountry(name: Int): LiveData<Country?> = countryDao.getCountry(name)
 
     fun insertCountry(country: Country) = countryDao.insertCountry(country)
 

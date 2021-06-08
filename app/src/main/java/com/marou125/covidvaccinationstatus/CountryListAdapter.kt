@@ -1,5 +1,6 @@
 package com.marou125.covidvaccinationstatus
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,11 +19,12 @@ interface OnItemClickListener {
 }
 
 
-class CountryListAdapter(private val countryList: List<Country>, listener: OnItemClickListener, isFavourites: Boolean = false) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
+class CountryListAdapter(context: Context, countryList: List<Country>, listener: OnItemClickListener, isFavourites: Boolean = false) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
     val listener = listener
     val isFavourites = isFavourites
     var mCountryList:MutableList<Country> = countryList.toMutableList()
+    val mContext = context
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val countryName : TextView = view.findViewById(R.id.country_name_tv)
@@ -68,7 +70,7 @@ class CountryListAdapter(private val countryList: List<Country>, listener: OnIte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.countryFlag.setImageResource(mCountryList[position].flag)
-        holder.countryName.text = mCountryList[position].name
+        holder.countryName.text = mContext.resources.getString(mCountryList[position].name)
         if(CountryDataSingleton.favourites.contains(mCountryList[position]) && !isFavourites){
             holder.favStar.visibility = ImageView.VISIBLE
         } else {

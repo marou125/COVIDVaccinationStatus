@@ -2,11 +2,10 @@ package com.marou125.covidvaccinationstatus.database
 
 
 import androidx.room.*
-import java.util.*
 
 @Entity
 data class Country(val flag: Int,
-                   @PrimaryKey val name: String,
+                   @PrimaryKey val name: Int,
                    var population: Int,
                    var totalCases: Int = 0,
                    var newCases: Int = 0,
@@ -18,8 +17,4 @@ data class Country(val flag: Int,
                    var firstVaccine: Int = 0,
                    var fullyVaccinated: Int = 0,
                    var sevenDayAverage: Int = 0 ) {
-    @Override
-    override fun toString(): String {
-        return name
-    }
 }
