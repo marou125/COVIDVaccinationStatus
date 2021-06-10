@@ -497,8 +497,9 @@
                         android:id="@+id/explanation_flag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:visibility="invisible"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/explanation_tv"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/vacc_percentage_full_tv"
@@ -511,12 +512,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:layout_marginTop="16dp"
-                        android:text="The government has not updated this number with the most recent update"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         android:textSize="8sp"
-                        android:visibility="invisible"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/explanation_flag"
-                        app:layout_constraintTop_toBottomOf="@+id/vacc_percentage_full_tv"
                         tools:visibility="visible" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

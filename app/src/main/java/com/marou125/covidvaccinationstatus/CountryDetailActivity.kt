@@ -85,41 +85,79 @@ class CountryDetailActivity : AppCompatActivity() {
                     var secondVacIncrease = 0
                     var averagePerDayChange = 0
 
+                    var totalVaccinationsUpdated = true
+                    var firstVaccinationsUpdated = true
+                    var fullyVaccinatedUpdated = true
+                    var sevenDayAverageUpdated = true
+
                     //Update country data to new values fetched from web
-                    if(displayedCountryData != null){
+                    if (displayedCountryData != null) {
                         val arrayLength = displayedCountryData.data.size
-                        val lastUpdate = displayedCountryData.data[arrayLength-1]
+                        val lastUpdate = displayedCountryData.data[arrayLength - 1]
 
                         country!!.date = formatDate(lastUpdate.date)
-                        country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
-                        country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
-                        country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
-                        country.sevenDayAverage = if(lastUpdate.daily_vaccinations != null) Integer.valueOf(lastUpdate.daily_vaccinations) else country.sevenDayAverage
+                        if (lastUpdate.total_vaccinations != null){
+                            country.totalVaccinations = Integer.valueOf(lastUpdate.total_vaccinations)
+                        } else {
+                            totalVaccinationsUpdated = false
+                        }
+                        if (lastUpdate.people_vaccinated != null){
+                            country.firstVaccine = Integer.valueOf(lastUpdate.people_vaccinated)
+                        } else {
+                            firstVaccinationsUpdated = false
+                        }
+                        if (lastUpdate.people_fully_vaccinated != null){
+                            country.fullyVaccinated = Integer.valueOf(lastUpdate.people_fully_vaccinated)
+                        } else {
+                            fullyVaccinatedUpdated = false
+                        }
+                        if (lastUpdate.daily_vaccinations != null){
+                            country.sevenDayAverage = Integer.valueOf(lastUpdate.daily_vaccinations)
+                        } else {
+                            sevenDayAverageUpdated = false
+                        }
 
-                        if(displayedCountryData.data.size > 1){
-                            val updateBefore = displayedCountryData.data[arrayLength-2]
+                        if (displayedCountryData.data.size > 1) {
+                            val updateBefore = displayedCountryData.data[arrayLength - 2]
 
-                            val totalVaccinationsOld:Int? = if(updateBefore.total_vaccinations != null) Integer.valueOf(updateBefore.total_vaccinations) else null
-                            val firstVaccinationsOld:Int? = if(updateBefore.people_vaccinated != null) Integer.valueOf(updateBefore.people_vaccinated) else null
-                            val secondVaccinationsOld:Int? = if(updateBefore.people_fully_vaccinated != null) Integer.valueOf(updateBefore.people_fully_vaccinated) else null
-                            val averageVaccinationsOld:Int? = if(updateBefore.daily_vaccinations != null) Integer.valueOf(updateBefore.daily_vaccinations) else null
+                            val totalVaccinationsOld: Int? =
+                                if (updateBefore.total_vaccinations != null) Integer.valueOf(
+                                    updateBefore.total_vaccinations
+                                ) else null
+                            val firstVaccinationsOld: Int? =
+                                if (updateBefore.people_vaccinated != null) Integer.valueOf(
+                                    updateBefore.people_vaccinated
+                                ) else null
+                            val secondVaccinationsOld: Int? =
+                                if (updateBefore.people_fully_vaccinated != null) Integer.valueOf(
+                                    updateBefore.people_fully_vaccinated
+                                ) else null
+                            val averageVaccinationsOld: Int? =
+                                if (updateBefore.daily_vaccinations != null) Integer.valueOf(
+                                    updateBefore.daily_vaccinations
+                                ) else null
 
-                            totalVacIncrease = if(totalVaccinationsOld != null) country.totalVaccinations - totalVaccinationsOld else 0
-                            firstVacIncrease = if(firstVaccinationsOld != null) country.firstVaccine - firstVaccinationsOld else 0
-                            secondVacIncrease = if(secondVaccinationsOld != null) country.fullyVaccinated - secondVaccinationsOld else 0
-                            averagePerDayChange = if(averageVaccinationsOld != null) country.sevenDayAverage - averageVaccinationsOld else 0
+                            totalVacIncrease =
+                                if (totalVaccinationsOld != null) country.totalVaccinations - totalVaccinationsOld else 0
+                            firstVacIncrease =
+                                if (firstVaccinationsOld != null) country.firstVaccine - firstVaccinationsOld else 0
+                            secondVacIncrease =
+                                if (secondVaccinationsOld != null) country.fullyVaccinated - secondVaccinationsOld else 0
+                            averagePerDayChange =
+                                if (averageVaccinationsOld != null) country.sevenDayAverage - averageVaccinationsOld else 0
                         }
 
 
                     }
 
-                    if(displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases){
+                    if (displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases) {
                         country!!.newDeaths = newDeaths
                         country.totalDeaths = displayedCountryCaseData.deaths
                         country.newCases = newCases
                         country.totalCases = displayedCountryCaseData.confirmed
                         //The active cases are the confirmed cases subtracted by the recovered people and people who passed away
-                        country.activeCases = displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered - country.totalDeaths
+                        country.activeCases =
+                            displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered - country.totalDeaths
 
                     }
 
@@ -140,31 +178,35 @@ class CountryDetailActivity : AppCompatActivity() {
 
                     //Vaccinations Card View
                     binding.dateDataTv.text = country.date
-                    binding.totalVaccNumberTv.text = if(country.totalVaccinations == 0) "No data" else formatNumber(country.totalVaccinations)
-                    binding.peopleVaccNumberTv.text = if(country.firstVaccine == 0) "No data" else formatNumber(country.firstVaccine)
-                    binding.peopleFullVaccNumberTv.text = if(country.fullyVaccinated == 0) "No data" else formatNumber(country.fullyVaccinated)
-                    binding.sevenDayAvgNumber.text = if(country.sevenDayAverage == 0) "No data" else formatNumber(country.sevenDayAverage)
+                    binding.totalVaccNumberTv.text =
+                        if (country.totalVaccinations == 0) "No data" else formatNumber(country.totalVaccinations)
+                    binding.peopleVaccNumberTv.text =
+                        if (country.firstVaccine == 0) "No data" else formatNumber(country.firstVaccine)
+                    binding.peopleFullVaccNumberTv.text =
+                        if (country.fullyVaccinated == 0) "No data" else formatNumber(country.fullyVaccinated)
+                    binding.sevenDayAvgNumber.text =
+                        if (country.sevenDayAverage == 0) "No data" else formatNumber(country.sevenDayAverage)
 
                     binding.totalVacIncrease.let {
-                        if(totalVacIncrease != 0 /*&& totalVaccinationsOld != country.totalVaccinations*/){
+                        if (totalVacIncrease != 0 /*&& totalVaccinationsOld != country.totalVaccinations*/) {
                             it.text = "(+${formatNumber(totalVacIncrease)})"
                         }
                     }
 
                     binding.firstVacIncrease.let {
-                        if(firstVacIncrease != 0 /*&& firstVaccinationsOld != country.firstVaccine*/){
+                        if (firstVacIncrease != 0 /*&& firstVaccinationsOld != country.firstVaccine*/) {
                             it.text = "(+${formatNumber(firstVacIncrease)})"
                         }
                     }
 
                     binding.fullVacIncrease.let {
-                        if(secondVacIncrease != 0 /*&& secondVaccinationsOld != country.fullyVaccinated*/){
+                        if (secondVacIncrease != 0 /*&& secondVaccinationsOld != country.fullyVaccinated*/) {
                             it.text = "(+${formatNumber(secondVacIncrease)})"
                         }
                     }
                     binding.averageVacChange.let {
-                        if(averagePerDayChange != 0 /*&& averageVaccinationsOld != country.sevenDayAverage*/){
-                            if(averagePerDayChange > 0){
+                        if (averagePerDayChange != 0 /*&& averageVaccinationsOld != country.sevenDayAverage*/) {
+                            if (averagePerDayChange > 0) {
                                 it.text = "(+${formatNumber(averagePerDayChange)})"
                             } else {
                                 it.text = "(${formatNumber(averagePerDayChange)})"
@@ -172,27 +214,58 @@ class CountryDetailActivity : AppCompatActivity() {
                         }
                     }
 
+                    //Warning flags
+                    binding.totalVacNotUpdatedFlag.let {
+                        if(totalVaccinationsUpdated == false){
+                            it.visibility = ImageView.VISIBLE
+                        }
+                    }
+                    binding.firstVaccineNotUpdatedFlag.let {
+                        if(firstVaccinationsUpdated == false){
+                            it.visibility = ImageView.VISIBLE
+                        }
+                    }
+                    binding.fullVaccineNotUpdatedFlag.let {
+                        if(fullyVaccinatedUpdated == false){
+                            it.visibility = ImageView.VISIBLE
+                        }
+                    }
+                    binding.sevenDayAvgNotUpdatedFlag.let {
+                        if(sevenDayAverageUpdated == false){
+                            it.visibility = ImageView.VISIBLE
+                        }
+                    }
+
+                    if(!(totalVaccinationsUpdated && firstVaccinationsUpdated && fullyVaccinatedUpdated && sevenDayAverageUpdated)){
+                        binding.explanationFlag.visibility = ImageView.VISIBLE
+                        binding.explanationTv.visibility = TextView.VISIBLE
+                    }
+
 
                     //ProgressBar
-                    if(binding.peopleFullVaccNumberTv.text.equals("No data")){
+                    if (binding.peopleFullVaccNumberTv.text.equals("No data")) {
                         binding.progressBarFully.visibility = View.GONE
                         binding.vaccPercentageFullTv.visibility = View.GONE
                     }
-                    val fullyVaccinatedPercentage = calculatePercentage(country.fullyVaccinated, country.population)
-                    binding.vaccPercentageFullTv.text = "$fullyVaccinatedPercentage ${getString(R.string.Percentage_fully_vaccinated)}"
+                    val fullyVaccinatedPercentage =
+                        calculatePercentage(country.fullyVaccinated, country.population)
+                    binding.vaccPercentageFullTv.text =
+                        "$fullyVaccinatedPercentage ${getString(R.string.Percentage_fully_vaccinated)}"
                     binding.progressBarFully.progress = fullyVaccinatedPercentage.toInt()
 
-                    if(binding.peopleVaccNumberTv.text.equals("No data")){
+                    if (binding.peopleVaccNumberTv.text.equals("No data")) {
                         binding.progressBarFirst.visibility = View.GONE
                         binding.vaccPercentageFirstTv.visibility = View.GONE
                     }
-                    val firstVaccinePercentage = calculatePercentage(country.firstVaccine, country.population)
-                    binding.vaccPercentageFirstTv.text = "$firstVaccinePercentage ${getString(R.string.Percentage_first_vaccine)}"
+                    val firstVaccinePercentage =
+                        calculatePercentage(country.firstVaccine, country.population)
+                    binding.vaccPercentageFirstTv.text =
+                        "$firstVaccinePercentage ${getString(R.string.Percentage_first_vaccine)}"
                     binding.progressBarFirst.progress = firstVaccinePercentage.toInt()
 
 
                     val executor = Executors.newSingleThreadExecutor()
-                    executor.execute{
+                    executor.execute {
                         countryRepository.updateCountry(country)
                     }
 

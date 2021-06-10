@@ -273,4 +273,5 @@
     <string name="Percentage_first_vaccine">% mit mindestens einer Impfung</string>
     <string name="Removed_from_favourites">Aus Favoriten entfernt:</string>
     <string name="Added_to_favourites">In Favoriten gespeichert:</string>
+    <string name="the_government_has_not_updated_this_number_with_the_most_recent_update">Diese Zahl wurde längere Zeit nicht aktualisiert und könnte ungenau sein</string>
 </resources>
