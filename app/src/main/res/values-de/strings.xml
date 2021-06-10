@@ -271,4 +271,6 @@
     <string name="Africa">Afrika</string>
     <string name="Percentage_fully_vaccinated">% sind voll geimpft</string>
     <string name="Percentage_first_vaccine">% mit mindestens einer Impfung</string>
+    <string name="Removed_from_favourites">Aus Favoriten entfernt:</string>
+    <string name="Added_to_favourites">In Favoriten gespeichert:</string>
 </resources>

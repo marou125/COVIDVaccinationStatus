@@ -99,15 +99,15 @@ class CountryDetailActivity : AppCompatActivity() {
                         if(displayedCountryData.data.size > 1){
                             val updateBefore = displayedCountryData.data[arrayLength-2]
 
-                            val totalVaccinationsOld = Integer.valueOf(updateBefore.total_vaccinations)
-                            val firstVaccinationsOld = Integer.valueOf(updateBefore.people_vaccinated)
-                            val secondVaccinationsOld = Integer.valueOf(updateBefore.people_fully_vaccinated)
-                            val averageVaccinationsOld = Integer.valueOf(updateBefore.daily_vaccinations)
+                            val totalVaccinationsOld:Int? = if(updateBefore.total_vaccinations != null) Integer.valueOf(updateBefore.total_vaccinations) else null
+                            val firstVaccinationsOld:Int? = if(updateBefore.people_vaccinated != null) Integer.valueOf(updateBefore.people_vaccinated) else null
+                            val secondVaccinationsOld:Int? = if(updateBefore.people_fully_vaccinated != null) Integer.valueOf(updateBefore.people_fully_vaccinated) else null
+                            val averageVaccinationsOld:Int? = if(updateBefore.daily_vaccinations != null) Integer.valueOf(updateBefore.daily_vaccinations) else null
 
-                            totalVacIncrease = country.totalVaccinations - totalVaccinationsOld
-                            firstVacIncrease = country.firstVaccine - firstVaccinationsOld
-                            secondVacIncrease = country.fullyVaccinated - secondVaccinationsOld
-                            averagePerDayChange = country.sevenDayAverage - averageVaccinationsOld
+                            totalVacIncrease = if(totalVaccinationsOld != null) country.totalVaccinations - totalVaccinationsOld else 0
+                            firstVacIncrease = if(firstVaccinationsOld != null) country.firstVaccine - firstVaccinationsOld else 0
+                            secondVacIncrease = if(secondVaccinationsOld != null) country.fullyVaccinated - secondVaccinationsOld else 0
+                            averagePerDayChange = if(averageVaccinationsOld != null) country.sevenDayAverage - averageVaccinationsOld else 0
                         }
 
 

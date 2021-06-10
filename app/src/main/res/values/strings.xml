@@ -35,6 +35,8 @@
     <string name="Percentage_fully_vaccinated">% are fully vaccinated</string>
     <string name="Percentage_first_vaccine">% with at least one vaccine shot</string>
     <string name="at_the_moment_there_is_no_data_available_for_this_country">At the moment there is no data available for this country</string>
+    <string name="Removed_from_favourites">Removed from favourites:</string>
+    <string name="Added_to_favourites">Added to favourites:</string>
 
 
 

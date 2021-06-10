@@ -52,23 +52,6 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         val toolbarTopLeft = findViewById<ImageView>(R.id.topleftIcon)
 
 
-//        viewModel.countryListLiveData.observe(
-//            this,
-//            Observer { countries ->
-//                countries?.let {
-//                    updateUI(currentList, false)
-//                }
-//            }
-//        )
-
-//        viewModel.favourites.observe(
-//                this,
-//                {
-//                    Log.i("OBSERVER", "LiveData changed")
-//                    recyclerView.adapter?.notifyDataSetChanged()
-//                }
-//        )
-
         //TODO: this resets the tint but also appears to remove the selection navigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         //bottomNav.itemIconTintList=null
@@ -190,13 +173,13 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             if(CountryDataSingleton.favourites.isEmpty()){
                 emptyList.visibility = TextView.VISIBLE
             }
-            toast.setText("Removed from favourites: ${getString(sorted[position].name)}")
+            toast.setText("${getString(R.string.Removed_from_favourites)} ${getString(sorted[position].name)}")
             toast.show()
 
         } else {
             emptyList.visibility = TextView.GONE
             CountryDataSingleton.favourites.add(sorted[position])
-            toast.setText("Added to favourites: ${getString(sorted[position].name)}")
+            toast.setText("${getString(R.string.Added_to_favourites)} ${getString(sorted[position].name)}")
             toast.show()
         }
         //updateUI(currentList)
