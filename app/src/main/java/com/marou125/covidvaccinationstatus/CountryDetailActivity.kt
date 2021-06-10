@@ -221,11 +221,17 @@ class CountryDetailActivity : AppCompatActivity() {
                         }
                     }
                     binding.firstVaccineNotUpdatedFlag.let {
+                        if(binding.peopleVaccNumberTv.text == "No data"){
+                            firstVaccinationsUpdated = true
+                        }
                         if(firstVaccinationsUpdated == false){
                             it.visibility = ImageView.VISIBLE
                         }
                     }
                     binding.fullVaccineNotUpdatedFlag.let {
+                        if(binding.peopleFullVaccNumberTv.text == "No data"){
+                            fullyVaccinatedUpdated = true
+                        }
                         if(fullyVaccinatedUpdated == false){
                             it.visibility = ImageView.VISIBLE
                         }
