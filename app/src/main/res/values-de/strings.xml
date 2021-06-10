@@ -269,4 +269,6 @@
     <string name="Americas">Amerikas</string>
     <string name="AsiaPacific">Asien/Pazifik</string>
     <string name="Africa">Afrika</string>
+    <string name="Percentage_fully_vaccinated">% sind voll geimpft</string>
+    <string name="Percentage_first_vaccine">% mit mindestens einer Impfung</string>
 </resources>

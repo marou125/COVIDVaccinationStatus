@@ -43,7 +43,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-       // readFavourites()
+        readFavourites()
 
         currentList = viewModel.favourites
         updateUI(currentList, true)

@@ -126,7 +126,7 @@ class CountryDetailActivity : AppCompatActivity() {
                         binding.vaccPercentageFullTv.visibility = View.GONE
                     }
                     val fullyVaccinatedPercentage = calculatePercentage(country.fullyVaccinated, country.population)
-                    binding.vaccPercentageFullTv.text = "$fullyVaccinatedPercentage % are fully vaccinated"
+                    binding.vaccPercentageFullTv.text = "$fullyVaccinatedPercentage ${getString(R.string.Percentage_fully_vaccinated)}"
                     binding.progressBarFully.progress = fullyVaccinatedPercentage.toInt()
 
                     if(binding.peopleVaccNumberTv.text.equals("No data")){
@@ -134,7 +134,7 @@ class CountryDetailActivity : AppCompatActivity() {
                         binding.vaccPercentageFirstTv.visibility = View.GONE
                     }
                     val firstVaccinePercentage = calculatePercentage(country.firstVaccine, country.population)
-                    binding.vaccPercentageFirstTv.text = "$firstVaccinePercentage % with at least one vaccine shot"
+                    binding.vaccPercentageFirstTv.text = "$firstVaccinePercentage ${getString(R.string.Percentage_first_vaccine)}"
                     binding.progressBarFirst.progress = firstVaccinePercentage.toInt()
 
 
@@ -207,7 +207,6 @@ class CountryDetailActivity : AppCompatActivity() {
         val historicCases = CountryDataSingleton.historicCases
         val historicDeaths = CountryDataSingleton.historicDeaths
         var caseInfo: Array<CaseInfo?> = emptyArray()
-        Log.i("Germany String ID", R.string.Germany.toString())
         when(countryID){
             R.string.Afghanistan -> caseInfo = arrayOf(caseData!!.Afghanistan.All, historicCases!!.Afghanistan.All, historicDeaths!!.Afghanistan.All)
             R.string.Albania -> caseInfo = arrayOf(caseData!!.Albania.All, historicCases!!.Albania.All, historicDeaths!!.Albania.All)

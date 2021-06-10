@@ -133,7 +133,7 @@ object CountryDataSingleton {
             R.string.Croatia -> english = "Croatia"
             R.string.Cuba -> english = "Cuba"
             R.string.Cyprus -> english = "Cyprus"
-            R.string.CzechRepublic -> english = "Czech Republic"
+            R.string.CzechRepublic -> english = "Czechia"
             R.string.Denmark -> english = "Denmark"
             R.string.Djibouti -> english = "Djibouti"
             R.string.Dominica -> english = "Dominica"
