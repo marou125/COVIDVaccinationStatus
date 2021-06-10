@@ -80,29 +80,37 @@ class CountryDetailActivity : AppCompatActivity() {
                 this,
                 Observer { country ->
 
-                    var totalVaccinationsOld = 0
-                    var firstVaccinationsOld = 0
-                    var secondVaccinationsOld = 0
-                    var averageVaccinationsOld = 0
+                    var totalVacIncrease = 0
+                    var firstVacIncrease = 0
+                    var secondVacIncrease = 0
+                    var averagePerDayChange = 0
 
                     //Update country data to new values fetched from web
                     if(displayedCountryData != null){
-                        val currentDate = country!!.date
                         val arrayLength = displayedCountryData.data.size
                         val lastUpdate = displayedCountryData.data[arrayLength-1]
 
-                        //TODO: Check if this change affects the update of data
-                        if(currentDate != formatDate(lastUpdate.date)){
-                            totalVaccinationsOld = country.totalVaccinations
-                            firstVaccinationsOld = country.firstVaccine
-                            secondVaccinationsOld = country.fullyVaccinated
-                            averageVaccinationsOld = country.sevenDayAverage
-                            country.date = formatDate(lastUpdate.date)
-                            country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
-                            country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
-                            country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
-                            country.sevenDayAverage = if(lastUpdate.daily_vaccinations != null) Integer.valueOf(lastUpdate.daily_vaccinations) else country.sevenDayAverage
+                        country!!.date = formatDate(lastUpdate.date)
+                        country.totalVaccinations = if(lastUpdate.total_vaccinations != null) Integer.valueOf(lastUpdate.total_vaccinations) else country.totalVaccinations
+                        country.firstVaccine = if(lastUpdate.people_vaccinated != null) Integer.valueOf(lastUpdate.people_vaccinated) else country.firstVaccine
+                        country.fullyVaccinated = if(lastUpdate.people_fully_vaccinated != null) Integer.valueOf(lastUpdate.people_fully_vaccinated) else country.fullyVaccinated
+                        country.sevenDayAverage = if(lastUpdate.daily_vaccinations != null) Integer.valueOf(lastUpdate.daily_vaccinations) else country.sevenDayAverage
+
+                        if(displayedCountryData.data.size > 1){
+                            val updateBefore = displayedCountryData.data[arrayLength-2]
+
+                            val totalVaccinationsOld = Integer.valueOf(updateBefore.total_vaccinations)
+                            val firstVaccinationsOld = Integer.valueOf(updateBefore.people_vaccinated)
+                            val secondVaccinationsOld = Integer.valueOf(updateBefore.people_fully_vaccinated)
+                            val averageVaccinationsOld = Integer.valueOf(updateBefore.daily_vaccinations)
+
+                            totalVacIncrease = country.totalVaccinations - totalVaccinationsOld
+                            firstVacIncrease = country.firstVaccine - firstVaccinationsOld
+                            secondVacIncrease = country.fullyVaccinated - secondVaccinationsOld
+                            averagePerDayChange = country.sevenDayAverage - averageVaccinationsOld
                         }
+
+
                     }
 
                     if(displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases){
@@ -138,28 +146,28 @@ class CountryDetailActivity : AppCompatActivity() {
                     binding.sevenDayAvgNumber.text = if(country.sevenDayAverage == 0) "No data" else formatNumber(country.sevenDayAverage)
 
                     binding.totalVacIncrease.let {
-                        if(totalVaccinationsOld != 0 /*&& totalVaccinationsOld != country.totalVaccinations*/){
-                            it.text = "(+${formatNumber(totalVaccinationsOld)})"
+                        if(totalVacIncrease != 0 /*&& totalVaccinationsOld != country.totalVaccinations*/){
+                            it.text = "(+${formatNumber(totalVacIncrease)})"
                         }
                     }
 
                     binding.firstVacIncrease.let {
-                        if(firstVaccinationsOld != 0 /*&& firstVaccinationsOld != country.firstVaccine*/){
-                            it.text = "(+${formatNumber(firstVaccinationsOld)})"
+                        if(firstVacIncrease != 0 /*&& firstVaccinationsOld != country.firstVaccine*/){
+                            it.text = "(+${formatNumber(firstVacIncrease)})"
                         }
                     }
 
                     binding.fullVacIncrease.let {
-                        if(secondVaccinationsOld != 0 /*&& secondVaccinationsOld != country.fullyVaccinated*/){
-                            it.text = "(+${formatNumber(secondVaccinationsOld)})"
+                        if(secondVacIncrease != 0 /*&& secondVaccinationsOld != country.fullyVaccinated*/){
+                            it.text = "(+${formatNumber(secondVacIncrease)})"
                         }
                     }
                     binding.averageVacChange.let {
-                        if(averageVaccinationsOld != 0 /*&& averageVaccinationsOld != country.sevenDayAverage*/){
-                            if(averageVaccinationsOld > 0){
-                                it.text = "(+${formatNumber(averageVaccinationsOld)})"
+                        if(averagePerDayChange != 0 /*&& averageVaccinationsOld != country.sevenDayAverage*/){
+                            if(averagePerDayChange > 0){
+                                it.text = "(+${formatNumber(averagePerDayChange)})"
                             } else {
-                                it.text = "(${formatNumber(averageVaccinationsOld)})"
+                                it.text = "(${formatNumber(averagePerDayChange)})"
                             }
                         }
                     }
@@ -209,6 +217,9 @@ class CountryDetailActivity : AppCompatActivity() {
             return "0"
         }
         var numberString = number.toString()
+        if(number<0){
+            numberString = numberString.substring(1)
+        }
         var formattedString = ""
         var counter = 1
         for(i in numberString.length-1 downTo 0){
@@ -218,6 +229,9 @@ class CountryDetailActivity : AppCompatActivity() {
                 counter = 0
             }
             counter++
+        }
+        if(number<0){
+            formattedString = "-$formattedString"
         }
         return formattedString
     }
