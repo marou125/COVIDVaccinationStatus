@@ -272,5 +272,10 @@
     <string name="Zambia">Zambia</string>
     <string name="Zimbabwe">Zimbabwe</string>
     <string name="Palestine">Palestine</string>
+    <string name="Favourites">Favourites</string>
+    <string name="Europe">Europe</string>
+    <string name="Americas">Americas</string>
+    <string name="AsiaPacific">Asia/Pacific</string>
+    <string name="Africa">Africa</string>
 
 </resources>

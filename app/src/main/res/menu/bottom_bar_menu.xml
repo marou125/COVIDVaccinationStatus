@@ -6,30 +6,30 @@
         android:id="@+id/favourites"
         android:icon="@android:drawable/btn_star_big_on"
 
-        android:title="Favourites"
+        android:title="@string/Favourites"
         app:showAsAction="always" />
     <item
         android:id="@+id/europe"
         android:icon="@drawable/europe"
 
-        android:title="Europe"
+        android:title="@string/Europe"
         app:showAsAction="always" />
     <item
         android:id="@+id/americas"
 
         android:icon="@drawable/americas"
-        android:title="Americas"
+        android:title="@string/Americas"
         app:showAsAction="always" />
     <item
         android:id="@+id/asiaPacific"
 
         android:icon="@drawable/asiapacific"
-        android:title="Asia-Pacific"
+        android:title="@string/AsiaPacific"
         app:showAsAction="always" />
     <item
         android:id="@+id/africa"
         android:icon="@drawable/africa"
 
-        android:title="Africa"
+        android:title="@string/Africa"
         app:showAsAction="always" />
 </menu>

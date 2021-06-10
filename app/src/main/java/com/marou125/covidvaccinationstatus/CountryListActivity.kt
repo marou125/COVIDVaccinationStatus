@@ -38,13 +38,12 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        CountryDataSingleton.printWorld(this)
         setContentView(R.layout.activity_country_list)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        readFavourites()
+       // readFavourites()
 
         currentList = viewModel.favourites
         updateUI(currentList, true)
@@ -78,28 +77,28 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             var isFavourites = false
             when(item.itemId){
                 R.id.favourites -> {
-                    toolbarTitle.text = "Favourites"
+                    toolbarTitle.text = getString(R.string.Favourites)
                     toolbarTopLeft.setImageResource(R.drawable.favourite_topleft)
                     currentList = viewModel.favourites
                     isFavourites = true
                 }
                 R.id.europe -> {
-                    toolbarTitle.text = "Europe"
+                    toolbarTitle.text = getString(R.string.Europe)
                     toolbarTopLeft.setImageResource(R.drawable.europe_topleft)
                     currentList = viewModel.europe
                 }
                 R.id.americas -> {
-                    toolbarTitle.text = "Americas"
+                    toolbarTitle.text = getString(R.string.Americas)
                     toolbarTopLeft.setImageResource(R.drawable.americas_topleft)
                     currentList = viewModel.americas
                 }
                 R.id.asiaPacific -> {
-                    toolbarTitle.text = "Asia/Pacific"
+                    toolbarTitle.text = getString(R.string.AsiaPacific)
                     toolbarTopLeft.setImageResource(R.drawable.asia_topleft)
                     currentList = viewModel.asiaPacific
                 }
                 R.id.africa -> {
-                    toolbarTitle.text = "Africa"
+                    toolbarTitle.text = getString(R.string.Africa)
                     toolbarTopLeft.setImageResource(R.drawable.africa_topleft)
                     currentList = viewModel.africa
                 }
@@ -122,7 +121,6 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             mToast.show()
         }
 
-        //Test if bugged country is in case data
 
     }
 

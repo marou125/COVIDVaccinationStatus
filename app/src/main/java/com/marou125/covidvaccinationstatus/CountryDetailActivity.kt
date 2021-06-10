@@ -202,7 +202,6 @@ class CountryDetailActivity : AppCompatActivity() {
         return null
     }
 
-    //TODO: fix switch case country names
     private fun findCaseData(countryID: Int): Array<CaseInfo?> {
         val caseData = CountryDataSingleton.caseData
         val historicCases = CountryDataSingleton.historicCases

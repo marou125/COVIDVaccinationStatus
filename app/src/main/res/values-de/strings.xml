@@ -264,4 +264,9 @@
     <string name="Zimbabwe">Simbabwe</string>
     <string name="Palestine">Palästina</string>
     <string name="Eswatini">Eswatini</string>
+    <string name="Favourites">Favoriten</string>
+    <string name="Europe">Europa</string>
+    <string name="Americas">Amerikas</string>
+    <string name="AsiaPacific">Asien/Pazifik</string>
+    <string name="Africa">Afrika</string>
 </resources>
