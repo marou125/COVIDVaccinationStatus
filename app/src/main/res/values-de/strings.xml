@@ -5,7 +5,6 @@
     <string name="vaccination_status">Impfstatus</string>
     <string name="population">Bevölkerung</string>
     <string name="total_cases">Fälle gesamt</string>
-    <string name="date">Datum</string>
     <string name="total_vaccinations">Impfungen gesamt</string>
     <string name="people_fully_vaccinated">Vollständig geimpft</string>
     <string name="people_vaccinated">Erstimpfung</string>
@@ -50,7 +49,6 @@
     <string name="Belgium">Belgien</string>
     <string name="Bermuda">Bermuda</string>
     <string name="Bolivia">Bolivien</string>
-    <string name="BosniaandHerzegowina">Bosnien und Herzegovina</string>
     <string name="Brazil">Brasilien</string>
     <string name="Bulgaria">Bulgarien</string>
     <string name="Cameroon">Kamerun</string>
@@ -276,4 +274,5 @@
     <string name="the_government_has_not_updated_this_number_with_the_most_recent_update">Diese Zahl wurde mit dem letzten Update nicht aktualisiert und könnte veraltet sein</string>
     <string name="BosniaandHerzegovina">Bosnien und Herzegowina</string>
     <string name="No_data">Keine Daten</string>
+    <string name="last_update">Stand</string>
 </resources>

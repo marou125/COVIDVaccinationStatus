@@ -392,8 +392,32 @@ class CountryDetailActivity : AppCompatActivity() {
             R.string.December
         )
 
-        val day = unformattedDate.substring(unformattedDate.length - 2) + "."
-        val monthNumber = unformattedDate.get(unformattedDate.length - 4).toString().toInt()
+        val thirtyDayMonths = listOf(4,6,9,11)
+
+        var dayNumber = unformattedDate.substring(unformattedDate.length - 2).toInt()
+        var monthNumber = unformattedDate.get(unformattedDate.length - 4).toString().toInt()
+        if(dayNumber == 31){
+            dayNumber = 1
+            monthNumber++
+            if(monthNumber == 13){
+                monthNumber = 1
+            }
+        } else {
+            if(dayNumber==28 && monthNumber == 2){
+                dayNumber = 1
+                monthNumber++
+            }
+            else if(dayNumber == 30 && thirtyDayMonths.contains(monthNumber)){
+                dayNumber = 1
+                monthNumber++
+            } else {
+                dayNumber++
+            }
+        }
+        var day = "$dayNumber."
+        if(dayNumber<10){
+            day = "0$day"
+        }
         val month = getString(monthsArray[monthNumber])
         val year = unformattedDate.substring(0, 4)
 

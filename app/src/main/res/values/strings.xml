@@ -4,7 +4,7 @@
     <string name="vaccination_status">Vaccination Status</string>
     <string name="population">Population</string>
     <string name="total_cases">Total Cases</string>
-    <string name="date">Date</string>
+    <string name="last_update">Last Update</string>
     <string name="total_vaccinations">Total Vaccinations</string>
     <string name="people_fully_vaccinated">Fully Vaccinated</string>
     <string name="people_vaccinated">First Vaccine Shot</string>
