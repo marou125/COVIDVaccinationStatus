@@ -37,6 +37,7 @@
     <string name="at_the_moment_there_is_no_data_available_for_this_country">At the moment there is no data available for this country</string>
     <string name="Removed_from_favourites">Removed from favourites:</string>
     <string name="Added_to_favourites">Added to favourites:</string>
+    <string name="No_data">No data</string>
 
 
 
@@ -66,7 +67,7 @@
     <string name="Bermuda">Bermuda</string>
     <string name="Bhutan">Bhutan</string>
     <string name="Bolivia">Bolivia</string>
-    <string name="BosniaandHerzegowina">Bosnia and Herzegowina</string>
+    <string name="BosniaandHerzegovina">Bosnia and Herzegovina</string>
     <string name="Botswana">Botswana</string>
     <string name="BouvetIsland">Bouvet Island</string>
     <string name="Brazil">Brazil</string>

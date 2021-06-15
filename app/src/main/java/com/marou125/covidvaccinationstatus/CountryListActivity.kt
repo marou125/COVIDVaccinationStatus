@@ -33,7 +33,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         findViewById<TextView>(R.id.emptyList)
     }
 
-    var currentList : List<Country> = emptyList()
+    var currentList: List<Country> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +58,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
             var isFavourites = false
-            when(item.itemId){
+            when (item.itemId) {
                 R.id.favourites -> {
                     toolbarTitle.text = getString(R.string.Favourites)
                     toolbarTopLeft.setImageResource(R.drawable.favourite_topleft)
@@ -91,15 +91,15 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         }
 
         findViewById<Button>(R.id.sort_button).setOnClickListener {
-            var mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT)
-            if(viewModel.sortedByName){
+            var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
+            if (viewModel.sortedByName) {
                 mToast.setText(getString(R.string.sorted_by_name))
                 viewModel.sortedByName = false
             } else {
                 mToast.setText(getString(R.string.sorted_by_population))
                 viewModel.sortedByName = true
             }
-            var isFavourites = currentList==viewModel.favourites
+            var isFavourites = currentList == viewModel.favourites
             updateUI(currentList, isFavourites)
             mToast.show()
         }
@@ -114,20 +114,20 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         super.onPause()
     }
 
-    private fun readFavourites(){
+    private fun readFavourites() {
         val prefs = this.getSharedPreferences("ListActivity", Context.MODE_PRIVATE) ?: return
         val gson = Gson()
         val json = prefs.getString("FavouriteList", null)
         val type = object : TypeToken<ArrayList<Country>>() {}.type
         val favouriteList = gson.fromJson<ArrayList<Country>>(json, type)
-        if(favouriteList != null){
+        if (favouriteList != null) {
             CountryDataSingleton.fillFavourites(favouriteList)
         }
     }
 
-    private fun saveFavourites(favourites: ArrayList<Country>){
+    private fun saveFavourites(favourites: ArrayList<Country>) {
         val prefs = this.getSharedPreferences("ListActivity", Context.MODE_PRIVATE) ?: return
-        with(prefs.edit()){
+        with(prefs.edit()) {
             val gson = Gson()
             val json = gson.toJson(favourites)
             putString("FavouriteList", json)
@@ -148,29 +148,29 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 
-    fun updateUI(continent: List<Country>, isFavourites: Boolean){
-            val sorted = viewModel.sortCountries(continent)
-            recyclerView.adapter = CountryListAdapter(this, sorted, this, isFavourites)
-            if(continent.isEmpty()){
-                emptyList.visibility = TextView.VISIBLE
-            } else {
-                emptyList.visibility = TextView.GONE
-            }
+    fun updateUI(continent: List<Country>, isFavourites: Boolean) {
+        val sorted = viewModel.sortCountries(this, continent)
+        recyclerView.adapter = CountryListAdapter(this, sorted, this, isFavourites)
+        if (continent.isEmpty()) {
+            emptyList.visibility = TextView.VISIBLE
+        } else {
+            emptyList.visibility = TextView.GONE
         }
+    }
 
     override fun onItemClick(position: Int) {
-        val sorted = viewModel.sortCountries(currentList)
+        val sorted = viewModel.sortCountries(this, currentList)
         val i = Intent(this, CountryDetailActivity::class.java)
         i.putExtra("country", sorted[position].name)
         startActivity(i, null)
     }
 
     override fun onLongClick(position: Int) {
-        val sorted = viewModel.sortCountries(currentList)
+        val sorted = viewModel.sortCountries(this, currentList)
         val toast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
-        if(CountryDataSingleton.favourites.contains(sorted[position])){
+        if (CountryDataSingleton.favourites.contains(sorted[position])) {
             CountryDataSingleton.favourites.remove(sorted[position])
-            if(CountryDataSingleton.favourites.isEmpty()){
+            if (CountryDataSingleton.favourites.isEmpty()) {
                 emptyList.visibility = TextView.VISIBLE
             }
             toast.setText("${getString(R.string.Removed_from_favourites)} ${getString(sorted[position].name)}")

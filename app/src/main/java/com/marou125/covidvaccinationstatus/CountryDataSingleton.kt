@@ -103,12 +103,12 @@ object CountryDataSingleton {
             R.string.Bermuda -> english = "Bermuda"
             R.string.Bhutan -> english = "Bhutan"
             R.string.Bolivia -> english = "Bolivia"
-            R.string.BosniaandHerzegowina -> english = "Bosnia and Herzegowina"
+            R.string.BosniaandHerzegovina -> english = "Bosnia and Herzegovina"
             R.string.Botswana -> english = "Botswana"
             R.string.BouvetIsland -> english = "Bouvet Island"
             R.string.Brazil -> english = "Brazil"
             //R.string.BritishIndianOceanTerritory -> english = "British Indian Ocean Territory"
-            R.string.BruneiDarussalam -> english = "Brunei Darussalam"
+            R.string.BruneiDarussalam -> english = "Brunei"
             R.string.Bulgaria -> english = "Bulgaria"
             R.string.BurkinaFaso -> english = "Burkina Faso"
             R.string.Burundi -> english = "Burundi"
@@ -126,7 +126,7 @@ object CountryDataSingleton {
             R.string.Colombia -> english = "Colombia"
             R.string.Comoros -> english = "Comoros"
             R.string.Congo -> english = "Congo"
-            R.string.Congo -> english = "Congo"
+            R.string.DRCongoe -> english = "Democratic Republic of Congo"
             R.string.CookIslands -> english = "Cook Islands"
             R.string.CostaRica -> english = "Costa Rica"
             R.string.CoteDIvoire -> english = "Cote d'Ivoire"
@@ -138,13 +138,14 @@ object CountryDataSingleton {
             R.string.Djibouti -> english = "Djibouti"
             R.string.Dominica -> english = "Dominica"
             R.string.DominicanRepublic -> english = "Dominican Republic"
-            R.string.EastTimor -> english = "East Timor"
+            R.string.EastTimor -> english = "Timor"
             R.string.Ecuador -> english = "Ecuador"
             R.string.Egypt -> english = "Egypt"
             R.string.ElSalvador -> english = "El Salvador"
             R.string.EquatorialGuinea -> english = "Equatorial Guinea"
             R.string.Eritrea -> english = "Eritrea"
             R.string.Estonia -> english = "Estonia"
+            R.string.Eswatini -> english = "Eswatini"
             R.string.Ethiopia -> english = "Ethiopia"
             R.string.FalklandIslands -> english = "Falkland Islands"
             R.string.FaroeIslands -> english = "Faroe Islands"
@@ -222,6 +223,7 @@ object CountryDataSingleton {
             R.string.Monaco -> english = "Monaco"
             R.string.Mongolia -> english = "Mongolia"
             R.string.Montserrat -> english = "Montserrat"
+            R.string.Montenegro -> english = "Montenegro"
             R.string.Morocco -> english = "Morocco"
             R.string.Mozambique -> english = "Mozambique"
             R.string.Myanmar -> english = "Myanmar"
@@ -348,7 +350,7 @@ object CountryDataSingleton {
         europe.add(Country(R.drawable.at, R.string.Austria, 9006398))
         europe.add(Country(R.drawable.by, R.string.Belarus, 9449323))
         europe.add(Country(R.drawable.be, R.string.Belgium, 11589623))
-        europe.add(Country(R.drawable.ba, R.string.BosniaandHerzegowina, 3280819))
+        europe.add(Country(R.drawable.ba, R.string.BosniaandHerzegovina, 3280819))
         europe.add(Country(R.drawable.bg, R.string.Bulgaria, 6948445))
         europe.add(Country(R.drawable.hr, R.string.Croatia, 4105267))
         europe.add(Country(R.drawable.cz, R.string.CzechRepublic, 10708981))

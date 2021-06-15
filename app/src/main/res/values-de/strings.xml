@@ -266,12 +266,14 @@
     <string name="Eswatini">Eswatini</string>
     <string name="Favourites">Favoriten</string>
     <string name="Europe">Europa</string>
-    <string name="Americas">Amerikas</string>
+    <string name="Americas">Amerika</string>
     <string name="AsiaPacific">Asien/Pazifik</string>
     <string name="Africa">Afrika</string>
     <string name="Percentage_fully_vaccinated">% sind voll geimpft</string>
     <string name="Percentage_first_vaccine">% mit mindestens einer Impfung</string>
     <string name="Removed_from_favourites">Aus Favoriten entfernt:</string>
     <string name="Added_to_favourites">In Favoriten gespeichert:</string>
-    <string name="the_government_has_not_updated_this_number_with_the_most_recent_update">Diese Zahl wurde längere Zeit nicht aktualisiert und könnte ungenau sein</string>
+    <string name="the_government_has_not_updated_this_number_with_the_most_recent_update">Diese Zahl wurde mit dem letzten Update nicht aktualisiert und könnte veraltet sein</string>
+    <string name="BosniaandHerzegovina">Bosnien und Herzegowina</string>
+    <string name="No_data">Keine Daten</string>
 </resources>

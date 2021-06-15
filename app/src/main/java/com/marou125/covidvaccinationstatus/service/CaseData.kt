@@ -44,8 +44,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Brazil: CaseData,
                    @SerializedName("British Indian Ocean Territory")
                    var BritishIndianOceanTerritory: CaseData,
-                   @SerializedName("Brunei Darussalam")
-                   var BruneiDarussalam: CaseData,
+//                   @SerializedName("Brunei Darussalam")
+                   var Brunei: CaseData,
                    var Bulgaria: CaseData,
                    @SerializedName("Burkina Faso")
                    var BurkinaFaso: CaseData,
@@ -88,8 +88,8 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Dominica: CaseData,
                    @SerializedName("Dominican Republic")
                    var DominicanRepublic: CaseData,
-                   @SerializedName("East Timor")
-                   var EastTimor: CaseData,
+//                   @SerializedName("Timor-Leste")
+//                   var Timor: CaseData,
                    var Ecuador: CaseData,
                    var Egypt: CaseData,
                    @SerializedName("El Salvador")
@@ -285,7 +285,7 @@ class JsonCaseData(var Afghanistan: CaseData,
                    var Sweden: CaseData,
                    var Switzerland: CaseData,
                    var Syria: CaseData,
-                   //@SerializedName("Taiwan, Province of China")
+                   @SerializedName("Taiwan*")
                    var Taiwan: CaseData,
                    var Tajikistan: CaseData,
                    //@SerializedName("Tanzania, United Republic of")

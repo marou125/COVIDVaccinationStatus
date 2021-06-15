@@ -1,5 +1,6 @@
 package com.marou125.covidvaccinationstatus
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -50,12 +51,12 @@ class CountryListViewModel : ViewModel() {
     }
 
     //TODO: Sort the other lists too, maybe only the one that is selected
-    fun sortCountries(continent: List<Country>): List<Country>{
+    fun sortCountries(context: Context, continent: List<Country>): List<Country>{
         var sorted = continent
         if(sortedByName) {
             sorted = continent.sortedBy { it.population }.reversed()
         } else {
-            sorted = continent.sortedBy{it.name}
+            sorted = continent.sortedBy{context.resources.getString(it.name)}
         }
         return sorted
     }
