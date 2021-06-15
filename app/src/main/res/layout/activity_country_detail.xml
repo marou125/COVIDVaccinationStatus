@@ -513,14 +513,16 @@
 
                     <TextView
                         android:id="@+id/explanation_tv"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="4dp"
                         android:text="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         android:textSize="8sp"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/explanation_flag"
                         tools:visibility="visible" />
 
