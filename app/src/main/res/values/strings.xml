@@ -282,5 +282,14 @@
     <string name="Africa">Africa</string>
     <string name="the_government_has_not_updated_this_number_with_the_most_recent_update">This number has not been updated recently and might be inaccurate</string>
     <string name="sort">Sort</string>
+    <string name="about">About</string>
+    <string name="ok">OK</string>
+    <string name="sources">Sources</string>
+    <string name="worldometers" translatable="false">- worldometers:</string>
+    <string name="m_media_group" translatable="false">- M-Media-Group:</string>
+    <string name="our_world_in_data" translatable="false">- Our World In Data:</string>
+    <string name="https_mmediagroup_fr_covid_19" translatable="false">https://mmediagroup.fr/covid-19</string>
+    <string name="https_www_worldometers_info_population" translatable="false">https://www.worldometers.info/population/</string>
+    <string name="https_covid_ourworldindata_org" translatable="false">https://covid.ourworldindata.org/</string>
 
 </resources>

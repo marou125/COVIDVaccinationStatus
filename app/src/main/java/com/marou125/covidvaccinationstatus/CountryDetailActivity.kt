@@ -4,13 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.google.android.material.button.MaterialButton
 import com.marou125.covidvaccinationstatus.database.CountryRepository
 import com.marou125.covidvaccinationstatus.databinding.ActivityCountryDetailBinding
+import com.marou125.covidvaccinationstatus.databinding.AlertDialogBinding
 import com.marou125.covidvaccinationstatus.service.CaseInfo
 import com.marou125.covidvaccinationstatus.service.VaccinationData
 import java.lang.Exception
@@ -32,6 +39,9 @@ class CountryDetailActivity : AppCompatActivity() {
 
         val binding: ActivityCountryDetailBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_country_detail)
+
+        setSupportActionBar(findViewById(R.id.toolbar_detail))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val countryID = intent.getIntExtra("country", 0)
         if (countryID != 0) {
@@ -346,6 +356,39 @@ class CountryDetailActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_detail_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.about_button -> createAlertDialog()
+        }
+        return true
+    }
+
+    private fun createAlertDialog(){
+
+        val dialogBinding: AlertDialogBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(this),
+            R.layout.alert_dialog,
+            null,
+            false
+        )
+
+        val alertDialog = AlertDialog.Builder(this, 0).create()
+
+        alertDialog.apply {
+            setView(dialogBinding.root)
+            setCancelable(false)
+        }.show()
+
+        dialogBinding.btnOk.setOnClickListener{
+            alertDialog.dismiss()
+        }
+
+    }
 
     private fun calculatePercentage(vaccinated: Int, population: Int): Double =
         ceil((vaccinated / population.toDouble()) * 1000) / 10

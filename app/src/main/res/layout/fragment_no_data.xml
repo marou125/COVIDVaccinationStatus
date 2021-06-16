@@ -8,7 +8,7 @@
     tools:context=".NoDataFragment">
         <include
             android:id="@+id/toolbar_detail"
-            layout="@layout/toolbar" />
+            layout="@layout/toolbar_detail" />
 
     <TextView
         android:id="@+id/no_data_tv"

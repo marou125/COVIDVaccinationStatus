@@ -275,6 +275,8 @@
     <string name="BosniaandHerzegovina">Bosnien und Herzegowina</string>
     <string name="No_data">Keine Daten</string>
     <string name="last_update">Stand</string>
-    <string name="Active_cases_explanation">Aktive Fälle sind geschätzt</string>
     <string name="sort">Sortieren</string>
+    <string name="about">Mehr erfahren</string>
+    <string name="ok">OK</string>
+    <string name="sources">Quellen</string>
 </resources>
