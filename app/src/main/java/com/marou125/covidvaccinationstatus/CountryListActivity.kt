@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -39,6 +41,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_country_list)
+        setSupportActionBar(findViewById(R.id.toolbar_list))
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -90,8 +93,26 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             true
         }
 
-        findViewById<Button>(R.id.sort_button).setOnClickListener {
-            var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
+//        findViewById<Button>(R.id.sort_button).setOnClickListener {
+//            var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
+//            if (viewModel.sortedByName) {
+//                mToast.setText(getString(R.string.sorted_by_name))
+//                viewModel.sortedByName = false
+//            } else {
+//                mToast.setText(getString(R.string.sorted_by_population))
+//                viewModel.sortedByName = true
+//            }
+//            var isFavourites = currentList == viewModel.favourites
+//            updateUI(currentList, isFavourites)
+//            mToast.show()
+//        }
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.sort_button -> { var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
             if (viewModel.sortedByName) {
                 mToast.setText(getString(R.string.sorted_by_name))
                 viewModel.sortedByName = false
@@ -102,9 +123,14 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             var isFavourites = currentList == viewModel.favourites
             updateUI(currentList, isFavourites)
             mToast.show()
+            }
         }
+        return true
+    }
 
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_list_menu, menu)
+        return true
     }
 
 

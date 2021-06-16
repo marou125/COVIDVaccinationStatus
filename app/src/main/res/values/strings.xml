@@ -281,5 +281,6 @@
     <string name="AsiaPacific">Asia/Pacific</string>
     <string name="Africa">Africa</string>
     <string name="the_government_has_not_updated_this_number_with_the_most_recent_update">This number has not been updated recently and might be inaccurate</string>
+    <string name="sort">Sort</string>
 
 </resources>

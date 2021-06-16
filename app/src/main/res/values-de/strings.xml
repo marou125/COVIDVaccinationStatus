@@ -17,7 +17,7 @@
     <string name="sorted_by_name">Nach Namen sortiert</string>
     <string name="sorted_by_population">Nach Bevölkerung sortiert</string>
     <string name="_7_day_average">7-Tage-Schnitt</string>
-    <string name="you_have_no_countries_saved_in_your_favourites_yet">Noch keine Länder gespeichert. Tippen und halten Sie, um ein Land als Favorit zu speichern</string>
+    <string name="you_have_no_countries_saved_in_your_favourites_yet">Noch keine Länder gespeichert. Auf ein Land tippen und gedrückt haltent, um es als Favorit zu speichern</string>
     <string name="infection_status">Infektionsstatus</string>
     <string name="January">Januar</string>
     <string name="February">Februar</string>
@@ -276,4 +276,5 @@
     <string name="No_data">Keine Daten</string>
     <string name="last_update">Stand</string>
     <string name="Active_cases_explanation">Aktive Fälle sind geschätzt</string>
+    <string name="sort">Sortieren</string>
 </resources>
