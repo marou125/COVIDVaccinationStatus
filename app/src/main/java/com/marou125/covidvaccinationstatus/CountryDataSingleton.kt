@@ -53,8 +53,8 @@ object CountryDataSingleton {
 
     //This function returns the cases/deaths of the last recorded seven days
     fun getWeeklyData(dateMap: HashMap<String, Int>): IntArray {
-        val weeklyData = dateMap.entries.sortedByDescending { it.value }.subList(0,7)
-        var weeklyDataNumeric = IntArray(7)
+        val weeklyData = dateMap.entries.sortedByDescending { it.value }.subList(0,21)
+        var weeklyDataNumeric = IntArray(21)
         var i = 0
         for(day in weeklyData){
             val numericValue = Integer.valueOf(day.toString().substring(11))
@@ -396,20 +396,20 @@ object CountryDataSingleton {
 
     fun fillAmericas(): List<Country>{
         val americas = ArrayList<Country>()
-        americas.add(Country(R.drawable.ai,R.string.Anguilla,15003))
+        //americas.add(Country(R.drawable.ai,R.string.Anguilla,15003)) British Territory
         americas.add(Country(R.drawable.ag,R.string.AntiguaandBarbuda,97929))
         americas.add(Country(R.drawable.ar,R.string.Argentina,45195774))
-        americas.add(Country(R.drawable.aw,R.string.Aruba,106766))
+        //americas.add(Country(R.drawable.aw,R.string.Aruba,106766)) Dutch Territory
         americas.add(Country(R.drawable.bs,R.string.Bahamas,393244))
         americas.add(Country(R.drawable.bb,R.string.Barbados,287375))
         americas.add(Country(R.drawable.bz,R.string.Belize,397375))
-        americas.add(Country(R.drawable.bm,R.string.Bermuda,62278))
+        //americas.add(Country(R.drawable.bm,R.string.Bermuda,62278)) British Territory
         americas.add(Country(R.drawable.bo,R.string.Bolivia,11673021))
         americas.add(Country(R.drawable.br,R.string.Brazil,212559417))
-        americas.add(Country(R.drawable.vg,R.string.VirginIslands,30231))
+        //americas.add(Country(R.drawable.vg,R.string.VirginIslands,30231)) US/UK Territory
         americas.add(Country(R.drawable.ca,R.string.Canada,37742154))
         //americas.add(Country(R.drawable.,"Caribbean Netherlands",26223,0,0,0,0,0,"2020-01-01",0,0,0))
-        americas.add(Country(R.drawable.ky,R.string.CaymanIslands,65722))
+        //americas.add(Country(R.drawable.ky,R.string.CaymanIslands,65722)) British Territory
         americas.add(Country(R.drawable.cl,R.string.Chile,19116201))
         americas.add(Country(R.drawable.co,R.string.Colombia,50882891))
         americas.add(Country(R.drawable.cr,R.string.CostaRica,5094118))
@@ -419,25 +419,25 @@ object CountryDataSingleton {
         americas.add(Country(R.drawable.dominican,R.string.DominicanRepublic,10847910))
         americas.add(Country(R.drawable.ec,R.string.Ecuador,17643054))
         americas.add(Country(R.drawable.sv,R.string.ElSalvador,6486205))
-        americas.add(Country(R.drawable.fk,R.string.FalklandIslands,3480))
-        americas.add(Country(R.drawable.gf,R.string.FrenchGuiana,298682))
-        americas.add(Country(R.drawable.gl,R.string.Greenland,56770))
+        //americas.add(Country(R.drawable.fk,R.string.FalklandIslands,3480)) British Territory
+        //americas.add(Country(R.drawable.gf,R.string.FrenchGuiana,298682)) French Territory
+        //americas.add(Country(R.drawable.gl,R.string.Greenland,56770)) Danish Territory
         americas.add(Country(R.drawable.gd,R.string.Grenada,112523))
-        americas.add(Country(R.drawable.gp,R.string.Guadeloupe,400124))
+        //americas.add(Country(R.drawable.gp,R.string.Guadeloupe,400124)) French Territory
         americas.add(Country(R.drawable.gy,R.string.Guyana,786552))
         americas.add(Country(R.drawable.ht,R.string.Haiti,11402528))
         americas.add(Country(R.drawable.hn,R.string.Honduras,9904607))
         americas.add(Country(R.drawable.jm,R.string.Jamaica,2961167))
         //check accuracy of flag
-        americas.add(Country(R.drawable.mq,R.string.Martinique,375265))
+        //americas.add(Country(R.drawable.mq,R.string.Martinique,375265)) French Territory
         americas.add(Country(R.drawable.mx,R.string.Mexico,128932753))
-        americas.add(Country(R.drawable.ms,R.string.Montserrat,4992))
+        //americas.add(Country(R.drawable.ms,R.string.Montserrat,4992)) British Territory
         americas.add(Country(R.drawable.ni,R.string.Nicaragua,6624554))
         //check accuracy of flag
         americas.add(Country(R.drawable.pa,R.string.Panama,4314767))
         americas.add(Country(R.drawable.py,R.string.Paraguay,7132538))
         americas.add(Country(R.drawable.pe,R.string.Peru,32971854))
-        americas.add(Country(R.drawable.pr,R.string.PuertoRico,2860853))
+        //americas.add(Country(R.drawable.pr,R.string.PuertoRico,2860853)) Belongs to US
         americas.add(Country(R.drawable.kn,R.string.SaintKittsandNevis,53199))
         americas.add(Country(R.drawable.lc,R.string.SaintLucia,183627))
         //americas.add(Country(R.drawable.,"Saint Martin",38666,0,0,0,0,0,"2020-01-01",0,0,0))
@@ -446,7 +446,7 @@ object CountryDataSingleton {
 //        americas.add(Country(R.drawable.vc,R.string.StVincentandtheGrenadines,110940))
         americas.add(Country(R.drawable.sr,R.string.Suriname,586632))
         americas.add(Country(R.drawable.tt,R.string.TrinidadandTobago,1399488))
-        americas.add(Country(R.drawable.tc,R.string.TurksandCaicosIslands,38717))
+        //americas.add(Country(R.drawable.tc,R.string.TurksandCaicosIslands,38717)) British Territory
         americas.add(Country(R.drawable.us,R.string.UnitedStates,331002651))
 //        americas.add(Country(R.drawable.vi,"US Virgin Islands",104425))
         americas.add(Country(R.drawable.uy,R.string.Uruguay,3473730))
@@ -469,7 +469,7 @@ object CountryDataSingleton {
         asia.add(Country(R.drawable.cn,R.string.China,1439323776))
         asia.add(Country(R.drawable.cy,R.string.Cyprus,1207359))
         asia.add(Country(R.drawable.ge,R.string.Georgia,3989167))
-        asia.add(Country(R.drawable.hk,R.string.HongKong,7496981))
+        //asia.add(Country(R.drawable.hk,R.string.HongKong,7496981)) Data in China
         asia.add(Country(R.drawable.india,R.string.India,1380004385))
         asia.add(Country(R.drawable.id,R.string.Indonesia,273523615))
         asia.add(Country(R.drawable.ir,R.string.Iran,83992949))
@@ -482,7 +482,7 @@ object CountryDataSingleton {
         asia.add(Country(R.drawable.kg,R.string.Kyrgyzstan,6524195))
         asia.add(Country(R.drawable.la,R.string.Laos,7275560))
         asia.add(Country(R.drawable.lb,R.string.Lebanon,6825445))
-        asia.add(Country(R.drawable.mo,R.string.Macau,649335)) //Macao ?
+        //asia.add(Country(R.drawable.mo,R.string.Macau,649335)) //Macao ? Data in China
         asia.add(Country(R.drawable.my,R.string.Malaysia,32365999))
         asia.add(Country(R.drawable.mv,R.string.Maldives,540544))
         asia.add(Country(R.drawable.mn,R.string.Mongolia,3278290))
@@ -550,15 +550,15 @@ object CountryDataSingleton {
         africa.add(Country(R.drawable.ml,R.string.Mali,20250833))
         africa.add(Country(R.drawable.mr,R.string.Mauritania,4649658))
         africa.add(Country(R.drawable.mu,R.string.Mauritius,1271768))
-        africa.add(Country(R.drawable.yt,R.string.Mayotte,272815))
+        //africa.add(Country(R.drawable.yt,R.string.Mayotte,272815)) French Territory
         africa.add(Country(R.drawable.ma,R.string.Morocco,36910560))
         africa.add(Country(R.drawable.mz,R.string.Mozambique,31255435))
         africa.add(Country(R.drawable.na,R.string.Namibia,2540905))
         africa.add(Country(R.drawable.ne,R.string.Niger,24206644))
         africa.add(Country(R.drawable.ng,R.string.Nigeria,206139589))
         africa.add(Country(R.drawable.rw,R.string.Rwanda,12952218))
-        africa.add(Country(R.drawable.re,R.string.Reunion,895312))
-        africa.add(Country(R.drawable.sh,R.string.StHelena,6077))
+        //africa.add(Country(R.drawable.re,R.string.Reunion,895312)) French Territory
+        //africa.add(Country(R.drawable.sh,R.string.StHelena,6077)) British Colony
         //africa.add(Country(R.drawable.st,R.string.SaoTomeAndPrincipe,219159))
         africa.add(Country(R.drawable.sn,R.string.Senegal,16743927))
         africa.add(Country(R.drawable.sc,R.string.Seychelles,98347))
@@ -583,20 +583,20 @@ object CountryDataSingleton {
     fun fillOceania(): List<Country>{
         val oceania = ArrayList<Country>()
         //check flag
-        oceania.add(Country(R.drawable.americansamoa,R.string.AmericanSamoa,55191))
+        //oceania.add(Country(R.drawable.americansamoa,R.string.AmericanSamoa,55191)) US Territory
         oceania.add(Country(R.drawable.au,R.string.Australia,25499884))
         oceania.add(Country(R.drawable.ck,R.string.CookIslands,17564))
         oceania.add(Country(R.drawable.fj,R.string.Fiji,896445))
-        oceania.add(Country(R.drawable.pf,R.string.FrenchPolynesia,280908))
-        oceania.add(Country(R.drawable.gu,R.string.Guam,168775))
+        //oceania.add(Country(R.drawable.pf,R.string.FrenchPolynesia,280908)) French Territory
+        //oceania.add(Country(R.drawable.gu,R.string.Guam,168775)) US Territory
         oceania.add(Country(R.drawable.ki,R.string.Kiribati,119449))
         oceania.add(Country(R.drawable.mh,R.string.MarshallIslands,59190))
         oceania.add(Country(R.drawable.fm,R.string.Micronesia,548914))
         oceania.add(Country(R.drawable.nr,R.string.Nauru,10824))
-        oceania.add(Country(R.drawable.nc,R.string.NewCaledonia,2854980))
+        //oceania.add(Country(R.drawable.nc,R.string.NewCaledonia,2854980)) French Territory
         oceania.add(Country(R.drawable.nz,R.string.NewZealand,4822233))
         oceania.add(Country(R.drawable.nu,R.string.Niue,1626))
-        oceania.add(Country(R.drawable.mp,R.string.NorthernMarianaIslands,57559))
+        //oceania.add(Country(R.drawable.mp,R.string.NorthernMarianaIslands,57559)) US Territory
         oceania.add(Country(R.drawable.pw,R.string.Palau,18094))
         oceania.add(Country(R.drawable.pg,R.string.PapuaNewGuinea,8947024))
         oceania.add(Country(R.drawable.ws,R.string.Samoa,198414))
@@ -605,7 +605,7 @@ object CountryDataSingleton {
         oceania.add(Country(R.drawable.to,R.string.Tonga,105695))
         oceania.add(Country(R.drawable.tv,R.string.Tuvalu,11792))
         oceania.add(Country(R.drawable.vu,R.string.Vanuatu,307145))
-        oceania.add(Country(R.drawable.wf,R.string.WallisandFutunaIslands,11239))
+        //oceania.add(Country(R.drawable.wf,R.string.WallisandFutunaIslands,11239)) French Territory
 
         return oceania
     }

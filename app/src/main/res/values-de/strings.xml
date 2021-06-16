@@ -11,7 +11,7 @@
     <string name="new_cases">Neue Fälle</string>
     <string name="total_deaths">Tode gesamt</string>
     <string name="new_deaths">Neue Tode</string>
-    <string name="active_cases">Aktive Fälle</string>
+    <string name="active_cases">Geschätzte Aktive Fälle</string>
     <string name="no_data">Keine Daten</string>
     <string name="ExitToast">Erneut drücken um App zu schließen</string>
     <string name="sorted_by_name">Nach Namen sortiert</string>
@@ -275,4 +275,5 @@
     <string name="BosniaandHerzegovina">Bosnien und Herzegowina</string>
     <string name="No_data">Keine Daten</string>
     <string name="last_update">Stand</string>
+    <string name="Active_cases_explanation">Aktive Fälle sind geschätzt</string>
 </resources>

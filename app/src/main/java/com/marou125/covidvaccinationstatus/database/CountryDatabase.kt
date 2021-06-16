@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database (entities = [Country::class], version = 3)
+@Database (entities = [Country::class], version = 4)
 @TypeConverters(CountryTypeConverter::class)
 abstract class CountryDatabase : RoomDatabase() {
 

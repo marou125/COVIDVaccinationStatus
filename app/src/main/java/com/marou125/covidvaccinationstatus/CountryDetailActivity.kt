@@ -62,23 +62,23 @@ class CountryDetailActivity : AppCompatActivity() {
             val displayedCountryCaseData = caseInfoArray[0]
 
             //Get last recorded seven days of cases and deaths saved into an Array
-            var lastWeekCases = IntArray(7)
-            var lastWeekDeaths = IntArray(7)
+            var threeWeekCases = IntArray(21)
+            var threeWeekDeaths = IntArray(21)
             var newCases = 0
             var newDeaths = 0
             if(caseInfoArray[1] != null){
-                lastWeekCases = CountryDataSingleton.getWeeklyData(caseInfoArray[1]!!.dates)
-                newCases = lastWeekCases[0] - lastWeekCases[1]
+                threeWeekCases = CountryDataSingleton.getWeeklyData(caseInfoArray[1]!!.dates)
+                newCases = threeWeekCases[0] - threeWeekCases[1]
+
             }
             if(caseInfoArray[2] != null){
-                lastWeekDeaths = CountryDataSingleton.getWeeklyData(caseInfoArray[2]!!.dates)
-                newDeaths = lastWeekDeaths[0] - lastWeekDeaths[1]
+                threeWeekDeaths = CountryDataSingleton.getWeeklyData(caseInfoArray[2]!!.dates)
+                newDeaths = threeWeekDeaths[0] - threeWeekDeaths[1]
+
             }
 
-
-
-            Log.i("LAST WEEK CASES in $countryID", Arrays.toString(lastWeekCases))
-            Log.i("LAST WEEK DEATHS in $countryID", Arrays.toString(lastWeekDeaths))
+            Log.i("LAST WEEK CASES in $countryID", Arrays.toString(threeWeekCases))
+            Log.i("LAST WEEK DEATHS in $countryID", Arrays.toString(threeWeekDeaths))
 
             //Values were fetched and are
             if (displayedCountryData != null) {
@@ -179,8 +179,10 @@ class CountryDetailActivity : AppCompatActivity() {
                         country.newCases = newCases
                         country.totalCases = displayedCountryCaseData.confirmed
                         //The active cases are the confirmed cases subtracted by the recovered people and people who passed away
+                        val activeCasesYesterday = threeWeekCases[1] - (threeWeekCases[19] - threeWeekDeaths[19]) - threeWeekDeaths[1]
                         country.activeCases =
-                            displayedCountryCaseData.confirmed - displayedCountryCaseData.recovered - country.totalDeaths
+                            displayedCountryCaseData.confirmed - (threeWeekCases[18]-threeWeekDeaths[18]) - country.totalDeaths
+                        country.activeCasesChange = country.activeCases - activeCasesYesterday
 
                     }
 
