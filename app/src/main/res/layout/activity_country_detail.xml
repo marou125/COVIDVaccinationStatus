@@ -367,6 +367,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
+                        android:text="@string/No_data"
                         app:layout_constraintStart_toEndOf="@+id/anchor2"
                         app:layout_constraintTop_toBottomOf="@+id/date_data_tv"
                         tools:text="895,746,915" />

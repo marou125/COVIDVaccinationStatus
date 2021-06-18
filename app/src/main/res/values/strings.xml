@@ -38,7 +38,7 @@
     <string name="Removed_from_favourites">Removed from favourites:</string>
     <string name="Added_to_favourites">Added to favourites:</string>
     <string name="No_data">No data</string>
-
+    <string name="connection_failed">Connection failed. Please check your internet connection. Old data displayed</string>
 
 
     <!-- Country names -->

@@ -35,17 +35,21 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         findViewById<TextView>(R.id.emptyList)
     }
 
+    val connectionFailed by lazy {
+        intent.getBooleanExtra("connectionFailed", false)
+    }
+
     var currentList: List<Country> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         setContentView(R.layout.activity_country_list)
         setSupportActionBar(findViewById(R.id.toolbar_list))
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-
         readFavourites()
 
         currentList = viewModel.favourites
@@ -93,6 +97,10 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             true
         }
 
+        if(connectionFailed){
+            Toast.makeText(this, R.string.connection_failed, Toast.LENGTH_SHORT).show()
+        }
+
 //        findViewById<Button>(R.id.sort_button).setOnClickListener {
 //            var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
 //            if (viewModel.sortedByName) {
@@ -109,6 +117,8 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
 
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -188,6 +198,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         val sorted = viewModel.sortCountries(this, currentList)
         val i = Intent(this, CountryDetailActivity::class.java)
         i.putExtra("country", sorted[position].name)
+        i.putExtra("connectionFailed", connectionFailed)
         startActivity(i, null)
     }
 

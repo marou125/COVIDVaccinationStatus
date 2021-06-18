@@ -28,4 +28,8 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:progressTint">@color/black</item>
     </style>
+    <style name="ToolbarTheme" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="android:homeAsUpIndicator">@color/black</item>
+    </style>
 </resources>

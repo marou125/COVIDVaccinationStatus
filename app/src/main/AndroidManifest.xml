@@ -15,7 +15,8 @@
         <activity android:name=".NoDataActivity"></activity>
         <activity
             android:name=".CountryDetailActivity"
-            android:label="Country Statistics" />
+            android:label="Country Statistics"
+            android:parentActivityName=".CountryListActivity"/>
         <activity
             android:name=".CountryListActivity"
             android:label="Select Country" />

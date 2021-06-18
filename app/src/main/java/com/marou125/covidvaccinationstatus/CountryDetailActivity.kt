@@ -27,7 +27,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.reflect.KFunction
 
-//TODO: Refactoring, flag appears small on some countries, create viewmodel for this class
+//TODO: Display old data if there is an error and one of the responses gives null
 class CountryDetailActivity : AppCompatActivity() {
 
     val countryRepository by lazy {
@@ -53,6 +53,8 @@ class CountryDetailActivity : AppCompatActivity() {
                 }
             }
         }
+
+        val connectionFailed = intent.getBooleanExtra("connectionFailed", false)
 
         try {
 
@@ -99,11 +101,21 @@ class CountryDetailActivity : AppCompatActivity() {
             //Fetch Country data from database
             val displayedCountry = countryRepository.getCountry(countryID)
 
+            if(displayedCountryCaseData == null && displayedCountryData == null){
+                Toast.makeText(this, R.string.connection_failed, Toast.LENGTH_LONG).show()
+            }
+
 
             //Set data according to clicked country
             displayedCountry.observe(
                 this,
                 Observer { country ->
+
+                    //Header
+                    val detailFlagIV = findViewById<ImageView>(R.id.detail_flag_iv)
+                    val detailCountryNameTV = findViewById<TextView>(R.id.detail_country_name_tv)
+                    detailFlagIV.setImageResource(country!!.flag)
+                    detailCountryNameTV.text = getString(country.name)
 
                     var totalVacIncrease = 0
                     var firstVacIncrease = 0
@@ -115,208 +127,225 @@ class CountryDetailActivity : AppCompatActivity() {
                     var fullyVaccinatedUpdated = true
                     var sevenDayAverageUpdated = true
 
-                    //Update country data to new values fetched from web
-                    if (displayedCountryData != null) {
-                        val arrayLength = displayedCountryData.data.size
-                        val lastUpdate = displayedCountryData.data[arrayLength - 1]
+                    if(displayedCountryCaseData == null && country?.date != "2021-01-01"){ //&& country?.date != "2021-01-01"
+                        //Case Card
+                        binding.populationNumberTv.text = formatNumber(country!!.population)
+                        binding.caseNumberTv.text = formatNumber(country.totalCases)
+                        binding.newCasesTv.text = "(+${formatNumber(country.newCases)})"
+                        binding.activeCasesNumberTv.text = formatNumber(country.activeCases)
+                        binding.totalDeathsNumberTv.text = formatNumber(country.totalDeaths)
+                        binding.newDeathsNumberTv.text = "(+${formatNumber(country.newDeaths)})"
 
-                        country!!.date = formatDate(lastUpdate.date)
-                        if (lastUpdate.total_vaccinations != null) {
-                            country.totalVaccinations =
-                                Integer.valueOf(lastUpdate.total_vaccinations)
-                        } else {
-                            totalVaccinationsUpdated = false
-                        }
-                        if (lastUpdate.people_vaccinated != null) {
-                            country.firstVaccine = Integer.valueOf(lastUpdate.people_vaccinated)
-                        } else {
-                            firstVaccinationsUpdated = false
-                        }
-                        if (lastUpdate.people_fully_vaccinated != null) {
-                            country.fullyVaccinated =
-                                Integer.valueOf(lastUpdate.people_fully_vaccinated)
-                        } else {
-                            fullyVaccinatedUpdated = false
-                        }
-                        if (lastUpdate.daily_vaccinations != null) {
-                            country.sevenDayAverage = Integer.valueOf(lastUpdate.daily_vaccinations)
-                        } else {
-                            sevenDayAverageUpdated = false
+
+                    } else {
+
+                        if (displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases) {
+                            country!!.newDeaths = newDeaths
+                            country.totalDeaths = displayedCountryCaseData.deaths
+                            country.newCases = newCases
+                            country.totalCases = displayedCountryCaseData.confirmed
+                            //The active cases are the confirmed cases subtracted by the recovered people and people who passed away
+                            val activeCasesYesterday = threeWeekCases[1] - (threeWeekCases[19] - threeWeekDeaths[19]) - threeWeekDeaths[1]
+                            country.activeCases =
+                                displayedCountryCaseData.confirmed - (threeWeekCases[18]-threeWeekDeaths[18]) - country.totalDeaths
+                            country.activeCasesChange = country.activeCases - activeCasesYesterday
+
                         }
 
-                        if (displayedCountryData.data.size > 1) {
-                            val updateBefore = displayedCountryData.data[arrayLength - 2]
-
-                            val totalVaccinationsOld: Int? =
-                                if (updateBefore.total_vaccinations != null) Integer.valueOf(
-                                    updateBefore.total_vaccinations
-                                ) else null
-                            val firstVaccinationsOld: Int? =
-                                if (updateBefore.people_vaccinated != null) Integer.valueOf(
-                                    updateBefore.people_vaccinated
-                                ) else null
-                            val secondVaccinationsOld: Int? =
-                                if (updateBefore.people_fully_vaccinated != null) Integer.valueOf(
-                                    updateBefore.people_fully_vaccinated
-                                ) else null
-                            val averageVaccinationsOld: Int? =
-                                if (updateBefore.daily_vaccinations != null) Integer.valueOf(
-                                    updateBefore.daily_vaccinations
-                                ) else null
-
-                            totalVacIncrease =
-                                if (totalVaccinationsOld != null) country.totalVaccinations - totalVaccinationsOld else 0
-                            firstVacIncrease =
-                                if (firstVaccinationsOld != null) country.firstVaccine - firstVaccinationsOld else 0
-                            secondVacIncrease =
-                                if (secondVaccinationsOld != null) country.fullyVaccinated - secondVaccinationsOld else 0
-                            averagePerDayChange =
-                                if (averageVaccinationsOld != null) country.sevenDayAverage - averageVaccinationsOld else 0
-
-                            //If the number is the same as from the update before then it was not updated and might be out of date
-                            if(country.totalVaccinations == totalVaccinationsOld) totalVaccinationsUpdated = false
-                            if(country.firstVaccine == firstVaccinationsOld) firstVaccinationsUpdated = false
-                            if(country.fullyVaccinated == secondVaccinationsOld) fullyVaccinatedUpdated = false
-                            if(country.sevenDayAverage == averageVaccinationsOld) sevenDayAverageUpdated = false
-                        }
-
-
-                    }
-
-                    if (displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases) {
-                        country!!.newDeaths = newDeaths
-                        country.totalDeaths = displayedCountryCaseData.deaths
-                        country.newCases = newCases
-                        country.totalCases = displayedCountryCaseData.confirmed
-                        //The active cases are the confirmed cases subtracted by the recovered people and people who passed away
-                        val activeCasesYesterday = threeWeekCases[1] - (threeWeekCases[19] - threeWeekDeaths[19]) - threeWeekDeaths[1]
-                        country.activeCases =
-                            displayedCountryCaseData.confirmed - (threeWeekCases[18]-threeWeekDeaths[18]) - country.totalDeaths
-                        country.activeCasesChange = country.activeCases - activeCasesYesterday
-
-                    }
-
-                    val detailFlagIV = findViewById<ImageView>(R.id.detail_flag_iv)
-                    val detailCountryNameTV = findViewById<TextView>(R.id.detail_country_name_tv)
-                    detailFlagIV.setImageResource(country!!.flag)
-                    detailCountryNameTV.text = getString(country.name)
-
-
-                    //Infection Status CardView
-                    binding.populationNumberTv.text = formatNumber(country.population)
-                    binding.caseNumberTv.let {
-                        if(country.totalCases != 0){
-                            it.text = formatNumber(country.totalCases)
-                        }
-                    }
-                    binding.newCasesTv.let {
-                        if(country.newCases != 0){
-                            it.visibility = TextView.VISIBLE
-                            it.text = "(+${formatNumber(country.newCases)})"
-                        }
-                    }
-                    binding.activeCasesNumberTv.let {
-                        if(country.activeCases == 0){
-                            //If the active cases are 0 but the total case number has data then the active cases have to be displayed as 0, otherwise leave them as no data
-                            if(!binding.caseNumberTv.text.equals(getString(R.string.no_data))){
-                                it.text = "0"
+                        //Infection Status CardView
+                        binding.populationNumberTv.text = formatNumber(country.population)
+                        binding.caseNumberTv.let {
+                            if(country.totalCases != 0){
+                                it.text = formatNumber(country.totalCases)
                             }
-                        } else {
-                            it.text = formatNumber(country.activeCases)
                         }
-
-                    }
-                    binding.totalDeathsNumberTv.let {
-                        if(country.totalDeaths != 0){
-                            it.text = formatNumber(country.totalDeaths)
+                        binding.newCasesTv.let {
+                            if(country.newCases != 0){
+                                it.visibility = TextView.VISIBLE
+                                it.text = "(+${formatNumber(country.newCases)})"
+                            }
                         }
-                    }
-                    binding.newDeathsNumberTv.let {
-                        if(country.newDeaths != 0){
-                            it.visibility = TextView.VISIBLE
-                            it.text = "(+${formatNumber(country.newDeaths)})"
-                        }
-                    }
-
-
-                    //Vaccinations Card View
-                    binding.dateDataTv.text =
-                        if(country.date == "2021-01-01") getString(R.string.no_data) else country.date
-                    binding.totalVaccNumberTv.text =
-                        if (country.totalVaccinations == 0) getString(R.string.no_data) else formatNumber(country.totalVaccinations)
-                    binding.peopleVaccNumberTv.text =
-                        if (country.firstVaccine == 0) getString(R.string.no_data) else formatNumber(country.firstVaccine)
-                    binding.peopleFullVaccNumberTv.text =
-                        if (country.fullyVaccinated == 0) getString(R.string.no_data) else formatNumber(country.fullyVaccinated)
-                    binding.sevenDayAvgNumber.text =
-                        if (country.sevenDayAverage == 0) getString(R.string.no_data) else formatNumber(country.sevenDayAverage)
-
-                    binding.totalVacIncrease.let {
-                        if (totalVacIncrease != 0 /*&& totalVaccinationsOld != country.totalVaccinations*/) {
-                            it.text = "(+${formatNumber(totalVacIncrease)})"
-                        }
-                    }
-
-                    binding.firstVacIncrease.let {
-                        if (firstVacIncrease != 0 /*&& firstVaccinationsOld != country.firstVaccine*/) {
-                            it.text = "(+${formatNumber(firstVacIncrease)})"
-                        }
-                    }
-
-                    binding.fullVacIncrease.let {
-                        if (secondVacIncrease != 0 /*&& secondVaccinationsOld != country.fullyVaccinated*/) {
-                            it.text = "(+${formatNumber(secondVacIncrease)})"
-                        }
-                    }
-                    binding.averageVacChange.let {
-                        if (averagePerDayChange != 0 /*&& averageVaccinationsOld != country.sevenDayAverage*/) {
-                            if (averagePerDayChange > 0) {
-                                it.text = "(+${formatNumber(averagePerDayChange)})"
+                        binding.activeCasesNumberTv.let {
+                            if(country.activeCases == 0){
+                                //If the active cases are 0 but the total case number has data then the active cases have to be displayed as 0, otherwise leave them as no data
+                                if(!binding.caseNumberTv.text.equals(getString(R.string.no_data))){
+                                    it.text = "0"
+                                }
                             } else {
-                                it.text = "(${formatNumber(averagePerDayChange)})"
+                                it.text = formatNumber(country.activeCases)
+                            }
+
+                        }
+                        binding.totalDeathsNumberTv.let {
+                            if(country.totalDeaths != 0){
+                                it.text = formatNumber(country.totalDeaths)
                             }
                         }
+                        binding.newDeathsNumberTv.let {
+                            if(country.newDeaths != 0){
+                                it.visibility = TextView.VISIBLE
+                                it.text = "(+${formatNumber(country.newDeaths)})"
+                            }
+                        }
+
                     }
 
-                    //Warning flags
-                    binding.totalVacNotUpdatedFlag.let {
-                        if(binding.totalVaccNumberTv.text == getString(R.string.no_data)){
-                            totalVaccinationsUpdated = true
-                        }
-                        if (totalVaccinationsUpdated == false) {
-                            it.visibility = ImageView.VISIBLE
-                        }
-                    }
-                    binding.firstVaccineNotUpdatedFlag.let {
-                        if (binding.peopleVaccNumberTv.text == getString(R.string.no_data)) {
-                            firstVaccinationsUpdated = true
-                        }
-                        if (firstVaccinationsUpdated == false) {
-                            it.visibility = ImageView.VISIBLE
-                        }
-                    }
-                    binding.fullVaccineNotUpdatedFlag.let {
-                        if (binding.peopleFullVaccNumberTv.text == getString(R.string.no_data)) {
-                            fullyVaccinatedUpdated = true
-                        }
-                        if (fullyVaccinatedUpdated == false) {
-                            it.visibility = ImageView.VISIBLE
-                        }
-                    }
-                    binding.sevenDayAvgNotUpdatedFlag.let {
-                        if(binding.sevenDayAvgNumber.text == getString(R.string.no_data)){
-                            sevenDayAverageUpdated = true
-                        }
-                        if (sevenDayAverageUpdated == false) {
-                            it.visibility = ImageView.VISIBLE
-                        }
-                    }
+                    //Vaccination card
+                    if(displayedCountryData == null && country.date != "2021-01-01"){
 
-                    if (!(totalVaccinationsUpdated && firstVaccinationsUpdated && fullyVaccinatedUpdated && sevenDayAverageUpdated)) {
-                        binding.explanationFlag.visibility = ImageView.VISIBLE
-                        binding.explanationTv.visibility = TextView.VISIBLE
-                    }
+                        binding.dateDataTv.text = country.date
+                        binding.totalVaccNumberTv.text = formatNumber(country.totalVaccinations)
+                        binding.peopleVaccNumberTv.text = formatNumber(country.firstVaccine)
+                        binding.peopleFullVaccNumberTv.text = formatNumber(country.fullyVaccinated)
+                        binding.sevenDayAvgNumber.text = formatNumber(country.sevenDayAverage)
+                    } else {
+                        //Update country data to new values fetched from web
+                        if (displayedCountryData != null) {
+                            val arrayLength = displayedCountryData.data.size
+                            val lastUpdate = displayedCountryData.data[arrayLength - 1]
 
+                            country!!.date = formatDate(lastUpdate.date)
+                            if (lastUpdate.total_vaccinations != null) {
+                                country.totalVaccinations =
+                                    Integer.valueOf(lastUpdate.total_vaccinations)
+                            } else {
+                                totalVaccinationsUpdated = false
+                            }
+                            if (lastUpdate.people_vaccinated != null) {
+                                country.firstVaccine = Integer.valueOf(lastUpdate.people_vaccinated)
+                            } else {
+                                firstVaccinationsUpdated = false
+                            }
+                            if (lastUpdate.people_fully_vaccinated != null) {
+                                country.fullyVaccinated =
+                                    Integer.valueOf(lastUpdate.people_fully_vaccinated)
+                            } else {
+                                fullyVaccinatedUpdated = false
+                            }
+                            if (lastUpdate.daily_vaccinations != null) {
+                                country.sevenDayAverage = Integer.valueOf(lastUpdate.daily_vaccinations)
+                            } else {
+                                sevenDayAverageUpdated = false
+                            }
+
+                            if (displayedCountryData.data.size > 1) {
+                                val updateBefore = displayedCountryData.data[arrayLength - 2]
+
+                                val totalVaccinationsOld: Int? =
+                                    if (updateBefore.total_vaccinations != null) Integer.valueOf(
+                                        updateBefore.total_vaccinations
+                                    ) else null
+                                val firstVaccinationsOld: Int? =
+                                    if (updateBefore.people_vaccinated != null) Integer.valueOf(
+                                        updateBefore.people_vaccinated
+                                    ) else null
+                                val secondVaccinationsOld: Int? =
+                                    if (updateBefore.people_fully_vaccinated != null) Integer.valueOf(
+                                        updateBefore.people_fully_vaccinated
+                                    ) else null
+                                val averageVaccinationsOld: Int? =
+                                    if (updateBefore.daily_vaccinations != null) Integer.valueOf(
+                                        updateBefore.daily_vaccinations
+                                    ) else null
+
+                                totalVacIncrease =
+                                    if (totalVaccinationsOld != null) country.totalVaccinations - totalVaccinationsOld else 0
+                                firstVacIncrease =
+                                    if (firstVaccinationsOld != null) country.firstVaccine - firstVaccinationsOld else 0
+                                secondVacIncrease =
+                                    if (secondVaccinationsOld != null) country.fullyVaccinated - secondVaccinationsOld else 0
+                                averagePerDayChange =
+                                    if (averageVaccinationsOld != null) country.sevenDayAverage - averageVaccinationsOld else 0
+
+                                //If the number is the same as from the update before then it was not updated and might be out of date
+                                if(country.totalVaccinations == totalVaccinationsOld) totalVaccinationsUpdated = false
+                                if(country.firstVaccine == firstVaccinationsOld) firstVaccinationsUpdated = false
+                                if(country.fullyVaccinated == secondVaccinationsOld) fullyVaccinatedUpdated = false
+                                if(country.sevenDayAverage == averageVaccinationsOld) sevenDayAverageUpdated = false
+                            }
+
+
+                        }
+
+                        //Vaccinations Card View
+                        binding.dateDataTv.text =
+                            if(country.date == "2021-01-01") getString(R.string.no_data) else country.date
+                        binding.totalVaccNumberTv.text =
+                            if (country.totalVaccinations == 0) getString(R.string.no_data) else formatNumber(country.totalVaccinations)
+                        binding.peopleVaccNumberTv.text =
+                            if (country.firstVaccine == 0) getString(R.string.no_data) else formatNumber(country.firstVaccine)
+                        binding.peopleFullVaccNumberTv.text =
+                            if (country.fullyVaccinated == 0) getString(R.string.no_data) else formatNumber(country.fullyVaccinated)
+                        binding.sevenDayAvgNumber.text =
+                            if (country.sevenDayAverage == 0) getString(R.string.no_data) else formatNumber(country.sevenDayAverage)
+
+                        binding.totalVacIncrease.let {
+                            if (totalVacIncrease != 0 /*&& totalVaccinationsOld != country.totalVaccinations*/) {
+                                it.text = "(+${formatNumber(totalVacIncrease)})"
+                            }
+                        }
+
+                        binding.firstVacIncrease.let {
+                            if (firstVacIncrease != 0 /*&& firstVaccinationsOld != country.firstVaccine*/) {
+                                it.text = "(+${formatNumber(firstVacIncrease)})"
+                            }
+                        }
+
+                        binding.fullVacIncrease.let {
+                            if (secondVacIncrease != 0 /*&& secondVaccinationsOld != country.fullyVaccinated*/) {
+                                it.text = "(+${formatNumber(secondVacIncrease)})"
+                            }
+                        }
+                        binding.averageVacChange.let {
+                            if (averagePerDayChange != 0 /*&& averageVaccinationsOld != country.sevenDayAverage*/) {
+                                if (averagePerDayChange > 0) {
+                                    it.text = "(+${formatNumber(averagePerDayChange)})"
+                                } else {
+                                    it.text = "(${formatNumber(averagePerDayChange)})"
+                                }
+                            }
+                        }
+
+                        //Warning flags
+                        binding.totalVacNotUpdatedFlag.let {
+                            if(binding.totalVaccNumberTv.text == getString(R.string.no_data)){
+                                totalVaccinationsUpdated = true
+                            }
+                            if (totalVaccinationsUpdated == false) {
+                                it.visibility = ImageView.VISIBLE
+                            }
+                        }
+                        binding.firstVaccineNotUpdatedFlag.let {
+                            if (binding.peopleVaccNumberTv.text == getString(R.string.no_data)) {
+                                firstVaccinationsUpdated = true
+                            }
+                            if (firstVaccinationsUpdated == false) {
+                                it.visibility = ImageView.VISIBLE
+                            }
+                        }
+                        binding.fullVaccineNotUpdatedFlag.let {
+                            if (binding.peopleFullVaccNumberTv.text == getString(R.string.no_data)) {
+                                fullyVaccinatedUpdated = true
+                            }
+                            if (fullyVaccinatedUpdated == false) {
+                                it.visibility = ImageView.VISIBLE
+                            }
+                        }
+                        binding.sevenDayAvgNotUpdatedFlag.let {
+                            if(binding.sevenDayAvgNumber.text == getString(R.string.no_data)){
+                                sevenDayAverageUpdated = true
+                            }
+                            if (sevenDayAverageUpdated == false) {
+                                it.visibility = ImageView.VISIBLE
+                            }
+                        }
+
+                        if (!(totalVaccinationsUpdated && firstVaccinationsUpdated && fullyVaccinatedUpdated && sevenDayAverageUpdated)) {
+                            binding.explanationFlag.visibility = ImageView.VISIBLE
+                            binding.explanationTv.visibility = TextView.VISIBLE
+                        }
+
+                    }
 
                     //ProgressBar
                     if (binding.peopleFullVaccNumberTv.text.equals(getString(R.string.no_data))) {
@@ -338,7 +367,6 @@ class CountryDetailActivity : AppCompatActivity() {
                     binding.vaccPercentageFirstTv.text =
                         "$firstVaccinePercentage ${getString(R.string.Percentage_first_vaccine)}"
                     binding.progressBarFirst.progress = firstVaccinePercentage.toInt()
-
 
                     val executor = Executors.newSingleThreadExecutor()
                     executor.execute {
@@ -363,6 +391,7 @@ class CountryDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            android.R.id.home -> onBackPressed()
             R.id.about_button -> createAlertDialog()
         }
         return true
