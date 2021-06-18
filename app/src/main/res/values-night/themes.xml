@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.COVIDVaccinationStatus" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.COVIDVaccinationStatus" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/mainColor</item>
         <item name="colorPrimaryVariant">@color/mainColor</item>
@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/background</item>
         <item name="android:fontFamily">@font/caudex_bold</item>
+
+        <item name="cardBackgroundColor">@color/black</item>
     </style>
 
     <style name="menu_text_style" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Menu">
@@ -22,6 +24,10 @@
 
     <style name="listActivity">
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="cardView">
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
     </style>
 
     <style name="detailActivity">
