@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         val executor = Executors.newSingleThreadExecutor()
 
-        var connectionFailed = false
-
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL_VACCINATION_DATA)
@@ -58,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<Array<VaccinationData>>?, t: Throwable?) {
                     Log.i("Failure", "No data fetched")
-                    connectionFailed = true
 
                 }
             })
@@ -77,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
                     Log.i("CaseCall", "Error $t")
-                    connectionFailed = true
                 }
             })
 
@@ -93,7 +89,6 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
                     Log.i("historicConfirmed", "Error $t")
-                    connectionFailed = true
                 }
             })
 
@@ -110,12 +105,8 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<JsonCaseData>?, t: Throwable?) {
                     Log.i("historicDeaths", "Error $t")
-                    connectionFailed = true
-//                    startActivity(i)
                 }
             })
-
-            i.putExtra("connectionFailed", connectionFailed)
 
             startActivity(i)
         }

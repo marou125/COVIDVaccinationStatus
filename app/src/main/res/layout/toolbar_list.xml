@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,18 +15,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!--        <Button-->
-        <!--            android:id="@+id/sort_button"-->
-        <!--            style="@style/Widget.AppCompat.Button.Small"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:icon="@android:drawable/ic_menu_sort_by_size"-->
-        <!--            app:iconTint="@color/black"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
         <TextView
             android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
@@ -48,6 +35,7 @@
             android:layout_marginEnd="8dp"
             android:cropToPadding="false"
             android:scaleType="fitXY"
+            android:contentDescription="@string/app_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/toolbarTitle"
             app:layout_constraintStart_toStartOf="parent"

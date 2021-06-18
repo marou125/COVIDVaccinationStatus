@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">COVID Vaccination Status</string>
+    <string name="app_name">Corona Impftracker</string>
     <string name="start">Start</string>
     <string name="vaccination_status">Impfstatus</string>
     <string name="population">Bevölkerung</string>
@@ -280,4 +280,6 @@
     <string name="ok">OK</string>
     <string name="sources">Quellen</string>
     <string name="connection_failed">Verbindung fehlgeschlagen. Bitte Internetverbindung prüfen. Alte Daten werden gezeigt.</string>
+    <string name="app_icon">App Icon</string>
+    <string name="visualized">Visualisiert</string>
 </resources>

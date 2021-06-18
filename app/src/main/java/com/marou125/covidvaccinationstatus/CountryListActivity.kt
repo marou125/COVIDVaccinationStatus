@@ -24,7 +24,7 @@ import java.lang.reflect.Type
 class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
     val recyclerView: RecyclerView by lazy {
-        findViewById<RecyclerView>(R.id.recyclerView)
+        findViewById(R.id.recyclerView)
     }
 
     private val viewModel by lazy {
@@ -33,10 +33,6 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
     val emptyList by lazy {
         findViewById<TextView>(R.id.emptyList)
-    }
-
-    val connectionFailed by lazy {
-        intent.getBooleanExtra("connectionFailed", false)
     }
 
     var currentList: List<Country> = emptyList()
@@ -50,6 +46,8 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         setSupportActionBar(findViewById(R.id.toolbar_list))
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //Check if there are favourites saved
         readFavourites()
 
         currentList = viewModel.favourites
@@ -59,9 +57,8 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         val toolbarTopLeft = findViewById<ImageView>(R.id.topleftIcon)
 
 
-        //TODO: this resets the tint but also appears to remove the selection navigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
-        //bottomNav.itemIconTintList=null
+
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
             var isFavourites = false
@@ -97,24 +94,6 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             true
         }
 
-        if(connectionFailed){
-            Toast.makeText(this, R.string.connection_failed, Toast.LENGTH_SHORT).show()
-        }
-
-//        findViewById<Button>(R.id.sort_button).setOnClickListener {
-//            var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
-//            if (viewModel.sortedByName) {
-//                mToast.setText(getString(R.string.sorted_by_name))
-//                viewModel.sortedByName = false
-//            } else {
-//                mToast.setText(getString(R.string.sorted_by_population))
-//                viewModel.sortedByName = true
-//            }
-//            var isFavourites = currentList == viewModel.favourites
-//            updateUI(currentList, isFavourites)
-//            mToast.show()
-//        }
-
 
     }
 
@@ -122,7 +101,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.sort_button -> { var mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
+            R.id.sort_button -> { val mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
             if (viewModel.sortedByName) {
                 mToast.setText(getString(R.string.sorted_by_name))
                 viewModel.sortedByName = false
@@ -130,7 +109,7 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
                 mToast.setText(getString(R.string.sorted_by_population))
                 viewModel.sortedByName = true
             }
-            var isFavourites = currentList == viewModel.favourites
+            val isFavourites = currentList == viewModel.favourites
             updateUI(currentList, isFavourites)
             mToast.show()
             }
@@ -198,7 +177,6 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
         val sorted = viewModel.sortCountries(this, currentList)
         val i = Intent(this, CountryDetailActivity::class.java)
         i.putExtra("country", sorted[position].name)
-        i.putExtra("connectionFailed", connectionFailed)
         startActivity(i, null)
     }
 
@@ -219,8 +197,6 @@ class CountryListActivity : AppCompatActivity(), OnItemClickListener {
             toast.setText("${getString(R.string.Added_to_favourites)} ${getString(sorted[position].name)}")
             toast.show()
         }
-        //updateUI(currentList)
-
     }
 
 

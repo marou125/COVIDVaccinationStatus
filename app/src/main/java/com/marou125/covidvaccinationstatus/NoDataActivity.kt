@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 
+/**This activity is displayed if something goes wrong in the try-block of the CountryDetailActivity
+ * The catch block starts this activity**/
 class NoDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

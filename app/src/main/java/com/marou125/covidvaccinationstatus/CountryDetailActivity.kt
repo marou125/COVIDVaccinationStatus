@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.google.android.material.button.MaterialButton
 import com.marou125.covidvaccinationstatus.database.CountryRepository
 import com.marou125.covidvaccinationstatus.databinding.ActivityCountryDetailBinding
 import com.marou125.covidvaccinationstatus.databinding.AlertDialogBinding
@@ -44,40 +43,45 @@ class CountryDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val countryID = intent.getIntExtra("country", 0)
-        if (countryID != 0) {
-            Log.i("The country is ", getString(countryID))
-            for (c in CountryDataSingleton.world) {
-                if (c.name == countryID) {
-                    Log.i("Is it in the database", c.date)
-                    break;
-                }
-            }
-        }
 
-        val connectionFailed = intent.getBooleanExtra("connectionFailed", false)
+        //Log Debug statement
+//        if (countryID != 0) {
+//            Log.i("The country is ", getString(countryID))
+//            for (c in CountryDataSingleton.world) {
+//                if (c.name == countryID) {
+//                    Log.i("Is it in the database", c.date)
+//                    break;
+//                }
+//            }
+//        }
+
 
         try {
 
             //Find data for country in Singleton List
             val displayedCountryData: VaccinationData? = findCountryData(countryID)
 
-            if(displayedCountryData != null){
-                Log.i(
-                    "Last vaccination update",
-                    displayedCountryData.data[displayedCountryData.data.size - 1].date
-                )
-            }
+
+            //Log Debug Statement
+//            if(displayedCountryData != null){
+//                Log.i(
+//                    "Last vaccination update",
+//                    displayedCountryData.data[displayedCountryData.data.size - 1].date
+//                )
+//            }
 
 
             //Find data for country in Json Case Data object
             val caseInfoArray = findCaseData(countryID)
             val displayedCountryCaseData = caseInfoArray[0]
 
-            //Get last recorded seven days of cases and deaths saved into an Array
+            //Get last recorded 21 days of cases and deaths saved into an Array
             var threeWeekCases = IntArray(21)
             var threeWeekDeaths = IntArray(21)
             var newCases = 0
             var newDeaths = 0
+
+            //Fill arrays with new data and calculate new cases + deaths
             if(caseInfoArray[1] != null){
                 threeWeekCases = CountryDataSingleton.getWeeklyData(caseInfoArray[1]!!.dates)
                 newCases = threeWeekCases[0] - threeWeekCases[1]
@@ -89,13 +93,14 @@ class CountryDetailActivity : AppCompatActivity() {
 
             }
 
-            Log.i("LAST WEEK CASES in $countryID", Arrays.toString(threeWeekCases))
-            Log.i("LAST WEEK DEATHS in $countryID", Arrays.toString(threeWeekDeaths))
-
-            //Values were fetched and are
-            if (displayedCountryData != null) {
-                Log.i("Fetched data for", displayedCountryData.country)
-            }
+            //Log Debug statements
+//            Log.i("LAST WEEK CASES in $countryID", Arrays.toString(threeWeekCases))
+//            Log.i("LAST WEEK DEATHS in $countryID", Arrays.toString(threeWeekDeaths))
+//
+//            //Values were fetched and are
+//            if (displayedCountryData != null) {
+//                Log.i("Fetched data for", displayedCountryData.country)
+//            }
 
 
             //Fetch Country data from database
@@ -127,8 +132,12 @@ class CountryDetailActivity : AppCompatActivity() {
                     var fullyVaccinatedUpdated = true
                     var sevenDayAverageUpdated = true
 
+                    /**Case Card
+                     * Check if case data object is null. If it is and if the date is not the default date
+                     * then set the text views with the values from the last time the country was updated
+                    **/
                     if(displayedCountryCaseData == null && country?.date != "2021-01-01"){ //&& country?.date != "2021-01-01"
-                        //Case Card
+
                         binding.populationNumberTv.text = formatNumber(country!!.population)
                         binding.caseNumberTv.text = formatNumber(country.totalCases)
                         binding.newCasesTv.text = "(+${formatNumber(country.newCases)})"
@@ -138,7 +147,7 @@ class CountryDetailActivity : AppCompatActivity() {
 
 
                     } else {
-
+                        /**Else set country values to the new values from the web**/
                         if (displayedCountryCaseData != null && displayedCountryCaseData.confirmed != country!!.totalCases) {
                             country!!.newDeaths = newDeaths
                             country.totalDeaths = displayedCountryCaseData.deaths
@@ -152,7 +161,7 @@ class CountryDetailActivity : AppCompatActivity() {
 
                         }
 
-                        //Infection Status CardView
+                        /**Update TextViews**/
                         binding.populationNumberTv.text = formatNumber(country.population)
                         binding.caseNumberTv.let {
                             if(country.totalCases != 0){
@@ -190,7 +199,11 @@ class CountryDetailActivity : AppCompatActivity() {
 
                     }
 
-                    //Vaccination card
+                    /**Vaccination card
+                     * Check if the vaccination data object is null
+                     * If it is and the date is not the default date then use the old values from
+                     * the last time the country was updated
+                     **/
                     if(displayedCountryData == null && country.date != "2021-01-01"){
 
                         binding.dateDataTv.text = country.date
@@ -199,7 +212,7 @@ class CountryDetailActivity : AppCompatActivity() {
                         binding.peopleFullVaccNumberTv.text = formatNumber(country.fullyVaccinated)
                         binding.sevenDayAvgNumber.text = formatNumber(country.sevenDayAverage)
                     } else {
-                        //Update country data to new values fetched from web
+                        /**Update country data to new values fetched from web**/
                         if (displayedCountryData != null) {
                             val arrayLength = displayedCountryData.data.size
                             val lastUpdate = displayedCountryData.data[arrayLength - 1]
@@ -231,6 +244,7 @@ class CountryDetailActivity : AppCompatActivity() {
                             if (displayedCountryData.data.size > 1) {
                                 val updateBefore = displayedCountryData.data[arrayLength - 2]
 
+                                /**Check if there are old values available**/
                                 val totalVaccinationsOld: Int? =
                                     if (updateBefore.total_vaccinations != null) Integer.valueOf(
                                         updateBefore.total_vaccinations
@@ -248,6 +262,7 @@ class CountryDetailActivity : AppCompatActivity() {
                                         updateBefore.daily_vaccinations
                                     ) else null
 
+                                /**Calculate the increase from last time**/
                                 totalVacIncrease =
                                     if (totalVaccinationsOld != null) country.totalVaccinations - totalVaccinationsOld else 0
                                 firstVacIncrease =
@@ -257,7 +272,7 @@ class CountryDetailActivity : AppCompatActivity() {
                                 averagePerDayChange =
                                     if (averageVaccinationsOld != null) country.sevenDayAverage - averageVaccinationsOld else 0
 
-                                //If the number is the same as from the update before then it was not updated and might be out of date
+                                /**If the number is the same as from the update before then it was not updated and might be out of date**/
                                 if(country.totalVaccinations == totalVaccinationsOld) totalVaccinationsUpdated = false
                                 if(country.firstVaccine == firstVaccinationsOld) firstVaccinationsUpdated = false
                                 if(country.fullyVaccinated == secondVaccinationsOld) fullyVaccinatedUpdated = false
@@ -267,7 +282,7 @@ class CountryDetailActivity : AppCompatActivity() {
 
                         }
 
-                        //Vaccinations Card View
+                        /**Update TextViews with new values**/
                         binding.dateDataTv.text =
                             if(country.date == "2021-01-01") getString(R.string.no_data) else country.date
                         binding.totalVaccNumberTv.text =
@@ -306,7 +321,9 @@ class CountryDetailActivity : AppCompatActivity() {
                             }
                         }
 
-                        //Warning flags
+                        /**Show a warning flag if there is a new update but a value has not changed
+                         * Some countries do not update every value within their new updates every time
+                         **/
                         binding.totalVacNotUpdatedFlag.let {
                             if(binding.totalVaccNumberTv.text == getString(R.string.no_data)){
                                 totalVaccinationsUpdated = true
@@ -340,6 +357,10 @@ class CountryDetailActivity : AppCompatActivity() {
                             }
                         }
 
+                        /**If one of these values is false it means there is a new entry but a number
+                         * has not changed. In that case a warning flag will be displayed next to that value
+                         * and therefore an explanation is necessary and must be made visible
+                         **/
                         if (!(totalVaccinationsUpdated && firstVaccinationsUpdated && fullyVaccinatedUpdated && sevenDayAverageUpdated)) {
                             binding.explanationFlag.visibility = ImageView.VISIBLE
                             binding.explanationTv.visibility = TextView.VISIBLE
@@ -347,7 +368,7 @@ class CountryDetailActivity : AppCompatActivity() {
 
                     }
 
-                    //ProgressBar
+                    /**Update ProgressBars according to the values displayed**/
                     if (binding.peopleFullVaccNumberTv.text.equals(getString(R.string.no_data))) {
                         binding.progressBarFully.visibility = View.GONE
                         binding.vaccPercentageFullTv.visibility = View.GONE
@@ -368,6 +389,8 @@ class CountryDetailActivity : AppCompatActivity() {
                         "$firstVaccinePercentage ${getString(R.string.Percentage_first_vaccine)}"
                     binding.progressBarFirst.progress = firstVaccinePercentage.toInt()
 
+
+                    /**Finally update the database with the new values for the country**/
                     val executor = Executors.newSingleThreadExecutor()
                     executor.execute {
                         countryRepository.updateCountry(country)

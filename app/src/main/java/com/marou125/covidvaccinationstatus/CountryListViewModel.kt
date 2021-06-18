@@ -35,7 +35,6 @@ class CountryListViewModel : ViewModel() {
 
     init {
         insert(world)
-//        favourites.value = CountryDataSingleton.favourites
     }
 
     //fills database with countries if freshly installed
@@ -52,7 +51,7 @@ class CountryListViewModel : ViewModel() {
 
     //TODO: Sort the other lists too, maybe only the one that is selected
     fun sortCountries(context: Context, continent: List<Country>): List<Country>{
-        var sorted = continent
+        var sorted: List<Country>
         if(sortedByName) {
             sorted = continent.sortedBy { it.population }.reversed()
         } else {

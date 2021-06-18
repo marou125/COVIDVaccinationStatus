@@ -454,6 +454,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:visibility="invisible"
+                        android:contentDescription="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         app:layout_constraintBottom_toBottomOf="@+id/textView11"
                         app:layout_constraintStart_toEndOf="@+id/textView11"
                         app:layout_constraintTop_toTopOf="@+id/textView11"
@@ -466,6 +467,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        android:contentDescription="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         app:tint="@color/not_updated_warning"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="@+id/textView13"
@@ -479,6 +481,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        android:contentDescription="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         app:tint="@color/not_updated_warning"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="@+id/textView12"
@@ -493,6 +496,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         app:tint="@color/not_updated_warning"
+                        android:contentDescription="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="@+id/sevenDayAvg"
                         app:layout_constraintStart_toEndOf="@+id/sevenDayAvg"
@@ -506,6 +510,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
+                        android:contentDescription="@string/the_government_has_not_updated_this_number_with_the_most_recent_update"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/explanation_tv"
                         app:layout_constraintStart_toStartOf="parent"
@@ -556,103 +561,12 @@
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Visualized"
+                        android:text="@string/visualized"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/twentyFivePercent"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginStart="16dp"-->
-                    <!--                        android:layout_marginTop="16dp"-->
-                    <!--                        android:text="25 %"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/fiftyPercent"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginStart="16dp"-->
-                    <!--                        android:layout_marginTop="8dp"-->
-                    <!--                        android:text="50 %"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/twentyFivePercent" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/seventyPercent"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginStart="16dp"-->
-                    <!--                        android:layout_marginTop="8dp"-->
-                    <!--                        android:text="70 %"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/fiftyPercent" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/index"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="8dp"-->
-                    <!--                        android:text="@string/index"-->
-                    <!--                        android:textColor="@color/purple_700"-->
-                    <!--                        android:textSize="24sp"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/twentyFivePercent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/index2"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="@string/index"-->
-                    <!--                        android:textColor="@color/purple_700"-->
-                    <!--                        android:textSize="24sp"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/fiftyPercent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/index" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/index3"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="@string/index"-->
-                    <!--                        android:textColor="@color/purple_700"-->
-                    <!--                        android:textSize="24sp"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/seventyPercent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/index2" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/textView15"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="16dp"-->
-                    <!--                        android:layout_marginEnd="16dp"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView18"-->
-                    <!--                        tools:text="10 days" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/textView16"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="8dp"-->
-                    <!--                        android:layout_marginEnd="16dp"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView15"-->
-                    <!--                        tools:text="30 days" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/textView17"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="8dp"-->
-                    <!--                        android:layout_marginEnd="16dp"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView16"-->
-                    <!--                        tools:text="55 days" />-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

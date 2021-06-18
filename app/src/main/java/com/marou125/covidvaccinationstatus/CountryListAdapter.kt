@@ -19,10 +19,10 @@ interface OnItemClickListener {
 }
 
 
-class CountryListAdapter(context: Context, countryList: List<Country>, listener: OnItemClickListener, isFavourites: Boolean = false) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
+class CountryListAdapter(context: Context, countryList: List<Country>,
+                         val listener: OnItemClickListener, val isFavourites: Boolean = false
+) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
-    val listener = listener
-    val isFavourites = isFavourites
     var mCountryList:MutableList<Country> = countryList.toMutableList()
     val mContext = context
 
@@ -50,13 +50,6 @@ class CountryListAdapter(context: Context, countryList: List<Country>, listener:
                 }
                 true
             }
-//            val favButton = view.findViewById<ImageView>(R.id.favButton)
-//            favButton.setOnClickListener {
-//                CountryDataSingleton.saveInFavourites(mCountryList[adapterPosition])
-//            }
-
-
-
         }
 
     }
