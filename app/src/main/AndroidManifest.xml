@@ -3,6 +3,8 @@
     package="com.marou125.covidvaccinationstatus">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.faketouch"/>
+    <uses-feature android:required="false" android:name="android.hardware.touchscreen"/>
 
     <application
         android:name=".database.CountryIntentApplication"
